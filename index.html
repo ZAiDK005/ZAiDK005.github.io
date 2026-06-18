@@ -28,7 +28,7 @@
 html { scroll-behavior: smooth; }
 body { background: var(--off); color: var(--navy); font-family: var(--body); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-/* NAV */
+/* NAVIGATION RESPONSIVENESS */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
@@ -38,204 +38,129 @@ nav {
 }
 .nav-logo { font-family: var(--serif); font-size: 17px; color: var(--navy); text-decoration: none; }
 .nav-logo em { color: var(--gold); font-style: italic; }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
 .nav-links a { font-size: 12.5px; color: rgba(15,31,61,0.55); text-decoration: none; letter-spacing: 0.05em; font-weight: 500; transition: color 0.2s; }
 .nav-links a:hover { color: var(--gold); }
 
-/* HERO */
+/* ICAI HUB DROPDOWN MENU */
+.icai-dropdown { position: relative; display: inline-block; }
+.icai-dropbtn { background: var(--navy-pale); color: var(--navy-soft) !important; padding: 4px 10px; border-radius: 4px; font-weight: 600 !important; cursor: pointer; }
+.icai-dropdown-content { display: none; position: absolute; right: 0; background-color: var(--white); min-width: 190px; box-shadow: var(--sh-h); border: 1px solid var(--rule-s); z-index: 210; border-radius: 4px; }
+.icai-dropdown-content a { color: var(--navy); padding: 10px 14px; text-decoration: none; display: block; font-size: 12px; border-bottom: 1px solid var(--rule); }
+.icai-dropdown-content a:last-child { border-bottom: none; }
+.icai-dropdown-content a:hover { background-color: var(--gold-pale); color: var(--gold); }
+.icai-dropdown:hover .icai-dropdown-content { display: block; }
+
+/* HERO SCREEN SCABLE RESPONSIVENESS */
 #hero {
-  min-height: 100vh; display: grid; grid-template-columns: 1fr 420px;
-  align-items: center; gap: 0;
-  padding: 80px 0 0; background: var(--white);
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 450px;
+  align-items: center; gap: 0; padding: 56px 0 0; background: var(--white);
   border-bottom: 1px solid var(--rule-s); overflow: hidden;
 }
-.hero-left { padding: 5rem 3rem 5rem 3rem; }
+.hero-left { padding: 4rem 3rem; }
 .hero-eyebrow {
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--gold); font-weight: 600; margin-bottom: 1.25rem;
   display: flex; align-items: center; gap: 0.75rem;
 }
 .hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
-.hero-since {
-  font-family: var(--serif); font-size: 1rem;
-  color: rgba(15,31,61,0.45); letter-spacing: 0.04em; margin-bottom: 0.5rem;
-}
-.hero-name {
-  font-family: var(--serif);
-  font-size: clamp(3.8rem, 8vw, 7rem);
-  line-height: 0.9; color: var(--navy);
-  margin-bottom: 1.5rem; letter-spacing: -0.025em;
-}
+.hero-since { font-family: var(--serif); font-size: 1rem; color: rgba(15,31,61,0.45); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+.hero-name { font-family: var(--serif); font-size: clamp(3.2rem, 7vw, 6rem); line-height: 0.95; color: var(--navy); margin-bottom: 1.5rem; letter-spacing: -0.025em; }
 .hero-name em { color: var(--gold); font-style: italic; }
-.hero-tagline {
-  font-family: var(--lora); font-style: italic;
-  font-size: 1.05rem; color: rgba(15,31,61,0.6);
-  max-width: 460px; line-height: 1.65;
-  border-left: 2.5px solid var(--gold);
-  padding-left: 1rem; margin-bottom: 1.75rem;
-}
+.hero-tagline { font-family: var(--lora); font-style: italic; font-size: 1.05rem; color: rgba(15,31,61,0.6); max-width: 460px; line-height: 1.65; border-left: 2.5px solid var(--gold); padding-left: 1rem; margin-bottom: 1.75rem; }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-.hero-tag {
-  padding: 0.3rem 0.85rem;
-  background: var(--navy-pale); color: var(--navy-soft);
-  font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em;
-}
-.hero-body {
-  font-family: var(--lora); font-size: 0.97rem;
-  color: rgba(15,31,61,0.65); line-height: 1.85; max-width: 520px;
-  opacity: 0; transition: opacity 0.9s ease;
-}
+.hero-tag { padding: 0.3rem 0.85rem; background: var(--navy-pale); color: var(--navy-soft); font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em; }
+.hero-body { font-family: var(--lora); font-size: 0.97rem; color: rgba(15,31,61,0.65); line-height: 1.85; max-width: 520px; opacity: 0; transition: opacity 0.9s ease; }
 .hero-body p + p { margin-top: 1rem; }
-.hero-scroll {
-  margin-top: 2.5rem; display: flex; align-items: center; gap: 0.75rem;
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(15,31,61,0.3); opacity: 0; transition: opacity 0.9s ease;
-}
+.hero-scroll { margin-top: 2.5rem; display: flex; align-items: center; gap: 0.75rem; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,31,61,0.3); opacity: 0; transition: opacity 0.9s ease; }
 .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.6); } }
 .cursor { display:inline-block; width:2.5px; height:0.85em; background:var(--gold); margin-left:3px; vertical-align:middle; animation:blink 1s step-end infinite; }
 @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 
-/* HERO IMAGE */
-.hero-right { height: 100%; position: relative; overflow: hidden; }
-.hero-right img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 15%;
-  display: block;
-}
-.hero-right-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, var(--white) 0%, transparent 18%),
-              linear-gradient(to top, rgba(15,31,61,0.35) 0%, transparent 50%);
-}
-.hero-right-caption {
-  position: absolute; bottom: 2rem; left: 1.5rem;
-  font-family: var(--lora); font-style: italic;
-  font-size: 12px; color: rgba(255,255,255,0.7);
-  letter-spacing: 0.04em;
-}
+.hero-right { height: 100%; position: relative; background: #f2f4f8; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.hero-right-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--white) 0%, transparent 12%); }
+.hero-right-caption { position: absolute; bottom: 1.5rem; left: 1.5rem; font-family: var(--lora); font-style: italic; font-size: 12px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 4px rgba(0,0,0,0.4); z-index: 10; }
 
-/* SHARED */
-.section { padding: 5.5rem 3rem; border-bottom: 1px solid var(--rule); }
+/* SECTIONS STRUCTURE */
+.section { padding: 5rem 3rem; border-bottom: 1px solid var(--rule); }
 .section-white { background: var(--white); }
 .section-off { background: var(--off); }
-.section-pale { background: var(--navy-pale); }
 .section-gold { background: var(--gold-pale); }
-.section-dark { background: var(--navy); color: var(--white); }
 .container { max-width: 1100px; margin: 0 auto; }
-.eyebrow {
-  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); font-weight: 600; margin-bottom: 1rem;
-  display: flex; align-items: center; gap: 0.75rem;
-}
+.eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
 .eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
-.section-heading {
-  font-family: var(--serif); font-size: clamp(1.9rem, 4vw, 3rem);
-  line-height: 1.1; margin-bottom: 0.75rem;
-}
-.section-sub {
-  font-family: var(--lora); font-style: italic;
-  color: rgba(15,31,61,0.45); font-size: 14.5px; margin-bottom: 2.75rem;
-}
+.section-heading { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; margin-bottom: 0.75rem; }
+.section-sub { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.5); font-size: 14.5px; margin-bottom: 2.5rem; }
 
-/* AAGAYE AAP */
-#aagaye {
-  background: var(--navy); color: var(--white);
-  padding: 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-  display: grid; grid-template-columns: 1fr 380px;
-  min-height: 520px; overflow: hidden;
-}
-.aagaye-left { padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
-.aagaye-eyebrow {
-  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); font-weight: 600; margin-bottom: 1.25rem;
-  display: flex; align-items: center; gap: 0.75rem;
-}
+/* AAGAYE AAP MIDDLE SECTION */
+#aagaye { background: var(--navy); color: var(--white); display: grid; grid-template-columns: 1fr 380px; min-height: 480px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.aagaye-left { padding: 4.5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+.aagaye-eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
 .aagaye-eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
-.aagaye-heading {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  color: var(--white); line-height: 1.05; margin-bottom: 0.5rem;
-}
-.aagaye-sub {
-  font-family: var(--lora); font-style: italic;
-  font-size: 0.95rem; color: var(--gold-light);
-  margin-bottom: 2rem;
-}
-.aagaye-body {
-  font-family: var(--lora); font-size: 1rem; color: rgba(255,255,255,0.68); line-height: 1.85; max-width: 540px;
-}
-.aagaye-body p + p { margin-top: 1.1rem; }
+.aagaye-heading { font-family: var(--serif); font-style: italic; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--white); line-height: 1.1; margin-bottom: 0.5rem; }
+.aagaye-sub { font-family: var(--lora); font-style: italic; font-size: 0.95rem; color: var(--gold-light); margin-bottom: 1.5rem; }
+.aagaye-body { font-family: var(--lora); font-size: 0.98rem; color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 540px; }
+.aagaye-body p + p { margin-top: 1rem; }
 .aagaye-right { position: relative; overflow: hidden; }
-.aagaye-right img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
-.aagaye-right-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, var(--navy) 0%, transparent 20%), linear-gradient(to top, var(--navy) 0%, transparent 40%);
-}
+.aagaye-right img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.aagaye-right-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--navy) 0%, transparent 20%); }
 
-/* JOURNEY */
+/* JOURNEY SECTION STYLES */
 .journey-intro { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.55); font-size: 1rem; line-height: 1.8; max-width: 620px; margin-bottom: 3rem; }
-.journey-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-.jcard {
-  background: var(--white); border: 1px solid var(--rule-s);
-  border-top: 3px solid var(--gold); padding: 1.75rem;
-  box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s;
-}
+.journey-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.jcard { background: var(--white); border: 1px solid var(--rule-s); border-top: 3px solid var(--gold); padding: 1.75rem; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; }
 .jcard:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
 .jcard-phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
-.jcard-title { font-family: var(--serif); font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
+.jcard-title { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
 .jcard-body { font-size: 13.5px; color: rgba(15,31,61,0.6); line-height: 1.65; }
 
-/* PLACES I'VE LEARNED FROM */
-.ind-banner { width: 100%; height: 300px; overflow: hidden; position: relative; margin-bottom: 3rem; }
-.ind-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-.ind-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,31,61,0.7) 0%, transparent 60%); }
-.ind-banner-caption { position: absolute; bottom: 1.5rem; left: 2rem; font-family: var(--lora); font-style: italic; font-size: 13px; color: rgba(255,255,255,0.7); }
-.ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-.ind-card {
-  background: var(--white); border: 1px solid var(--rule-s);
-  border-top: 3px solid var(--gold); padding: 2rem 1.5rem;
-  box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; cursor: default;
-}
-.ind-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
-.ind-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
-.ind-name { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
-.ind-lesson { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); font-style: italic; line-height: 1.65; }
-
-/* THE COMPREHENSIVE AUTOMATION PLATFORM TERMINAL CSS */
-.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
-.dash-card { background: var(--white); border: 1px solid var(--rule-s); padding: 24px; border-radius: 4px; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between; }
+/* COMPLIANCE CORE TERMINAL & GRID LAYOUTS */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+.dash-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; }
 .dash-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); border-color: var(--gold); }
-.status-badge { font-family: var(--body); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 3px; letter-spacing: 0.04em; }
+.dash-meta { display: flex; flex-direction: column; gap: 4px; }
+.dash-title { font-weight: 600; font-size: 14px; color: var(--navy); }
+.dash-notice-count { font-size: 11px; color: var(--gold); font-weight: 600; font-family: var(--body); margin-top: 2px; }
+.status-badge { align-self: flex-start; font-family: var(--body); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.04em; margin-top: 6px; }
 .status-yes { color: #2f855a; background: #e6fffa; border: 1px solid #b2f5ea; }
-.status-no { color: #718096; background: #edf2f7; border: 1px solid #e2e8f0; }
-.status-alert { color: #c53030; background: #fff5f5; border: 1px solid #fed7d7; }
-.card-actions-row { display: flex; gap: 16px; margin-top: 16px; border-top: 1px solid var(--rule); padding-top: 12px; }
+.status-no { color: #4a5568; background: #edf2f7; border: 1px solid #e2e8f0; }
+.card-actions-row { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
 .action-anchor { font-size: 12px; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 1px; transition: color 0.2s; }
 .action-anchor:hover { color: var(--gold); }
 
-/* TABLES FOR CALENDAR */
+/* COMPLIANCE TABLES STYLING */
 .table-wrapper { width: 100%; overflow-x: auto; background: var(--white); border: 1px solid var(--rule-s); border-radius: 4px; box-shadow: var(--sh); margin-top: 24px; }
-.compliance-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-.compliance-table th { background: var(--navy-pale); color: var(--navy); font-weight: 600; padding: 14px 16px; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
-.compliance-table td { padding: 16px; border-bottom: 1px solid var(--rule); color: rgba(15,31,61,0.75); }
+.compliance-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px; min-width: 600px; }
+.compliance-table th { background: var(--navy-pale); color: var(--navy); font-weight: 600; padding: 12px 14px; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+.compliance-table td { padding: 14px; border-bottom: 1px solid var(--rule); color: rgba(15,31,61,0.8); }
 .compliance-table tr:last-child td { border-bottom: none; }
 
-/* STOCK WATCH SYSTEM */
-.input-field { width: 100%; padding: 12px 16px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--off); transition: border-color 0.2s; }
+/* ENGINE CONTROLS LAYOUT */
+.input-field { width: 100%; padding: 12px 14px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--off); transition: border-color 0.2s; }
 .input-field:focus { border-color: var(--gold); background: var(--white); }
-.select-field { width: 100%; padding: 12px 16px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--white); }
-.submit-btn { font-family: var(--body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: var(--navy); color: var(--white); border: 1px solid var(--navy); padding: 12px 24px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+.select-field { width: 100%; padding: 12px 14px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--white); }
+.submit-btn { font-family: var(--body); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: var(--navy); color: var(--white); border: 1px solid var(--navy); padding: 12px 24px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
 .submit-btn:hover { background: transparent; color: var(--navy); border-color: var(--navy); }
 
-/* PRIVATE METRICS HUB */
-.vault-box { border: 1px dashed var(--gold); border-radius: 6px; padding: 32px; background: var(--gold-pale); margin-top: 24px; }
-.vault-blur-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px; filter: blur(8px); pointer-events: none; transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-.vault-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; text-align: center; box-shadow: var(--sh); }
+/* DATA VAULT ENCRYPTED WRAPPERS */
+.vault-box { border: 1px dashed var(--gold); border-radius: 6px; padding: 24px; background: var(--gold-pale); margin-top: 24px; }
+.vault-blur-container { margin-top: 24px; filter: blur(10px); pointer-events: none; transition: filter 0.4s ease; display: flex; flex-direction: column; gap: 20px; }
+.vault-table-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; box-shadow: var(--sh); }
+.vault-filter-select { padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid var(--rule-s); outline: none; font-family: var(--body); color: var(--navy); }
 
-/* FROM FILES */
-.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-.file-card { background: var(--white); border: 1px solid var(--rule-s); padding: 2rem 1.75rem; box-shadow: var(--sh); transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden; }
+/* FIELD PROJECTS GRID */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.proj-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
+.proj-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
+.proj-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+.proj-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; }
+.proj-desc { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; }
+
+/* NOTEBOOK CARDS LIST */
+.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.file-card { background: var(--white); border: 1px solid var(--rule-s); padding: 2rem 1.75rem; box-shadow: var(--sh); transition: all 0.25s; position: relative; overflow: hidden; }
 .file-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
 .file-card:hover::before { transform: scaleX(1); }
 .file-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
@@ -244,15 +169,7 @@ nav {
 .file-desc { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); line-height: 1.65; }
 .file-coming { margin-top: 1rem; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
-/* PROJECTS & LEARNINGS GRID */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-.proj-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
-.proj-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
-.proj-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
-.proj-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; }
-.proj-desc { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; }
-
-/* SHARED */
+/* FEED POST DESIGNS */
 .shared-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
 .shared-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
 .shared-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
@@ -262,10 +179,15 @@ nav {
 .shared-link { font-size: 12px; color: var(--gold); font-weight: 600; text-decoration: none; letter-spacing: 0.04em; }
 .shared-link:hover { text-decoration: underline; }
 
-/* FORMAL */
+/* GENERAL ABOUT AND CV PACK LAYOUTS */
+.ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+.ind-card { background: var(--white); border: 1px solid var(--rule-s); border-top: 3px solid var(--gold); padding: 2rem 1.5rem; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; cursor: default; }
+.ind-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
+.ind-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.ind-name { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
+.ind-lesson { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); font-style: italic; line-height: 1.65; }
+
 .formal-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-.formal-text { font-family: var(--lora); font-size: 1rem; color: rgba(15,31,61,0.68); line-height: 1.8; margin-bottom: 2rem; }
-.formal-quote { font-family: var(--lora); font-style: italic; font-size: 0.95rem; color: rgba(15,31,61,0.4); padding-left: 1rem; border-left: 2px solid var(--gold); line-height: 1.65; }
 .formal-cards { display: flex; flex-direction: column; gap: 1rem; }
 .formal-card { background: var(--navy); color: var(--white); padding: 1.75rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: background 0.2s; box-shadow: var(--sh); }
 .formal-card:hover { background: var(--navy-mid); }
@@ -273,9 +195,9 @@ nav {
 .formal-card-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
 .formal-card-icon { font-size: 1.4rem; color: var(--gold); }
 
-/* CONTACT */
-.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-.contact-heading { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0; margin-bottom: 1.25rem; }
+/* COMMUNICATION CHANNELS CONTROLS */
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-heading { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1.25rem; }
 .contact-heading em { color: var(--gold); font-style: italic; }
 .contact-sub { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 1rem; line-height: 1.75; max-width: 400px; }
 .contact-links { display: flex; flex-direction: column; }
@@ -289,33 +211,32 @@ nav {
 .c-handle { font-size: 12.5px; color: rgba(15,31,61,0.38); margin-top: 1px; }
 .c-arrow { color: rgba(15,31,61,0.28); transition: all 0.2s; }
 
-/* FOOTER */
-footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+/* FOOTER ELEMENTS */
+footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
 .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--white); margin-bottom: 0.25rem; }
 .footer-note { font-family: var(--lora); font-style: italic; font-size: 13px; color: rgba(255,255,255,0.42); max-width: 460px; line-height: 1.55; }
 .footer-gold { color: var(--gold-light); }
 
-/* FADE IN */
 .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
 .fade.in { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 900px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  #aagaye { grid-template-columns: 1fr; }
-  .aagaye-right { display: none; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .formal-inner { grid-template-columns: 1fr; }
-  .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+/* RIGOROUS CSS MEDIA GRAPH QUERY FOR LAPTOP + TABLET + PHONE EQUILIBRIUM */
+@media (max-width: 1024px) {
+  #hero { grid-template-columns: 1fr; text-align: left; min-height: auto; }
+  .hero-right { height: 380px; width: 100%; }
+  .hero-right-overlay { background: linear-gradient(to top, var(--white) 0%, transparent 20%); }
+  #aagaye { grid-template-columns: 1fr; min-height: auto; }
+  .aagaye-right { height: 280px; }
 }
-@media (max-width: 640px) {
-  nav { padding: 0 1.25rem; }
-  .nav-links li:nth-child(n+4) { display: none; }
-  .section { padding: 3.5rem 1.25rem; }
-  .hero-left { padding: 2.5rem 1.25rem; }
-  .aagaye-left { padding: 3rem 1.25rem; }
-  .ind-banner { height: 200px; }
-  footer { padding: 2rem 1.25rem; flex-direction: column; }
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links li:not(.icai-dropdown) { display: none; } /* Adaptive dropdown navigation layout mapping */
+  .section { padding: 3.5rem 1.5rem; }
+  .hero-left { padding: 3rem 1.5rem; }
+  .aagaye-left { padding: 3rem 1.5rem; }
+  .formal-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
 }
 </style>
 </head>
@@ -324,11 +245,14 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
 <nav>
   <a href="#hero" class="nav-logo">Md Zaid <em>Kamran</em></a>
   <ul class="nav-links">
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#dashboard-center">Control Center</a></li>
-    <li><a href="#thoughts">Writing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li class="icai-dropdown">
+      <span class="icai-dropbtn">ICAI Portal Links ▾</span>
+      <div class="icai-dropdown-content">
+        <a href="https://ssp.icai.org" target="_blank">SSP Portal Registry</a>
+        <a href="https://boslive.icai.org" target="_blank">BOS Knowledge Portal</a>
+        <a href="https://www.icaionlineregistration.org" target="_blank">ICAI Training Registry</a>
+      </div>
+    </li>
   </ul>
 </nav>
 
@@ -355,7 +279,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1471&auto=format&fit=crop" alt="Md Zaid Kamran Layout Frame">
+    <img src="profile.jpg" alt="Md Zaid Kamran Layout Frame" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1471&auto=format&fit=crop'">
     <div class="hero-right-overlay"></div>
     <p class="hero-right-caption">Md Zaid Kamran, CA Final</p>
   </div>
@@ -403,92 +327,80 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
   </div>
 </section>
 
-<section id="about" class="section section-off fade">
-  <div class="container">
-    <p class="eyebrow">Places I've Learned From</p>
-    <h2 class="section-heading">Industrial Exposure</h2>
-    <div class="ind-banner">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1470&auto=format&fit=crop" alt="Industrial Framework Systems">
-      <div class="ind-banner-overlay"></div>
-      <p class="ind-banner-caption">Notes captured directly from active plant floor cycles.</p>
-    </div>
-    <div class="ind-grid">
-      <div class="ind-card">
-        <span class="ind-emoji">🏭</span>
-        <h3 class="ind-name">Textile</h3>
-        <p class="ind-lesson">How small process gaps can quietly become expensive business problems. Understanding the alignment loop of quality parameters and material handling.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">⚡</span>
-        <h3 class="ind-name">Hydropower</h3>
-        <p class="ind-lesson">Why compliance matters most when nobody is looking. Seeing internal structural governance frameworks preserve high-capital long-term asset models.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">🥛</span>
-        <h3 class="ind-name">Dairy</h3>
-        <p class="ind-lesson">How operations, inventory, and quality controls depend on one another. Navigating time-sensitive supply chains where small disruptions multiply instantly.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">🛞</span>
-        <h3 class="ind-name">Tyre</h3>
-        <p class="ind-lesson">How working capital often hides in places nobody thinks to look. Dissecting stock aging parameters and raw procurement store loops.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="dashboard-center" class="section section-gold fade">
   <div class="container">
     <p class="eyebrow">Interactive Operations Platform</p>
     <h2 class="section-heading">Control Center</h2>
-    <p class="section-sub">Live tracking systems covering automated registry portals, markets, ICAI scheduling, and encrypted analytics metrics.</p>
+    <p class="section-sub">Live tracking systems covering automated registry portals, markets, and encrypted analytics metrics.</p>
 
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 32px; font-weight: 600;">🏛️ Government Portals Tracking</h3>
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 32px; font-weight: 600;">🏛️ Live Government & Market Registry Portals</h3>
     <div class="dashboard-grid">
       <div class="dash-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-          <span style="font-weight: 600; color: var(--navy);">GST Portal</span>
-          <span class="status-badge status-yes">Notice Today: YES</span>
+        <div class="dash-meta">
+          <span class="dash-title">GST Portal</span>
+          <span class="dash-notice-count">📋 3 Notices Issued Today</span>
+          <span class="status-badge status-yes">SYSTEM RUN ACTIVE</span>
         </div>
-        <div class="card-actions-row">
-          <a href="https://www.gst.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
-          <a href="#" class="action-anchor" style="color: rgba(15,31,61,0.5);">Download Circular ↓</a>
-        </div>
+        <div class="card-actions-row"><a href="https://www.gst.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
       </div>
-
       <div class="dash-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-          <span style="font-weight: 600; color: var(--navy);">MCA21 Registry</span>
-          <span class="status-badge status-no">Notice Today: NO</span>
+        <div class="dash-meta">
+          <span class="dash-title">Income Tax (CPC)</span>
+          <span class="dash-notice-count">📋 1 Circular Update</span>
+          <span class="status-badge status-yes">SYSTEM RUN ACTIVE</span>
         </div>
-        <div class="card-actions-row">
-          <a href="https://www.mca.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
-          <span style="font-size: 12px; color: #a0aec0;">No Updates</span>
-        </div>
+        <div class="card-actions-row"><a href="https://www.incometax.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
       </div>
-
       <div class="dash-card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-          <span style="font-weight: 600; color: var(--navy);">Income Tax (CPC)</span>
-          <span class="status-badge status-yes">Live Update: YES</span>
+        <div class="dash-meta">
+          <span class="dash-title">MCA21 Registry</span>
+          <span class="dash-notice-count">📋 0 Corporate Alerts</span>
+          <span class="status-badge status-no">STABLE</span>
         </div>
-        <div class="card-actions-row">
-          <a href="https://www.incometax.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
-          <a href="#" class="action-anchor" style="color: rgba(15,31,61,0.5);">Download Return Template ↓</a>
+        <div class="card-actions-row"><a href="https://www.mca.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-meta">
+          <span class="dash-title">NSE India</span>
+          <span class="dash-notice-count">📈 2 New Circular Files</span>
+          <span class="status-badge status-yes">MARKET RUN</span>
         </div>
+        <div class="card-actions-row"><a href="https://www.nseindia.com" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-meta">
+          <span class="dash-title">BSE India</span>
+          <span class="dash-notice-count">📈 4 Filing Disclosures</span>
+          <span class="status-badge status-yes">MARKET RUN</span>
+        </div>
+        <div class="card-actions-row"><a href="https://www.bseindia.com" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-meta">
+          <span class="dash-title">RBI Portal</span>
+          <span class="dash-notice-count">📋 0 Policy Alerts</span>
+          <span class="status-badge status-no">STABLE</span>
+        </div>
+        <div class="card-actions-row"><a href="https://www.rbi.org.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-meta">
+          <span class="dash-title">SEBI Board</span>
+          <span class="dash-notice-count">📋 1 Board Circular</span>
+          <span class="status-badge status-yes">MONITORING</span>
+        </div>
+        <div class="card-actions-row"><a href="https://www.sebi.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
       </div>
     </div>
 
     <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">📈 Live Stock Tracking Engine</h3>
-    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Type in an equity ticket symbol and seamlessly route your research to any premium analyzer platform instantaneously under this umbrella website section.</p>
-    
-    <div style="background: var(--white); border: 1px solid var(--rule-s); padding: 28px; border-radius: 4px; box-shadow: var(--sh);">
+    <div style="background: var(--white); border: 1px solid var(--rule-s); padding: 24px; border-radius: 4px; box-shadow: var(--sh);">
       <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
-        <div style="flex: 1; min-width: 240px;">
+        <div style="flex: 1; min-width: 200px;">
           <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">ENTER STOCK SYMBOL</label>
-          <input type="text" id="global-stock-ticker" value="TCS" placeholder="e.g., RELIANCE, INFY, WIPRO" class="input-field" style="font-weight:600;" />
+          <input type="text" id="global-stock-ticker" value="TCS" placeholder="e.g., RELIANCE, INFY" class="input-field" style="font-weight:600;" />
         </div>
-        <div style="flex: 1; min-width: 280px;">
+        <div style="flex: 1; min-width: 240px;">
           <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">SELECT CHOSEN MARKET ENGINE ROUTE</label>
           <select id="stock-target-engine" class="select-field">
             <option value="screener">Screener.in (Financial Matrix Sheets)</option>
@@ -501,115 +413,119 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
       <button onclick="launchStockAnalysis()" class="submit-btn">Launch Analysis Portal ↗</button>
     </div>
 
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">📑 Deep Statutory Compliance Matrix</h3>
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">📅 Major Statutory Compliance Due Dates Calendar</h3>
     <div class="table-wrapper">
       <table class="compliance-table">
         <thead>
           <tr>
-            <th>Due Date</th>
+            <th>Due Date Timeline</th>
             <th>Filing Category</th>
-            <th>Statutory Mandate Provision</th>
-            <th style="text-align: center;">Filing Status</th>
-            <th style="text-align: right;">Action Tool</th>
+            <th>Statutory Mandate Provision Description</th>
+            <th style="text-align: center;">Filing window status</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="font-weight: 600; font-family: var(--body);">07th Current Month</td>
-            <td>Direct Tax</td>
-            <td>Deposit of TDS/TCS liabilities collected across preceding cycle loops</td>
-            <td style="text-align: center;"><span class="status-badge status-yes">FILED</span></td>
-            <td style="text-align: right;"><span style="color: #a0aec0; font-size: 12px;">Challan Locked</span></td>
+            <td style="font-weight: 600;">07th of Every Month</td>
+            <td>Direct Tax (Income Tax)</td>
+            <td>Challan payment deposit loop for corporate TDS and TCS collections</td>
+            <td style="text-align: center;"><span class="status-badge status-yes">UPCOMING LOCKRUN</span></td>
           </tr>
           <tr>
-            <td style="font-weight: 600; font-family: var(--body);">11th Current Month</td>
-            <td>Indirect Tax</td>
-            <td>Filing statement of outward corporate supplies inside Form GSTR-1</td>
-            <td style="text-align: center;"><span class="status-badge status-yes">FILED</span></td>
-            <td style="text-align: right;"><a href="#" class="action-anchor">View Return →</a></td>
+            <td style="font-weight: 600;">11th of Every Month</td>
+            <td>Indirect Tax (GST)</td>
+            <td>Filing statement metrics of outward supplies in Form GSTR-1 parameters</td>
+            <td style="text-align: center;"><span class="status-badge status-yes">UPCOMING LOCKRUN</span></td>
           </tr>
           <tr>
-            <td style="font-weight: 600; font-family: var(--body); color: var(--gold);">15th Current Month</td>
-            <td>Advance Tax</td>
-            <td>Remittance parameters for Corporate Advance Tax processing runs</td>
-            <td style="text-align: center;"><span class="status-badge status-alert">PENDING</span></td>
-            <td style="text-align: right;"><a href="#" class="action-anchor" style="color: var(--navy);">Compute Sheet ↓</a></td>
+            <td style="font-weight: 600; color: var(--gold);">20th of Every Month</td>
+            <td>Indirect Tax (GST)</td>
+            <td>Monthly summary auto-computation return filing loop inside Form GSTR-3B</td>
+            <td style="text-align: center;"><span class="status-badge status-alert">ACTION REQUIRED</span></td>
           </tr>
           <tr>
-            <td style="font-weight: 600; font-family: var(--body);">30th June Calendar</td>
-            <td>MCA System</td>
-            <td>Filing Form DPT-3 (Mandatory Return of Corporate Outstanding Loans)</td>
-            <td style="text-align: center;"><span class="status-badge status-no">NOT STARTED</span></td>
-            <td style="text-align: right;"><span style="color: #a0aec0; font-size: 12px;">Draft Checklist</span></td>
+            <td style="font-weight: 600;">Quarterly Cycles</td>
+            <td>Direct Tax (Advance Tax)</td>
+            <td>Remittance installations processing runs for Corporate Advance Tax frameworks</td>
+            <td style="text-align: center;"><span class="status-badge status-no">MONITORING</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">30th June (Annual)</td>
+            <td>MCA Corporate Registry</td>
+            <td>Filing Form DPT-3 to verify outstanding deposits/loans metrics parameters</td>
+            <td style="text-align: center;"><span class="status-badge status-no">COMPLIANCE OPEN</span></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">🎓 Advanced ICAI Track Monitor</h3>
-    <div class="dashboard-grid" style="margin-bottom: 32px;">
-      <div class="dash-card">
-        <div>
-          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">ICITSS LABS</span>
-          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">Advanced ITT Batches</h4>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span class="status-badge status-alert" style="font-weight:700;">STATUS: FULL</span>
-          <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="action-anchor">Check Center ↗</a>
-        </div>
-      </div>
-
-      <div class="dash-card">
-        <div>
-          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">MANAGEMENT MODULE</span>
-          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">Orientation Course (OC)</h4>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span class="status-badge status-yes" style="font-weight:700;">2 SEATS AVAILABLE</span>
-          <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="action-anchor">Book Slot ↗</a>
-        </div>
-      </div>
-
-      <div class="dash-card">
-        <div>
-          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">SELF-PACED TRAINING</span>
-          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">SPOM Exam Board Layout</h4>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span class="status-badge status-no" style="font-weight:600; color: var(--navy); background: var(--navy-pale); border-color: rgba(15,31,61,0.2);">TEST TRACK ACTIVE</span>
-          <a href="https://spmt.icai.org" target="_blank" class="action-anchor">Launch Portal ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">🔒 Private LinkedIn Analytics Engine Layout</h3>
-    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Paste any public LinkedIn profile target link below to trigger calculation simulation protocols. Extraction records sit locked inside the vault structure below.</p>
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">🔒 Private LinkedIn Engagement Breakdown Vault</h3>
+    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Input text link logs below. Enter master security vault code <strong>0505</strong> to unblur interactive tables.</p>
     
     <div class="vault-box">
       <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
-        <div style="flex: 1; min-width: 280px;">
-          <label style="font-family: var(--body); font-size: 11px; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">TARGET ACCOUNT PROFILE LINK</label>
-          <input type="url" id="linkedin-profile-input" placeholder="https://www.linkedin.com/in/target-username" class="input-field" />
+        <div style="flex: 1; min-width: 240px;">
+          <label style="font-family: var(--body); font-size: 11px; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 600;">PASTE ENGAGEMENT OR PROFILE LINK</label>
+          <input type="url" id="linkedin-profile-input" placeholder="https://www.linkedin.com/in/... or post URL" class="input-field" />
         </div>
       </div>
       
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <button onclick="processLinkedInProfile()" class="submit-btn" style="background:var(--navy); color:var(--white);">Queue Parse Sequence</button>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="processLinkedInProfile()" class="submit-btn">Queue Parse Sequence</button>
         <button onclick="togglePrivateVaultData()" id="vault-toggle-button" class="submit-btn" style="background:transparent; color:var(--navy); border-color:var(--navy);">Unlock Secure Vault</button>
       </div>
 
       <div id="private-metrics-vault-container" class="vault-blur-container">
-        <div class="vault-card">
-          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">CURRENT AUDIENCE</div>
-          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">4,820</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--navy-pale); padding: 10px 16px; border-radius: 4px;">
+          <span style="font-size: 12px; font-weight: 600; color: var(--navy-soft);">SELECT DATA TIME ANALYSIS HORIZON:</span>
+          <select class="vault-filter-select" onchange="alert('Simulating pipeline query execution engine logic parameters for selected range.')">
+            <option>Last 7 Days Metrics</option>
+            <option>Last 14 Days Metrics</option>
+            <option>Last 28 Days Metrics</option>
+            <option>Last 2 Months History</option>
+            <option>Last 3 Months History</option>
+            <option>Custom Engine Registry Range</option>
+          </select>
         </div>
-        <div class="vault-card">
-          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">EXTRACTED LIKES</div>
-          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">1,240</div>
-        </div>
-        <div class="vault-card">
-          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">COMMENTS COUNT</div>
-          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">382</div>
+
+        <div class="vault-table-card">
+          <h4 style="font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 12px;">Detailed Post Metrics Archive Summary Logs</h4>
+          <div class="table-wrapper" style="margin-top:0;">
+            <table class="compliance-table">
+              <thead>
+                <tr>
+                  <th>Post Identifier Reference Name</th>
+                  <th>Target Redirection URL</th>
+                  <th style="text-align: center;">Likes</th>
+                  <th style="text-align: center;">Comments</th>
+                  <th style="text-align: right;">Avg Eng% Tier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:600;">Wipro Stock Buyback Deepdive Analysis</td>
+                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
+                  <td style="text-align: center; font-weight: 600;">240</td>
+                  <td style="text-align: center; font-weight: 600;">42</td>
+                  <td style="text-align: right; color:#2f855a; font-weight:600;">8.42% High</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;">Chegg vs Generative Artificial Intelligence Disruptions</td>
+                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
+                  <td style="text-align: center; font-weight: 600;">195</td>
+                  <td style="text-align: center; font-weight: 600;">31</td>
+                  <td style="text-align: right; color:#2f855a; font-weight:600;">6.10% Med</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;">IPL & Sports Franchise Business Monetization Architecture</td>
+                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
+                  <td style="text-align: center; font-weight: 600;">310</td>
+                  <td style="text-align: center; font-weight: 600;">56</td>
+                  <td style="text-align: right; color:#2f855a; font-weight:600;">11.20% High</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -617,8 +533,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
         Pipeline Source: Google Sheets App Script API Automation Engine Tier
       </div>
     </div>
-
-    <p class="tools-note" style="margin-top: 40px; margin-bottom: 0;">"Not because they're perfect. Just because every time I visit them, I usually end up learning something."</p>
   </div>
 </section>
 
@@ -702,44 +616,37 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
   </div>
 </section>
 
-<section id="shared" class="section section-white fade">
+<section id="about" class="section section-white fade">
   <div class="container">
-    <p class="eyebrow">Things I've Shared Online</p>
-    <h2 class="section-heading">Out of the Notebook</h2>
-    <p class="section-sub">A clean layout reserved for written pieces, updates, and interactions that moved beyond my private drafts folder.</p>
-    <div class="shared-grid">
-      <div class="shared-card">
-        <p class="shared-type">LinkedIn Post Analysis</p>
-        <h3 class="shared-title">Deconstructing the operational landscape of modern consumer brands and brand case histories.</h3>
-        <p class="shared-preview">Evaluating corporate decisions and system pivots across tracking parameters...</p>
-        <a href="https://www.linkedin.com" target="_blank" class="shared-link">View post on LinkedIn →</a>
+    <p class="eyebrow">Places I've Learned From</p>
+    <h2 class="section-heading">Industrial Exposure Overview</h2>
+    <div class="ind-grid" style="margin-top:24px;">
+      <div class="ind-card">
+        <span class="ind-emoji">🏭</span>
+        <h3 class="ind-name">Textile</h3>
+        <p class="ind-lesson">How small process gaps can quietly become expensive business problems. Understanding the alignment loop of quality parameters and material handling.</p>
       </div>
-      <div class="shared-card">
-        <p class="shared-type">Articles & Analytics</p>
-        <h3 class="shared-title">The subtle cost implications of unmonitored material ledger gaps in manufacturing workflows.</h3>
-        <p class="shared-preview">A breakdown tracking custom physical adjustments vs system inventory entries...</p>
-        <a href="https://www.linkedin.com" target="_blank" class="shared-link">Read article analysis →</a>
+      <div class="ind-card">
+        <span class="ind-emoji">⚡</span>
+        <h3 class="ind-name">Hydropower</h3>
+        <p class="ind-lesson">Why compliance matters most when nobody is looking. Seeing internal structural governance frameworks preserve high-capital long-term asset models.</p>
       </div>
-      <div class="shared-card">
-        <p class="shared-type">Collaborations</p>
-        <h3 class="shared-title">Joint professional system discussions with peer groups analyzing recent tax amendments.</h3>
-        <p class="shared-preview">Summarizing key compliance takeaways for student audit professionals...</p>
-        <a href="https://www.linkedin.com" target="_blank" class="shared-link">View exchange logs →</a>
+      <div class="ind-card">
+        <span class="ind-emoji">🥛</span>
+        <h3 class="ind-name">Dairy</h3>
+        <p class="ind-lesson">How operations, inventory, and quality controls depend on one another. Navigating time-sensitive supply chains where small disruptions multiply instantly.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-emoji">🛞</span>
+        <h3 class="ind-name">Tyre</h3>
+        <p class="ind-lesson">How working capital often hides in places nobody thinks to look. Dissecting stock aging parameters and raw procurement store loops.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="formal" class="section section-off fade">
-  <div class="container">
-    <div class="formal-inner">
+    <div class="formal-inner" style="margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--rule);">
       <div>
-        <p class="eyebrow">The Formal Version</p>
-        <h2 class="section-heading">Structured Records</h2>
-        <div class="formal-text">
-          <p>The PDF document options exist for formal corporate requirements and administrative tracking routines.</p>
-          <p class="formal-quote">"This website serves as the more honest version of my journey."</p>
-        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.6rem; color: var(--navy); margin-bottom: 8px;">Formal Portfolio Version</h3>
+        <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.5); font-size: 14px;">The PDF document options exist for formal corporate requirements and administrative tracking routines.</p>
       </div>
       <div class="formal-cards">
         <a href="resume.pdf" target="_blank" class="formal-card">
@@ -749,19 +656,12 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
           </div>
           <span class="formal-card-icon">↓</span>
         </a>
-        <a href="#" class="formal-card">
-          <div>
-            <h3 class="formal-card-name">Professional Profile</h3>
-            <p class="formal-card-desc">View verified academic declarations</p>
-          </div>
-          <span class="formal-card-icon">→</span>
-        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="section section-white fade">
+<section id="contact" class="section section-off fade">
   <div class="container">
     <div class="contact-inner">
       <div>
@@ -769,22 +669,22 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
         <p class="contact-sub">Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, a specific cricket tracking observation, or sharing notes on spreadsheet models—reach out.</p>
       </div>
       <div class="contact-links">
-        <a href="https://www.linkedin.com" target="_blank" class="c-link">
+        <a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" class="c-link">
           <div class="c-left">
             <span class="c-icon">↗</span>
             <div>
-              <p class="c-platform">LinkedIn</p>
-              <p class="c-handle">Connect professionally</p>
+              <p class="c-platform">LinkedIn Profile</p>
+              <p class="c-handle">Connect professionally @md-zaid-kamran</p>
             </div>
           </div>
           <span class="c-arrow">→</span>
         </a>
-        <a href="https://www.instagram.com" target="_blank" class="c-link">
+        <a href="https://www.instagram.com/zaid_kamran05?igsh=eGhubzd6M2tsM2Np" target="_blank" class="c-link">
           <div class="c-left">
             <span class="c-icon">↗</span>
             <div>
               <p class="c-platform">Instagram</p>
-              <p class="c-handle">Personal corner logs</p>
+              <p class="c-handle">Personal corner logs @zaid_kamran05</p>
             </div>
           </div>
           <span class="c-arrow">→</span>
@@ -813,7 +713,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem
 </footer>
 
 <script>
-// Typewriter Engine
+// Typewriter Engine Execution
 const nameEl = document.getElementById("typed-name");
 const cursor = document.getElementById("cursor");
 const heroBody = document.getElementById("hero-body");
@@ -834,13 +734,13 @@ function type() {
 }
 setTimeout(type, 600);
 
-// Scroll fade-in framework engine
+// Scroll view observer fade configurations
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
 }, { threshold: 0.05 });
 document.querySelectorAll(".fade").forEach(el => obs.observe(el));
 
-// Platform Interactive Function: Multi-Website Equity Analysis Router
+// Equity Router Engine Multiplexer Execution
 function launchStockAnalysis() {
   var tickerSymbol = document.getElementById('global-stock-ticker').value.trim().toUpperCase();
   var enginePlatform = document.getElementById('stock-target-engine').value;
@@ -861,40 +761,34 @@ function launchStockAnalysis() {
   window.open(destinationLink, '_blank');
 }
 
-// Platform Interactive Function: LinkedIn Input Data Simulation Node
+// Scraper Target Simulation Alert
 function processLinkedInProfile() {
   var userUrlInput = document.getElementById('linkedin-profile-input').value.trim();
   if(!userUrlInput.includes('linkedin.com/')) {
-    alert('Validation Error: Please insert a secure, qualified LinkedIn URL.');
+    alert('Validation Error: Please insert a secure, qualified LinkedIn address URL.');
     return;
   }
-  
-  if(userUrlInput.includes('in/md-zaid-kamran') || userUrlInput.includes('mdzaidkamran05')) {
-    alert('Routing Native Master Profile: Initializing 3-Legged OAuth secure database pipeline logs to mirror account summaries.');
-  } else {
-    alert('Routing External Competitor Post/Profile Link: Triggering serverless scraper nodes (Apify/Vayne Tier Engine) to collect public comments and active like strings safely into your master Google Sheet database.');
-  }
+  alert('Target Added to Pipeline Queue: Triggering cloud data metrics sync. Engagement intervals will be compiled under your private sheet records.');
 }
 
-// Platform Interactive Function: local encrypted privacy PIN layer toggle
+// Vault Security Code Verification logic matching '0505'
 function togglePrivateVaultData() {
   var metricVault = document.getElementById('private-metrics-vault-container');
   var actionButtonText = document.getElementById('vault-toggle-button');
   
   if (metricVault.style.filter === 'blur(0px)') {
-    metricVault.style.filter = 'blur(8px)';
+    metricVault.style.filter = 'blur(10px)';
     metricVault.style.pointerEvents = 'none';
     actionButtonText.innerText = 'Unlock Secure Vault';
   } else {
-    var structuralSecurePinPrompt = prompt('System Authentication Guard: Enter security pin code passkey to unblur private summaries:');
+    var structuralSecurePinPrompt = prompt('System Authentication Guard: Enter security pin code passkey to unblur private tracking data logs:');
     
-    // Set to your chosen key sequence '0505'
     if(structuralSecurePinPrompt === '0505') { 
       metricVault.style.filter = 'blur(0px)';
       metricVault.style.pointerEvents = 'auto';
       actionButtonText.innerText = 'Lock Private Displays';
     } else {
-      alert('Access Denied: Authentication parameters mismatch. Records remain encrypted.');
+      alert('Access Denied: Authentication parameters mismatch. Vault remains safely locked.');
     }
   }
 }
