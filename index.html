@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Zaid Kamran</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0f1f3d;
+  --navy-mid: #1a3260;
+  --navy-soft: #2a4a8a;
+  --navy-pale: #e8edf5;
+  --gold: #c9973a;
+  --gold-light: #e8c97a;
+  --gold-pale: #fdf6e8;
+  --white: #ffffff;
+  --off: #f8f7f4;
+  --rule: rgba(15,31,61,0.10);
+  --rule-s: rgba(15,31,61,0.18);
+  --sh: 0 4px 20px rgba(15,31,61,0.05);
+  --sh-h: 0 12px 32px rgba(15,31,61,0.12);
+  --serif: "DM Serif Display", Georgia, serif;
+  --body: "Inter", system-ui, sans-serif;
+  --lora: "Lora", Georgia, serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--off); color: var(--navy); font-family: var(--body); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; box-shadow: 0 1px 16px rgba(15,31,61,0.06);
+}
+.nav-logo { font-family: var(--serif); font-size: 17px; color: var(--navy); text-decoration: none; }
+.nav-logo em { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 12.5px; color: rgba(15,31,61,0.55); text-decoration: none; letter-spacing: 0.05em; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 420px;
+  align-items: center; gap: 0;
+  padding: 80px 0 0; background: var(--white);
+  border-bottom: 1px solid var(--rule-s); overflow: hidden;
+}
+.hero-left { padding: 5rem 3rem 5rem 3rem; }
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
+.hero-since {
+  font-family: var(--serif); font-size: 1rem;
+  color: rgba(15,31,61,0.45); letter-spacing: 0.04em; margin-bottom: 0.5rem;
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.8rem, 8vw, 7rem);
+  line-height: 0.9; color: var(--navy);
+  margin-bottom: 1.5rem; letter-spacing: -0.025em;
+}
+.hero-name em { color: var(--gold); font-style: italic; }
+.hero-tagline {
+  font-family: var(--lora); font-style: italic;
+  font-size: 1.05rem; color: rgba(15,31,61,0.6);
+  max-width: 460px; line-height: 1.65;
+  border-left: 2.5px solid var(--gold);
+  padding-left: 1rem; margin-bottom: 1.75rem;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.hero-tag {
+  padding: 0.3rem 0.85rem;
+  background: var(--navy-pale); color: var(--navy-soft);
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em;
+}
+.hero-body {
+  font-family: var(--lora); font-size: 0.97rem;
+  color: rgba(15,31,61,0.65); line-height: 1.85; max-width: 520px;
+  opacity: 0; transition: opacity 0.9s ease;
+}
+.hero-body p + p { margin-top: 1rem; }
+.hero-scroll {
+  margin-top: 2.5rem; display: flex; align-items: center; gap: 0.75rem;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(15,31,61,0.3); opacity: 0; transition: opacity 0.9s ease;
+}
+.pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.6); } }
+.cursor { display:inline-block; width:2.5px; height:0.85em; background:var(--gold); margin-left:3px; vertical-align:middle; animation:blink 1s step-end infinite; }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+/* HERO IMAGE */
+.hero-right { height: 100%; position: relative; overflow: hidden; }
+.hero-right img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 15%;
+  display: block;
+}
+.hero-right-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--white) 0%, transparent 18%),
+              linear-gradient(to top, rgba(15,31,61,0.35) 0%, transparent 50%);
+}
+.hero-right-caption {
+  position: absolute; bottom: 2rem; left: 1.5rem;
+  font-family: var(--lora); font-style: italic;
+  font-size: 12px; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+}
+
+/* SHARED */
+.section { padding: 5.5rem 3rem; border-bottom: 1px solid var(--rule); }
+.section-white { background: var(--white); }
+.section-off { background: var(--off); }
+.section-pale { background: var(--navy-pale); }
+.section-gold { background: var(--gold-pale); }
+.section-dark { background: var(--navy); color: var(--white); }
+.container { max-width: 1100px; margin: 0 auto; }
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
+.section-heading {
+  font-family: var(--serif); font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.1; margin-bottom: 0.75rem;
+}
+.section-sub {
+  font-family: var(--lora); font-style: italic;
+  color: rgba(15,31,61,0.45); font-size: 14.5px; margin-bottom: 2.75rem;
+}
+
+/* AAGAYE AAP */
+#aagaye {
+  background: var(--navy); color: var(--white);
+  padding: 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: grid; grid-template-columns: 1fr 380px;
+  min-height: 520px; overflow: hidden;
+}
+.aagaye-left { padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+.aagaye-eyebrow {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.aagaye-eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
+.aagaye-heading {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--white); line-height: 1.05; margin-bottom: 0.5rem;
+}
+.aagaye-sub {
+  font-family: var(--lora); font-style: italic;
+  font-size: 0.95rem; color: var(--gold-light);
+  margin-bottom: 2rem;
+}
+.aagaye-body {
+  font-family: var(--lora); font-size: 1rem; color: rgba(255,255,255,0.68); line-height: 1.85; max-width: 540px;
+}
+.aagaye-body p + p { margin-top: 1.1rem; }
+.aagaye-right { position: relative; overflow: hidden; }
+.aagaye-right img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+.aagaye-right-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--navy) 0%, transparent 20%), linear-gradient(to top, var(--navy) 0%, transparent 40%);
+}
+
+/* JOURNEY */
+.journey-intro { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.55); font-size: 1rem; line-height: 1.8; max-width: 620px; margin-bottom: 3rem; }
+.journey-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.jcard {
+  background: var(--white); border: 1px solid var(--rule-s);
+  border-top: 3px solid var(--gold); padding: 1.75rem;
+  box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s;
+}
+.jcard:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
+.jcard-phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
+.jcard-title { font-family: var(--serif); font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
+.jcard-body { font-size: 13.5px; color: rgba(15,31,61,0.6); line-height: 1.65; }
+
+/* PLACES I'VE LEARNED FROM */
+.ind-banner { width: 100%; height: 300px; overflow: hidden; position: relative; margin-bottom: 3rem; }
+.ind-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.ind-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,31,61,0.7) 0%, transparent 60%); }
+.ind-banner-caption { position: absolute; bottom: 1.5rem; left: 2rem; font-family: var(--lora); font-style: italic; font-size: 13px; color: rgba(255,255,255,0.7); }
+.ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+.ind-card {
+  background: var(--white); border: 1px solid var(--rule-s);
+  border-top: 3px solid var(--gold); padding: 2rem 1.5rem;
+  box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; cursor: default;
+}
+.ind-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
+.ind-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.ind-name { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
+.ind-lesson { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); font-style: italic; line-height: 1.65; }
+
+/* THE COMPREHENSIVE AUTOMATION PLATFORM TERMINAL CSS */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+.dash-card { background: var(--white); border: 1px solid var(--rule-s); padding: 24px; border-radius: 4px; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between; }
+.dash-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); border-color: var(--gold); }
+.status-badge { font-family: var(--body); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 3px; letter-spacing: 0.04em; }
+.status-yes { color: #2f855a; background: #e6fffa; border: 1px solid #b2f5ea; }
+.status-no { color: #718096; background: #edf2f7; border: 1px solid #e2e8f0; }
+.status-alert { color: #c53030; background: #fff5f5; border: 1px solid #fed7d7; }
+.card-actions-row { display: flex; gap: 16px; margin-top: 16px; border-top: 1px solid var(--rule); padding-top: 12px; }
+.action-anchor { font-size: 12px; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 1px; transition: color 0.2s; }
+.action-anchor:hover { color: var(--gold); }
+
+/* TABLES FOR CALENDAR */
+.table-wrapper { width: 100%; overflow-x: auto; background: var(--white); border: 1px solid var(--rule-s); border-radius: 4px; box-shadow: var(--sh); margin-top: 24px; }
+.compliance-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+.compliance-table th { background: var(--navy-pale); color: var(--navy); font-weight: 600; padding: 14px 16px; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+.compliance-table td { padding: 16px; border-bottom: 1px solid var(--rule); color: rgba(15,31,61,0.75); }
+.compliance-table tr:last-child td { border-bottom: none; }
+
+/* STOCK WATCH SYSTEM */
+.input-field { width: 100%; padding: 12px 16px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--off); transition: border-color 0.2s; }
+.input-field:focus { border-color: var(--gold); background: var(--white); }
+.select-field { width: 100%; padding: 12px 16px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--white); }
+.submit-btn { font-family: var(--body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: var(--navy); color: var(--white); border: 1px solid var(--navy); padding: 12px 24px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+.submit-btn:hover { background: transparent; color: var(--navy); border-color: var(--navy); }
+
+/* PRIVATE METRICS HUB */
+.vault-box { border: 1px dashed var(--gold); border-radius: 6px; padding: 32px; background: var(--gold-pale); margin-top: 24px; }
+.vault-blur-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px; filter: blur(8px); pointer-events: none; transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.vault-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; text-align: center; box-shadow: var(--sh); }
+
+/* FROM FILES */
+.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.file-card { background: var(--white); border: 1px solid var(--rule-s); padding: 2rem 1.75rem; box-shadow: var(--sh); transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden; }
+.file-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.file-card:hover::before { transform: scaleX(1); }
+.file-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
+.file-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.file-title { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.6rem; }
+.file-desc { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); line-height: 1.65; }
+.file-coming { margin-top: 1rem; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+/* PROJECTS & LEARNINGS GRID */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.proj-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
+.proj-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
+.proj-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+.proj-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; }
+.proj-desc { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; }
+
+/* SHARED */
+.shared-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.shared-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
+.shared-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
+.shared-type { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
+.shared-title { font-weight: 500; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.45; }
+.shared-preview { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; margin-bottom: 1rem; }
+.shared-link { font-size: 12px; color: var(--gold); font-weight: 600; text-decoration: none; letter-spacing: 0.04em; }
+.shared-link:hover { text-decoration: underline; }
+
+/* FORMAL */
+.formal-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.formal-text { font-family: var(--lora); font-size: 1rem; color: rgba(15,31,61,0.68); line-height: 1.8; margin-bottom: 2rem; }
+.formal-quote { font-family: var(--lora); font-style: italic; font-size: 0.95rem; color: rgba(15,31,61,0.4); padding-left: 1rem; border-left: 2px solid var(--gold); line-height: 1.65; }
+.formal-cards { display: flex; flex-direction: column; gap: 1rem; }
+.formal-card { background: var(--navy); color: var(--white); padding: 1.75rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: background 0.2s; box-shadow: var(--sh); }
+.formal-card:hover { background: var(--navy-mid); }
+.formal-card-name { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-light); margin-bottom: 0.3rem; }
+.formal-card-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
+.formal-card-icon { font-size: 1.4rem; color: var(--gold); }
+
+/* CONTACT */
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-heading { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0; margin-bottom: 1.25rem; }
+.contact-heading em { color: var(--gold); font-style: italic; }
+.contact-sub { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 1rem; line-height: 1.75; max-width: 400px; }
+.contact-links { display: flex; flex-direction: column; }
+.c-link { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--navy); transition: all 0.2s; }
+.c-link:first-child { border-top: 1px solid var(--rule); }
+.c-link:hover { padding-left: 0.5rem; color: var(--gold); }
+.c-link:hover .c-arrow { color: var(--gold); transform: translate(3px,-3px); }
+.c-left { display: flex; align-items: center; gap: 1rem; }
+.c-icon { font-size: 1.1rem; }
+.c-platform { font-weight: 600; font-size: 14.5px; }
+.c-handle { font-size: 12.5px; color: rgba(15,31,61,0.38); margin-top: 1px; }
+.c-arrow { color: rgba(15,31,61,0.28); transition: all 0.2s; }
+
+/* FOOTER */
+footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-name { font-family: var(--serif); font-size: 1rem; color: var(--white); margin-bottom: 0.25rem; }
+.footer-note { font-family: var(--lora); font-style: italic; font-size: 13px; color: rgba(255,255,255,0.42); max-width: 460px; line-height: 1.55; }
+.footer-gold { color: var(--gold-light); }
+
+/* FADE IN */
+.fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade.in { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  #aagaye { grid-template-columns: 1fr; }
+  .aagaye-right { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .formal-inner { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links li:nth-child(n+4) { display: none; }
+  .section { padding: 3.5rem 1.25rem; }
+  .hero-left { padding: 2.5rem 1.25rem; }
+  .aagaye-left { padding: 3rem 1.25rem; }
+  .ind-banner { height: 200px; }
+  footer { padding: 2rem 1.25rem; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Md Zaid <em>Kamran</em></a>
+  <ul class="nav-links">
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#dashboard-center">Control Center</a></li>
+    <li><a href="#thoughts">Writing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">CA Final · Articleship · Curious by default</p>
+    <p class="hero-since">Since We're Here...</p>
+    <h1 class="hero-name">Hi, I'm <em><span id="typed-name"></span><span class="cursor" id="cursor"></span></em></h1>
+    <p class="hero-tagline">Following numbers for work, stories for curiosity, and cricket for balance.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">CA Final Student</span>
+      <span class="hero-tag">Internal Audit</span>
+      <span class="hero-tag">Business Curiosity</span>
+    </div>
+    <div class="hero-body" id="hero-body">
+      <p>CA Final Student, currently navigating articleship, audits, spreadsheets, and the occasional mystery that every ERP system seems determined to create.</p>
+      <p>I enjoy understanding how businesses work behind the scenes, whether it's a warehouse, a manufacturing plant, a finance process, or a GST register that refuses to reconcile despite everyone's best efforts.</p>
+      <p>When I'm not chasing audit observations or wondering who approved a particular process, you'll probably find me reading about business, following current affairs, watching cricket, or writing about things that catch my attention.</p>
+      <p>Feel free to explore. We've already made it this far.</p>
+    </div>
+    <div class="hero-scroll" id="hero-scroll">
+      <span class="pulse"></span>
+      Scroll to explore
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1471&auto=format&fit=crop" alt="Md Zaid Kamran Layout Frame">
+    <div class="hero-right-overlay"></div>
+    <p class="hero-right-caption">Md Zaid Kamran, CA Final</p>
+  </div>
+</section>
+
+<section id="aagaye">
+  <div class="aagaye-left">
+    <p class="aagaye-eyebrow">A little about me</p>
+    <h2 class="aagaye-heading">Aagaye aap?</h2>
+    <p class="aagaye-sub">Ab aagaye ho toh chalo, apne baare mein thoda bata hi dete hain.</p>
+    <div class="aagaye-body">
+      <p>I'm currently muddying my boots across CA Final curriculum pathways while finishing up my articleship training routines at BGJC & Associates LLP.</p>
+      <p>Like most students, I started with textbooks, lectures, and the hope that one day everything would somehow connect. Then articleship happened. Warehouses replaced case studies. Processes replaced assumptions. And suddenly every business had its own unique way of keeping scores.</p>
+      <p>Over time, I've had the opportunity to work across different industries, understand how businesses operate beyond reports and presentations, and learn that small process gaps often tell bigger stories than large presentations. Most days I'm still learning, still asking questions, and still discovering how much there is left to understand.</p>
+    </div>
+  </div>
+  <div class="aagaye-right">
+    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1470&auto=format&fit=crop" alt="Real World Analysis">
+    <div class="aagaye-right-overlay"></div>
+  </div>
+</section>
+
+<section id="journey" class="section section-white fade">
+  <div class="container">
+    <p class="eyebrow">The Journey So Far</p>
+    <h2 class="section-heading">Learning Through Experience</h2>
+    <p class="journey-intro">Presenting milestones as standard pathways focused purely on curiosity, tactical ground exposure, and asking basic functional system questions.</p>
+    <div class="journey-track">
+      <div class="jcard">
+        <p class="jcard-phase">Phase I</p>
+        <h3 class="jcard-title">Academic Architecture</h3>
+        <p class="jcard-body">Acquiring primary accounting principles through B.Com (Hons.) program parameters at Deshbandhu College, University of Delhi and Jamia Millia Islamia frameworks.</p>
+      </div>
+      <div class="jcard">
+        <p class="jcard-phase">Phase II</p>
+        <h3 class="jcard-title">Audit Trail Training</h3>
+        <p class="jcard-body">Entering live professional articleship systems, translating theoretical books into functional system registry audits.</p>
+      </div>
+      <div class="jcard">
+        <p class="jcard-phase">Phase III</p>
+        <h3 class="jcard-title">CA Final Track</h3>
+        <p class="jcard-body">Balancing macro corporate regulatory tracking metrics while investigating real-world ledger systems on active factory grounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section section-off fade">
+  <div class="container">
+    <p class="eyebrow">Places I've Learned From</p>
+    <h2 class="section-heading">Industrial Exposure</h2>
+    <div class="ind-banner">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1470&auto=format&fit=crop" alt="Industrial Framework Systems">
+      <div class="ind-banner-overlay"></div>
+      <p class="ind-banner-caption">Notes captured directly from active plant floor cycles.</p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-card">
+        <span class="ind-emoji">🏭</span>
+        <h3 class="ind-name">Textile</h3>
+        <p class="ind-lesson">How small process gaps can quietly become expensive business problems. Understanding the alignment loop of quality parameters and material handling.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-emoji">⚡</span>
+        <h3 class="ind-name">Hydropower</h3>
+        <p class="ind-lesson">Why compliance matters most when nobody is looking. Seeing internal structural governance frameworks preserve high-capital long-term asset models.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-emoji">🥛</span>
+        <h3 class="ind-name">Dairy</h3>
+        <p class="ind-lesson">How operations, inventory, and quality controls depend on one another. Navigating time-sensitive supply chains where small disruptions multiply instantly.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-emoji">🛞</span>
+        <h3 class="ind-name">Tyre</h3>
+        <p class="ind-lesson">How working capital often hides in places nobody thinks to look. Dissecting stock aging parameters and raw procurement store loops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard-center" class="section section-gold fade">
+  <div class="container">
+    <p class="eyebrow">Interactive Operations Platform</p>
+    <h2 class="section-heading">Control Center</h2>
+    <p class="section-sub">Live tracking systems covering automated registry portals, markets, ICAI scheduling, and encrypted analytics metrics.</p>
+
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 32px; font-weight: 600;">🏛️ Government Portals Tracking</h3>
+    <div class="dashboard-grid">
+      <div class="dash-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span style="font-weight: 600; color: var(--navy);">GST Portal</span>
+          <span class="status-badge status-yes">Notice Today: YES</span>
+        </div>
+        <div class="card-actions-row">
+          <a href="https://www.gst.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
+          <a href="#" class="action-anchor" style="color: rgba(15,31,61,0.5);">Download Circular ↓</a>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span style="font-weight: 600; color: var(--navy);">MCA21 Registry</span>
+          <span class="status-badge status-no">Notice Today: NO</span>
+        </div>
+        <div class="card-actions-row">
+          <a href="https://www.mca.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
+          <span style="font-size: 12px; color: #a0aec0;">No Updates</span>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span style="font-weight: 600; color: var(--navy);">Income Tax (CPC)</span>
+          <span class="status-badge status-yes">Live Update: YES</span>
+        </div>
+        <div class="card-actions-row">
+          <a href="https://www.incometax.gov.in" target="_blank" class="action-anchor">Open Registry ↗</a>
+          <a href="#" class="action-anchor" style="color: rgba(15,31,61,0.5);">Download Return Template ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">📈 Live Stock Tracking Engine</h3>
+    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Type in an equity ticket symbol and seamlessly route your research to any premium analyzer platform instantaneously under this umbrella website section.</p>
+    
+    <div style="background: var(--white); border: 1px solid var(--rule-s); padding: 28px; border-radius: 4px; box-shadow: var(--sh);">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
+        <div style="flex: 1; min-width: 240px;">
+          <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">ENTER STOCK SYMBOL</label>
+          <input type="text" id="global-stock-ticker" value="TCS" placeholder="e.g., RELIANCE, INFY, WIPRO" class="input-field" style="font-weight:600;" />
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">SELECT CHOSEN MARKET ENGINE ROUTE</label>
+          <select id="stock-target-engine" class="select-field">
+            <option value="screener">Screener.in (Financial Matrix Sheets)</option>
+            <option value="tradingview">TradingView (Technical Chart Engine Layout)</option>
+            <option value="tickertape">Tickertape (Asset Valuation Tracking)</option>
+            <option value="moneycontrol">Moneycontrol (Market News Stream & Feed)</option>
+          </select>
+        </div>
+      </div>
+      <button onclick="launchStockAnalysis()" class="submit-btn">Launch Analysis Portal ↗</button>
+    </div>
+
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">📑 Deep Statutory Compliance Matrix</h3>
+    <div class="table-wrapper">
+      <table class="compliance-table">
+        <thead>
+          <tr>
+            <th>Due Date</th>
+            <th>Filing Category</th>
+            <th>Statutory Mandate Provision</th>
+            <th style="text-align: center;">Filing Status</th>
+            <th style="text-align: right;">Action Tool</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: 600; font-family: var(--body);">07th Current Month</td>
+            <td>Direct Tax</td>
+            <td>Deposit of TDS/TCS liabilities collected across preceding cycle loops</td>
+            <td style="text-align: center;"><span class="status-badge status-yes">FILED</span></td>
+            <td style="text-align: right;"><span style="color: #a0aec0; font-size: 12px;">Challan Locked</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; font-family: var(--body);">11th Current Month</td>
+            <td>Indirect Tax</td>
+            <td>Filing statement of outward corporate supplies inside Form GSTR-1</td>
+            <td style="text-align: center;"><span class="status-badge status-yes">FILED</span></td>
+            <td style="text-align: right;"><a href="#" class="action-anchor">View Return →</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; font-family: var(--body); color: var(--gold);">15th Current Month</td>
+            <td>Advance Tax</td>
+            <td>Remittance parameters for Corporate Advance Tax processing runs</td>
+            <td style="text-align: center;"><span class="status-badge status-alert">PENDING</span></td>
+            <td style="text-align: right;"><a href="#" class="action-anchor" style="color: var(--navy);">Compute Sheet ↓</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; font-family: var(--body);">30th June Calendar</td>
+            <td>MCA System</td>
+            <td>Filing Form DPT-3 (Mandatory Return of Corporate Outstanding Loans)</td>
+            <td style="text-align: center;"><span class="status-badge status-no">NOT STARTED</span></td>
+            <td style="text-align: right;"><span style="color: #a0aec0; font-size: 12px;">Draft Checklist</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">🎓 Advanced ICAI Track Monitor</h3>
+    <div class="dashboard-grid" style="margin-bottom: 32px;">
+      <div class="dash-card">
+        <div>
+          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">ICITSS LABS</span>
+          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">Advanced ITT Batches</h4>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="status-badge status-alert" style="font-weight:700;">STATUS: FULL</span>
+          <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="action-anchor">Check Center ↗</a>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div>
+          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">MANAGEMENT MODULE</span>
+          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">Orientation Course (OC)</h4>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="status-badge status-yes" style="font-weight:700;">2 SEATS AVAILABLE</span>
+          <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="action-anchor">Book Slot ↗</a>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div>
+          <span style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600; letter-spacing:0.05em;">SELF-PACED TRAINING</span>
+          <h4 style="font-size: 16px; color: var(--navy); margin: 4px 0 12px 0; font-weight:600;">SPOM Exam Board Layout</h4>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="status-badge status-no" style="font-weight:600; color: var(--navy); background: var(--navy-pale); border-color: rgba(15,31,61,0.2);">TEST TRACK ACTIVE</span>
+          <a href="https://spmt.icai.org" target="_blank" class="action-anchor">Launch Portal ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">🔒 Private LinkedIn Analytics Engine Layout</h3>
+    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Paste any public LinkedIn profile target link below to trigger calculation simulation protocols. Extraction records sit locked inside the vault structure below.</p>
+    
+    <div class="vault-box">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
+        <div style="flex: 1; min-width: 280px;">
+          <label style="font-family: var(--body); font-size: 11px; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">TARGET ACCOUNT PROFILE LINK</label>
+          <input type="url" id="linkedin-profile-input" placeholder="https://www.linkedin.com/in/target-username" class="input-field" />
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button onclick="processLinkedInProfile()" class="submit-btn" style="background:var(--navy); color:var(--white);">Queue Parse Sequence</button>
+        <button onclick="togglePrivateVaultData()" id="vault-toggle-button" class="submit-btn" style="background:transparent; color:var(--navy); border-color:var(--navy);">Unlock Secure Vault</button>
+      </div>
+
+      <div id="private-metrics-vault-container" class="vault-blur-container">
+        <div class="vault-card">
+          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">CURRENT AUDIENCE</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">4,820</div>
+        </div>
+        <div class="vault-card">
+          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">EXTRACTED LIKES</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">1,240</div>
+        </div>
+        <div class="vault-card">
+          <div style="font-family: var(--body); font-size: 10px; color: var(--gold); font-weight:600;">COMMENTS COUNT</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--navy); margin-top: 6px;">382</div>
+        </div>
+      </div>
+
+      <div style="font-family: var(--body); font-size: 11px; color: rgba(15,31,61,0.4); margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15,31,61,0.15); font-weight:500;">
+        Pipeline Source: Google Sheets App Script API Automation Engine Tier
+      </div>
+    </div>
+
+    <p class="tools-note" style="margin-top: 40px; margin-bottom: 0;">"Not because they're perfect. Just because every time I visit them, I usually end up learning something."</p>
+  </div>
+</section>
+
+<section id="projects" class="section section-white fade">
+  <div class="container">
+    <p class="eyebrow">Projects, Observations & Learnings</p>
+    <h2 class="section-heading">Insights from the Field</h2>
+    <p class="section-sub">A layout of tracking documentation built around physical real-world checks, systems audits, and transactional data logs.</p>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <span class="proj-icon">🔍</span>
+        <h3 class="proj-title">Audit Observations</h3>
+        <p class="proj-desc">Investigating complex ledger systems to find accounting discrepancies and structural process bypass errors.</p>
+      </div>
+      <div class="proj-card">
+        <span class="proj-icon">📋</span>
+        <h3 class="proj-title">Process Reviews</h3>
+        <p class="proj-desc">Mapping inventory walk-throughs across factory locations to optimize actual resource utilization cycles.</p>
+      </div>
+      <div class="proj-card">
+        <span class="proj-icon">⚖️</span>
+        <h3 class="proj-title">Compliance Learnings</h3>
+        <p class="proj-desc">Dissecting cross-border tax regulations, state laws, and corporate filing schedules across multi-tiered parameters.</p>
+      </div>
+      <div class="proj-card">
+        <span class="proj-icon">⚙️</span>
+        <h3 class="proj-title">Internal Controls</h3>
+        <p class="proj-desc">Evaluating custom user permissions inside complex enterprise legacy databases to patch data loop exceptions.</p>
+      </div>
+      <div class="proj-card">
+        <span class="proj-icon">📊</span>
+        <h3 class="proj-title">Business Insights</h3>
+        <p class="proj-desc">Reviewing structural working capital data lines to evaluate underlying financial health of supply networks.</p>
+      </div>
+      <div class="proj-card">
+        <span class="proj-icon">📦</span>
+        <h3 class="proj-title">Operational Learnings</h3>
+        <p class="proj-desc">Spending operational shifts monitoring raw yard log entries and dispatch balances straight from loading platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="thoughts" class="section section-off fade">
+  <div class="container">
+    <p class="eyebrow">From Files to Thoughts</p>
+    <h2 class="section-heading">The Digital Notebook</h2>
+    <p class="section-sub">Because not everything worth noting fits in a working paper.</p>
+    <div class="files-grid">
+      <div class="file-card">
+        <span class="file-emoji">📂</span>
+        <h3 class="file-title">What I'm Learning</h3>
+        <p class="file-desc">Things currently being explored, understood, or questioned. Notes on fresh corporate frameworks, global tax mechanics, and system design lines.</p>
+        <p class="file-coming">Log Active</p>
+      </div>
+      <div class="file-card">
+        <span class="file-emoji">📝</span>
+        <h3 class="file-title">Thoughts & Write-Ups</h3>
+        <p class="file-desc">Analytical business deep-dives, strategy break-downs, career reflections, and personal perspectives concerning financial operations.</p>
+        <p class="file-coming">Log Active</p>
+      </div>
+      <div class="file-card">
+        <span class="file-emoji">🔍</span>
+        <h3 class="file-title">Notes from the Audit Trail</h3>
+        <p class="file-desc">Lessons gathered from active assignments, factory floor systems, internal validation checks, and ledger reconciliation pipelines.</p>
+        <p class="file-coming">Log Active</p>
+      </div>
+      <div class="file-card">
+        <span class="file-emoji">🔥</span>
+        <h3 class="file-title">What's Happening Around Us</h3>
+        <p class="file-desc">Dissecting macro-economic announcements, current affairs updates, major domestic startup restructurings, and policy modifications.</p>
+        <p class="file-coming">Log Active</p>
+      </div>
+      <div class="file-card">
+        <span class="file-emoji">🏏</span>
+        <h3 class="file-title">Beyond the Working Papers</h3>
+        <p class="file-desc">Discussions regarding cricket tactical systems, data mechanics in sports administration, and life lessons that can't be mapped to balance sheets.</p>
+        <p class="file-coming">Log Active</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="shared" class="section section-white fade">
+  <div class="container">
+    <p class="eyebrow">Things I've Shared Online</p>
+    <h2 class="section-heading">Out of the Notebook</h2>
+    <p class="section-sub">A clean layout reserved for written pieces, updates, and interactions that moved beyond my private drafts folder.</p>
+    <div class="shared-grid">
+      <div class="shared-card">
+        <p class="shared-type">LinkedIn Post Analysis</p>
+        <h3 class="shared-title">Deconstructing the operational landscape of modern consumer brands and brand case histories.</h3>
+        <p class="shared-preview">Evaluating corporate decisions and system pivots across tracking parameters...</p>
+        <a href="https://www.linkedin.com" target="_blank" class="shared-link">View post on LinkedIn →</a>
+      </div>
+      <div class="shared-card">
+        <p class="shared-type">Articles & Analytics</p>
+        <h3 class="shared-title">The subtle cost implications of unmonitored material ledger gaps in manufacturing workflows.</h3>
+        <p class="shared-preview">A breakdown tracking custom physical adjustments vs system inventory entries...</p>
+        <a href="https://www.linkedin.com" target="_blank" class="shared-link">Read article analysis →</a>
+      </div>
+      <div class="shared-card">
+        <p class="shared-type">Collaborations</p>
+        <h3 class="shared-title">Joint professional system discussions with peer groups analyzing recent tax amendments.</h3>
+        <p class="shared-preview">Summarizing key compliance takeaways for student audit professionals...</p>
+        <a href="https://www.linkedin.com" target="_blank" class="shared-link">View exchange logs →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formal" class="section section-off fade">
+  <div class="container">
+    <div class="formal-inner">
+      <div>
+        <p class="eyebrow">The Formal Version</p>
+        <h2 class="section-heading">Structured Records</h2>
+        <div class="formal-text">
+          <p>The PDF document options exist for formal corporate requirements and administrative tracking routines.</p>
+          <p class="formal-quote">"This website serves as the more honest version of my journey."</p>
+        </div>
+      </div>
+      <div class="formal-cards">
+        <a href="resume.pdf" target="_blank" class="formal-card">
+          <div>
+            <h3 class="formal-card-name">Curriculum Vitae</h3>
+            <p class="formal-card-desc">Download Resume (PDF Version)</p>
+          </div>
+          <span class="formal-card-icon">↓</span>
+        </a>
+        <a href="#" class="formal-card">
+          <div>
+            <h3 class="formal-card-name">Professional Profile</h3>
+            <p class="formal-card-desc">View verified academic declarations</p>
+          </div>
+          <span class="formal-card-icon">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section section-white fade">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-heading">Let's continue the <em>conversation.</em></h2>
+        <p class="contact-sub">Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, a specific cricket tracking observation, or sharing notes on spreadsheet models—reach out.</p>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com" target="_blank" class="c-link">
+          <div class="c-left">
+            <span class="c-icon">↗</span>
+            <div>
+              <p class="c-platform">LinkedIn</p>
+              <p class="c-handle">Connect professionally</p>
+            </div>
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="c-link">
+          <div class="c-left">
+            <span class="c-icon">↗</span>
+            <div>
+              <p class="c-platform">Instagram</p>
+              <p class="c-handle">Personal corner logs</p>
+            </div>
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="mailto:mdzaidkamran05@gmail.com" class="c-link">
+          <div class="c-left">
+            <span class="c-icon">✉</span>
+            <div>
+              <p class="c-platform">Email Directly</p>
+              <p class="c-handle">mdzaidkamran05@gmail.com</p>
+            </div>
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <p class="footer-name">Md Zaid Kamran</p>
+    <p class="footer-note">Built during articleship, updated whenever curiosity wins.</p>
+  </div>
+  <p class="footer-note">Still learning, still asking questions, and still occasionally <span class="footer-gold">fighting with spreadsheets.</span></p>
+</footer>
+
+<script>
+// Typewriter Engine
+const nameEl = document.getElementById("typed-name");
+const cursor = document.getElementById("cursor");
+const heroBody = document.getElementById("hero-body");
+const heroScroll = document.getElementById("hero-scroll");
+const name = "ZAiD";
+let i = 0;
+function type() {
+  if (i <= name.length) {
+    nameEl.textContent = name.substring(0, i++);
+    setTimeout(type, i === 1 ? 900 : 130);
+  } else {
+    setTimeout(() => {
+      cursor.style.display = "none";
+      heroBody.style.opacity = "1";
+      heroScroll.style.opacity = "1";
+    }, 500);
+  }
+}
+setTimeout(type, 600);
+
+// Scroll fade-in framework engine
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
+}, { threshold: 0.05 });
+document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+
+// Platform Interactive Function: Multi-Website Equity Analysis Router
+function launchStockAnalysis() {
+  var tickerSymbol = document.getElementById('global-stock-ticker').value.trim().toUpperCase();
+  var enginePlatform = document.getElementById('stock-target-engine').value;
+  
+  if(!tickerSymbol) {
+    alert('Please enter a valid stock symbol (e.g., RELIANCE).');
+    return;
+  }
+
+  var routingEngineUrlMap = {
+    'screener': 'https://www.screener.in/company/' + tickerSymbol + '/',
+    'tradingview': 'https://www.tradingview.com/symbols/NSE-' + tickerSymbol + '/',
+    'tickertape': 'https://www.tickertape.in/stocks/' + tickerSymbol.toLowerCase() + '-RELI',
+    'moneycontrol': 'https://www.moneycontrol.com/india/stockpricequote/'
+  };
+
+  var destinationLink = routingEngineUrlMap[enginePlatform];
+  window.open(destinationLink, '_blank');
+}
+
+// Platform Interactive Function: LinkedIn Input Data Simulation Node
+function processLinkedInProfile() {
+  var userUrlInput = document.getElementById('linkedin-profile-input').value.trim();
+  if(!userUrlInput.includes('linkedin.com/')) {
+    alert('Validation Error: Please insert a secure, qualified LinkedIn URL.');
+    return;
+  }
+  
+  if(userUrlInput.includes('in/md-zaid-kamran') || userUrlInput.includes('mdzaidkamran05')) {
+    alert('Routing Native Master Profile: Initializing 3-Legged OAuth secure database pipeline logs to mirror account summaries.');
+  } else {
+    alert('Routing External Competitor Post/Profile Link: Triggering serverless scraper nodes (Apify/Vayne Tier Engine) to collect public comments and active like strings safely into your master Google Sheet database.');
+  }
+}
+
+// Platform Interactive Function: local encrypted privacy PIN layer toggle
+function togglePrivateVaultData() {
+  var metricVault = document.getElementById('private-metrics-vault-container');
+  var actionButtonText = document.getElementById('vault-toggle-button');
+  
+  if (metricVault.style.filter === 'blur(0px)') {
+    metricVault.style.filter = 'blur(8px)';
+    metricVault.style.pointerEvents = 'none';
+    actionButtonText.innerText = 'Unlock Secure Vault';
+  } else {
+    var structuralSecurePinPrompt = prompt('System Authentication Guard: Enter security pin code passkey to unblur private summaries:');
+    
+    // Set to your chosen key sequence '0505'
+    if(structuralSecurePinPrompt === '0505') { 
+      metricVault.style.filter = 'blur(0px)';
+      metricVault.style.pointerEvents = 'auto';
+      actionButtonText.innerText = 'Lock Private Displays';
+    } else {
+      alert('Access Denied: Authentication parameters mismatch. Records remain encrypted.');
+    }
+  }
+}
+</script>
+
+</body>
+</html>
