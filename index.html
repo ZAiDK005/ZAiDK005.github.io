@@ -1,798 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Md Zaid Kamran</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --navy: #0f1f3d;
-  --navy-mid: #1a3260;
-  --navy-soft: #2a4a8a;
-  --navy-pale: #e8edf5;
-  --gold: #c9973a;
-  --gold-light: #e8c97a;
-  --gold-pale: #fdf6e8;
-  --white: #ffffff;
-  --off: #f8f7f4;
-  --rule: rgba(15,31,61,0.10);
-  --rule-s: rgba(15,31,61,0.18);
-  --sh: 0 4px 20px rgba(15,31,61,0.05);
-  --sh-h: 0 12px 32px rgba(15,31,61,0.12);
-  --serif: "DM Serif Display", Georgia, serif;
-  --body: "Inter", system-ui, sans-serif;
-  --lora: "Lora", Georgia, serif;
-}
-html { scroll-behavior: smooth; }
-body { background: var(--off); color: var(--navy); font-family: var(--body); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-
-/* NAVIGATION RESPONSIVENESS */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule); height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 3rem; box-shadow: 0 1px 16px rgba(15,31,61,0.06);
-}
-.nav-logo { font-family: var(--serif); font-size: 17px; color: var(--navy); text-decoration: none; }
-.nav-logo em { color: var(--gold); font-style: italic; }
-.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-.nav-links a { font-size: 12.5px; color: rgba(15,31,61,0.55); text-decoration: none; letter-spacing: 0.05em; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--gold); }
-
-/* ICAI HUB DROPDOWN MENU */
-.icai-dropdown { position: relative; display: inline-block; }
-.icai-dropbtn { background: var(--navy-pale); color: var(--navy-soft) !important; padding: 4px 10px; border-radius: 4px; font-weight: 600 !important; cursor: pointer; }
-.icai-dropdown-content { display: none; position: absolute; right: 0; background-color: var(--white); min-width: 190px; box-shadow: var(--sh-h); border: 1px solid var(--rule-s); z-index: 210; border-radius: 4px; }
-.icai-dropdown-content a { color: var(--navy); padding: 10px 14px; text-decoration: none; display: block; font-size: 12px; border-bottom: 1px solid var(--rule); }
-.icai-dropdown-content a:last-child { border-bottom: none; }
-.icai-dropdown-content a:hover { background-color: var(--gold-pale); color: var(--gold); }
-.icai-dropdown:hover .icai-dropdown-content { display: block; }
-
-/* HERO SCREEN SCABLE RESPONSIVENESS */
-#hero {
-  min-height: 100vh; display: grid; grid-template-columns: 1fr 450px;
-  align-items: center; gap: 0; padding: 56px 0 0; background: var(--white);
-  border-bottom: 1px solid var(--rule-s); overflow: hidden;
-}
-.hero-left { padding: 4rem 3rem; }
-.hero-eyebrow {
-  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); font-weight: 600; margin-bottom: 1.25rem;
-  display: flex; align-items: center; gap: 0.75rem;
-}
-.hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
-.hero-since { font-family: var(--serif); font-size: 1rem; color: rgba(15,31,61,0.45); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-.hero-name { font-family: var(--serif); font-size: clamp(3.2rem, 7vw, 6rem); line-height: 0.95; color: var(--navy); margin-bottom: 1.5rem; letter-spacing: -0.025em; }
-.hero-name em { color: var(--gold); font-style: italic; }
-.hero-tagline { font-family: var(--lora); font-style: italic; font-size: 1.05rem; color: rgba(15,31,61,0.6); max-width: 460px; line-height: 1.65; border-left: 2.5px solid var(--gold); padding-left: 1rem; margin-bottom: 1.75rem; }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-.hero-tag { padding: 0.3rem 0.85rem; background: var(--navy-pale); color: var(--navy-soft); font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em; }
-.hero-body { font-family: var(--lora); font-size: 0.97rem; color: rgba(15,31,61,0.65); line-height: 1.85; max-width: 520px; opacity: 0; transition: opacity 0.9s ease; }
-.hero-body p + p { margin-top: 1rem; }
-.hero-scroll { margin-top: 2.5rem; display: flex; align-items: center; gap: 0.75rem; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,31,61,0.3); opacity: 0; transition: opacity 0.9s ease; }
-.pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.6); } }
-.cursor { display:inline-block; width:2.5px; height:0.85em; background:var(--gold); margin-left:3px; vertical-align:middle; animation:blink 1s step-end infinite; }
-@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-
-.hero-right { height: 100%; position: relative; background: #f2f4f8; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
-.hero-right-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--white) 0%, transparent 12%); }
-.hero-right-caption { position: absolute; bottom: 1.5rem; left: 1.5rem; font-family: var(--lora); font-style: italic; font-size: 12px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 4px rgba(0,0,0,0.4); z-index: 10; }
-
-/* SECTIONS STRUCTURE */
-.section { padding: 5rem 3rem; border-bottom: 1px solid var(--rule); }
-.section-white { background: var(--white); }
-.section-off { background: var(--off); }
-.section-gold { background: var(--gold-pale); }
-.container { max-width: 1100px; margin: 0 auto; }
-.eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
-.eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
-.section-heading { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; margin-bottom: 0.75rem; }
-.section-sub { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.5); font-size: 14.5px; margin-bottom: 2.5rem; }
-
-/* AAGAYE AAP MIDDLE SECTION */
-#aagaye { background: var(--navy); color: var(--white); display: grid; grid-template-columns: 1fr 380px; min-height: 480px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.aagaye-left { padding: 4.5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
-.aagaye-eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
-.aagaye-eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--gold); display: block; }
-.aagaye-heading { font-family: var(--serif); font-style: italic; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--white); line-height: 1.1; margin-bottom: 0.5rem; }
-.aagaye-sub { font-family: var(--lora); font-style: italic; font-size: 0.95rem; color: var(--gold-light); margin-bottom: 1.5rem; }
-.aagaye-body { font-family: var(--lora); font-size: 0.98rem; color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 540px; }
-.aagaye-body p + p { margin-top: 1rem; }
-.aagaye-right { position: relative; overflow: hidden; }
-.aagaye-right img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
-.aagaye-right-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--navy) 0%, transparent 20%); }
-
-/* JOURNEY SECTION STYLES */
-.journey-intro { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.55); font-size: 1rem; line-height: 1.8; max-width: 620px; margin-bottom: 3rem; }
-.journey-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-.jcard { background: var(--white); border: 1px solid var(--rule-s); border-top: 3px solid var(--gold); padding: 1.75rem; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; }
-.jcard:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
-.jcard-phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
-.jcard-title { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
-.jcard-body { font-size: 13.5px; color: rgba(15,31,61,0.6); line-height: 1.65; }
-
-/* COMPLIANCE CORE TERMINAL & GRID LAYOUTS */
-.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
-.dash-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; }
-.dash-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); border-color: var(--gold); }
-.dash-meta { display: flex; flex-direction: column; gap: 4px; }
-.dash-title { font-weight: 600; font-size: 14px; color: var(--navy); }
-.dash-notice-count { font-size: 11px; color: var(--gold); font-weight: 600; font-family: var(--body); margin-top: 2px; }
-.status-badge { align-self: flex-start; font-family: var(--body); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.04em; margin-top: 6px; }
-.status-yes { color: #2f855a; background: #e6fffa; border: 1px solid #b2f5ea; }
-.status-no { color: #4a5568; background: #edf2f7; border: 1px solid #e2e8f0; }
-.card-actions-row { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
-.action-anchor { font-size: 12px; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 1px; transition: color 0.2s; }
-.action-anchor:hover { color: var(--gold); }
-
-/* COMPLIANCE TABLES STYLING */
-.table-wrapper { width: 100%; overflow-x: auto; background: var(--white); border: 1px solid var(--rule-s); border-radius: 4px; box-shadow: var(--sh); margin-top: 24px; }
-.compliance-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px; min-width: 600px; }
-.compliance-table th { background: var(--navy-pale); color: var(--navy); font-weight: 600; padding: 12px 14px; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
-.compliance-table td { padding: 14px; border-bottom: 1px solid var(--rule); color: rgba(15,31,61,0.8); }
-.compliance-table tr:last-child td { border-bottom: none; }
-
-/* ENGINE CONTROLS LAYOUT */
-.input-field { width: 100%; padding: 12px 14px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--off); transition: border-color 0.2s; }
-.input-field:focus { border-color: var(--gold); background: var(--white); }
-.select-field { width: 100%; padding: 12px 14px; border: 1px solid var(--rule-s); border-radius: 4px; font-family: var(--body); font-size: 14px; color: var(--navy); outline: none; background: var(--white); }
-.submit-btn { font-family: var(--body); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: var(--navy); color: var(--white); border: 1px solid var(--navy); padding: 12px 24px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
-.submit-btn:hover { background: transparent; color: var(--navy); border-color: var(--navy); }
-
-/* DATA VAULT ENCRYPTED WRAPPERS */
-.vault-box { border: 1px dashed var(--gold); border-radius: 6px; padding: 24px; background: var(--gold-pale); margin-top: 24px; }
-.vault-blur-container { margin-top: 24px; filter: blur(10px); pointer-events: none; transition: filter 0.4s ease; display: flex; flex-direction: column; gap: 20px; }
-.vault-table-card { background: var(--white); border: 1px solid var(--rule-s); padding: 20px; border-radius: 4px; box-shadow: var(--sh); }
-.vault-filter-select { padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid var(--rule-s); outline: none; font-family: var(--body); color: var(--navy); }
-
-/* FIELD PROJECTS GRID */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-.proj-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
-.proj-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
-.proj-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
-.proj-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; }
-.proj-desc { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; }
-
-/* NOTEBOOK CARDS LIST */
-.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-.file-card { background: var(--white); border: 1px solid var(--rule-s); padding: 2rem 1.75rem; box-shadow: var(--sh); transition: all 0.25s; position: relative; overflow: hidden; }
-.file-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-.file-card:hover::before { transform: scaleX(1); }
-.file-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
-.file-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
-.file-title { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.6rem; }
-.file-desc { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); line-height: 1.65; }
-.file-coming { margin-top: 1rem; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-
-/* FEED POST DESIGNS */
-.shared-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-.shared-card { background: var(--white); border: 1px solid var(--rule-s); padding: 1.75rem; box-shadow: var(--sh); transition: all 0.25s; }
-.shared-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
-.shared-type { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
-.shared-title { font-weight: 500; font-size: 14px; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.45; }
-.shared-preview { font-size: 13px; color: rgba(15,31,61,0.6); line-height: 1.6; margin-bottom: 1rem; }
-.shared-link { font-size: 12px; color: var(--gold); font-weight: 600; text-decoration: none; letter-spacing: 0.04em; }
-.shared-link:hover { text-decoration: underline; }
-
-/* GENERAL ABOUT AND CV PACK LAYOUTS */
-.ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-.ind-card { background: var(--white); border: 1px solid var(--rule-s); border-top: 3px solid var(--gold); padding: 2rem 1.5rem; box-shadow: var(--sh); transition: transform 0.25s, box-shadow 0.25s; cursor: default; }
-.ind-card:hover { transform: translateY(-5px); box-shadow: var(--sh-h); }
-.ind-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
-.ind-name { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
-.ind-lesson { font-size: 13.5px; color: rgba(15,31,61,0.6); font-family: var(--lora); font-style: italic; line-height: 1.65; }
-
-.formal-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-.formal-cards { display: flex; flex-direction: column; gap: 1rem; }
-.formal-card { background: var(--navy); color: var(--white); padding: 1.75rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: background 0.2s; box-shadow: var(--sh); }
-.formal-card:hover { background: var(--navy-mid); }
-.formal-card-name { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-light); margin-bottom: 0.3rem; }
-.formal-card-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
-.formal-card-icon { font-size: 1.4rem; color: var(--gold); }
-
-/* COMMUNICATION CHANNELS CONTROLS */
-.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.contact-heading { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1.25rem; }
-.contact-heading em { color: var(--gold); font-style: italic; }
-.contact-sub { font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 1rem; line-height: 1.75; max-width: 400px; }
-.contact-links { display: flex; flex-direction: column; }
-.c-link { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--navy); transition: all 0.2s; }
-.c-link:first-child { border-top: 1px solid var(--rule); }
-.c-link:hover { padding-left: 0.5rem; color: var(--gold); }
-.c-link:hover .c-arrow { color: var(--gold); transform: translate(3px,-3px); }
-.c-left { display: flex; align-items: center; gap: 1rem; }
-.c-icon { font-size: 1.1rem; }
-.c-platform { font-weight: 600; font-size: 14.5px; }
-.c-handle { font-size: 12.5px; color: rgba(15,31,61,0.38); margin-top: 1px; }
-.c-arrow { color: rgba(15,31,61,0.28); transition: all 0.2s; }
-
-/* FOOTER ELEMENTS */
-footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-.footer-name { font-family: var(--serif); font-size: 1rem; color: var(--white); margin-bottom: 0.25rem; }
-.footer-note { font-family: var(--lora); font-style: italic; font-size: 13px; color: rgba(255,255,255,0.42); max-width: 460px; line-height: 1.55; }
-.footer-gold { color: var(--gold-light); }
-
-.fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.fade.in { opacity: 1; transform: translateY(0); }
-
-/* RIGOROUS CSS MEDIA GRAPH QUERY FOR LAPTOP + TABLET + PHONE EQUILIBRIUM */
-@media (max-width: 1024px) {
-  #hero { grid-template-columns: 1fr; text-align: left; min-height: auto; }
-  .hero-right { height: 380px; width: 100%; }
-  .hero-right-overlay { background: linear-gradient(to top, var(--white) 0%, transparent 20%); }
-  #aagaye { grid-template-columns: 1fr; min-height: auto; }
-  .aagaye-right { height: 280px; }
-}
-@media (max-width: 768px) {
-  nav { padding: 0 1.5rem; }
-  .nav-links li:not(.icai-dropdown) { display: none; } /* Adaptive dropdown navigation layout mapping */
-  .section { padding: 3.5rem 1.5rem; }
-  .hero-left { padding: 3rem 1.5rem; }
-  .aagaye-left { padding: 3rem 1.5rem; }
-  .formal-inner { grid-template-columns: 1fr; gap: 1.5rem; }
-  .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-  footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Zaid Kamran | Professional Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .dark-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
 
-<nav>
-  <a href="#hero" class="nav-logo">Md Zaid <em>Kamran</em></a>
-  <ul class="nav-links">
-    <li class="icai-dropdown">
-      <span class="icai-dropbtn">ICAI Portal Links ▾</span>
-      <div class="icai-dropdown-content">
-        <a href="https://ssp.icai.org" target="_blank">SSP Portal Registry</a>
-        <a href="https://boslive.icai.org" target="_blank">BOS Knowledge Portal</a>
-        <a href="https://www.icaionlineregistration.org" target="_blank">ICAI Training Registry</a>
-      </div>
-    </li>
-  </ul>
-</nav>
-
-<section id="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">CA Final · Articleship · Curious by default</p>
-    <p class="hero-since">Since We're Here...</p>
-    <h1 class="hero-name">Hi, I'm <em><span id="typed-name"></span><span class="cursor" id="cursor"></span></em></h1>
-    <p class="hero-tagline">Following numbers for work, stories for curiosity, and cricket for balance.</p>
-    <div class="hero-tags">
-      <span class="hero-tag">CA Final Student</span>
-      <span class="hero-tag">Internal Audit</span>
-      <span class="hero-tag">Business Curiosity</span>
-    </div>
-    <div class="hero-body" id="hero-body">
-      <p>CA Final Student, currently navigating articleship, audits, spreadsheets, and the occasional mystery that every ERP system seems determined to create.</p>
-      <p>I enjoy understanding how businesses work behind the scenes, whether it's a warehouse, a manufacturing plant, a finance process, or a GST register that refuses to reconcile despite everyone's best efforts.</p>
-      <p>When I'm not chasing audit observations or wondering who approved a particular process, you'll probably find me reading about business, following current affairs, watching cricket, or writing about things that catch my attention.</p>
-      <p>Feel free to explore. We've already made it this far.</p>
-    </div>
-    <div class="hero-scroll" id="hero-scroll">
-      <span class="pulse"></span>
-      Scroll to explore
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="profile.jpg" alt="Md Zaid Kamran Layout Frame" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1471&auto=format&fit=crop'">
-    <div class="hero-right-overlay"></div>
-    <p class="hero-right-caption">Md Zaid Kamran, CA Final</p>
-  </div>
-</section>
-
-<section id="aagaye">
-  <div class="aagaye-left">
-    <p class="aagaye-eyebrow">A little about me</p>
-    <h2 class="aagaye-heading">Aagaye aap?</h2>
-    <p class="aagaye-sub">Ab aagaye ho toh chalo, apne baare mein thoda bata hi dete hain.</p>
-    <div class="aagaye-body">
-      <p>I'm currently muddying my boots across CA Final curriculum pathways while finishing up my articleship training routines at BGJC & Associates LLP.</p>
-      <p>Like most students, I started with textbooks, lectures, and the hope that one day everything would somehow connect. Then articleship happened. Warehouses replaced case studies. Processes replaced assumptions. And suddenly every business had its own unique way of keeping scores.</p>
-      <p>Over time, I've had the opportunity to work across different industries, understand how businesses operate beyond reports and presentations, and learn that small process gaps often tell bigger stories than large presentations. Most days I'm still learning, still asking questions, and still discovering how much there is left to understand.</p>
-    </div>
-  </div>
-  <div class="aagaye-right">
-    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1470&auto=format&fit=crop" alt="Real World Analysis">
-    <div class="aagaye-right-overlay"></div>
-  </div>
-</section>
-
-<section id="journey" class="section section-white fade">
-  <div class="container">
-    <p class="eyebrow">The Journey So Far</p>
-    <h2 class="section-heading">Learning Through Experience</h2>
-    <p class="journey-intro">Presenting milestones as standard pathways focused purely on curiosity, tactical ground exposure, and asking basic functional system questions.</p>
-    <div class="journey-track">
-      <div class="jcard">
-        <p class="jcard-phase">Phase I</p>
-        <h3 class="jcard-title">Academic Architecture</h3>
-        <p class="jcard-body">Acquiring primary accounting principles through B.Com (Hons.) program parameters at Deshbandhu College, University of Delhi and Jamia Millia Islamia frameworks.</p>
-      </div>
-      <div class="jcard">
-        <p class="jcard-phase">Phase II</p>
-        <h3 class="jcard-title">Audit Trail Training</h3>
-        <p class="jcard-body">Entering live professional articleship systems, translating theoretical books into functional system registry audits.</p>
-      </div>
-      <div class="jcard">
-        <p class="jcard-phase">Phase III</p>
-        <h3 class="jcard-title">CA Final Track</h3>
-        <p class="jcard-body">Balancing macro corporate regulatory tracking metrics while investigating real-world ledger systems on active factory grounds.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="dashboard-center" class="section section-gold fade">
-  <div class="container">
-    <p class="eyebrow">Interactive Operations Platform</p>
-    <h2 class="section-heading">Control Center</h2>
-    <p class="section-sub">Live tracking systems covering automated registry portals, markets, and encrypted analytics metrics.</p>
-
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 32px; font-weight: 600;">🏛️ Live Government & Market Registry Portals</h3>
-    <div class="dashboard-grid">
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">GST Portal</span>
-          <span class="dash-notice-count">📋 3 Notices Issued Today</span>
-          <span class="status-badge status-yes">SYSTEM RUN ACTIVE</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.gst.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">Income Tax (CPC)</span>
-          <span class="dash-notice-count">📋 1 Circular Update</span>
-          <span class="status-badge status-yes">SYSTEM RUN ACTIVE</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.incometax.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">MCA21 Registry</span>
-          <span class="dash-notice-count">📋 0 Corporate Alerts</span>
-          <span class="status-badge status-no">STABLE</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.mca.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">NSE India</span>
-          <span class="dash-notice-count">📈 2 New Circular Files</span>
-          <span class="status-badge status-yes">MARKET RUN</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.nseindia.com" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">BSE India</span>
-          <span class="dash-notice-count">📈 4 Filing Disclosures</span>
-          <span class="status-badge status-yes">MARKET RUN</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.bseindia.com" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">RBI Portal</span>
-          <span class="dash-notice-count">📋 0 Policy Alerts</span>
-          <span class="status-badge status-no">STABLE</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.rbi.org.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-meta">
-          <span class="dash-title">SEBI Board</span>
-          <span class="dash-notice-count">📋 1 Board Circular</span>
-          <span class="status-badge status-yes">MONITORING</span>
-        </div>
-        <div class="card-actions-row"><a href="https://www.sebi.gov.in" target="_blank" class="action-anchor">Visit Portal ↗</a></div>
-      </div>
-    </div>
-
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">📈 Live Stock Tracking Engine</h3>
-    <div style="background: var(--white); border: 1px solid var(--rule-s); padding: 24px; border-radius: 4px; box-shadow: var(--sh);">
-      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
-        <div style="flex: 1; min-width: 200px;">
-          <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">ENTER STOCK SYMBOL</label>
-          <input type="text" id="global-stock-ticker" value="TCS" placeholder="e.g., RELIANCE, INFY" class="input-field" style="font-weight:600;" />
-        </div>
-        <div style="flex: 1; min-width: 240px;">
-          <label style="font-family: var(--body); font-size: 11px; color: var(--gold); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em;">SELECT CHOSEN MARKET ENGINE ROUTE</label>
-          <select id="stock-target-engine" class="select-field">
-            <option value="screener">Screener.in (Financial Matrix Sheets)</option>
-            <option value="tradingview">TradingView (Technical Chart Engine Layout)</option>
-            <option value="tickertape">Tickertape (Asset Valuation Tracking)</option>
-            <option value="moneycontrol">Moneycontrol (Market News Stream & Feed)</option>
-          </select>
-        </div>
-      </div>
-      <button onclick="launchStockAnalysis()" class="submit-btn">Launch Analysis Portal ↗</button>
-    </div>
-
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 16px; margin-top: 56px; font-weight: 600;">📅 Major Statutory Compliance Due Dates Calendar</h3>
-    <div class="table-wrapper">
-      <table class="compliance-table">
-        <thead>
-          <tr>
-            <th>Due Date Timeline</th>
-            <th>Filing Category</th>
-            <th>Statutory Mandate Provision Description</th>
-            <th style="text-align: center;">Filing window status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="font-weight: 600;">07th of Every Month</td>
-            <td>Direct Tax (Income Tax)</td>
-            <td>Challan payment deposit loop for corporate TDS and TCS collections</td>
-            <td style="text-align: center;"><span class="status-badge status-yes">UPCOMING LOCKRUN</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">11th of Every Month</td>
-            <td>Indirect Tax (GST)</td>
-            <td>Filing statement metrics of outward supplies in Form GSTR-1 parameters</td>
-            <td style="text-align: center;"><span class="status-badge status-yes">UPCOMING LOCKRUN</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600; color: var(--gold);">20th of Every Month</td>
-            <td>Indirect Tax (GST)</td>
-            <td>Monthly summary auto-computation return filing loop inside Form GSTR-3B</td>
-            <td style="text-align: center;"><span class="status-badge status-alert">ACTION REQUIRED</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">Quarterly Cycles</td>
-            <td>Direct Tax (Advance Tax)</td>
-            <td>Remittance installations processing runs for Corporate Advance Tax frameworks</td>
-            <td style="text-align: center;"><span class="status-badge status-no">MONITORING</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">30th June (Annual)</td>
-            <td>MCA Corporate Registry</td>
-            <td>Filing Form DPT-3 to verify outstanding deposits/loans metrics parameters</td>
-            <td style="text-align: center;"><span class="status-badge status-no">COMPLIANCE OPEN</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 style="font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; margin-top: 56px; font-weight: 600;">🔒 Private LinkedIn Engagement Breakdown Vault</h3>
-    <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.6); font-size: 14px; margin-bottom: 20px;">Input text link logs below. Enter master security vault code <strong>0505</strong> to unblur interactive tables.</p>
-    
-    <div class="vault-box">
-      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
-        <div style="flex: 1; min-width: 240px;">
-          <label style="font-family: var(--body); font-size: 11px; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 600;">PASTE ENGAGEMENT OR PROFILE LINK</label>
-          <input type="url" id="linkedin-profile-input" placeholder="https://www.linkedin.com/in/... or post URL" class="input-field" />
-        </div>
-      </div>
-      
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
-        <button onclick="processLinkedInProfile()" class="submit-btn">Queue Parse Sequence</button>
-        <button onclick="togglePrivateVaultData()" id="vault-toggle-button" class="submit-btn" style="background:transparent; color:var(--navy); border-color:var(--navy);">Unlock Secure Vault</button>
-      </div>
-
-      <div id="private-metrics-vault-container" class="vault-blur-container">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--navy-pale); padding: 10px 16px; border-radius: 4px;">
-          <span style="font-size: 12px; font-weight: 600; color: var(--navy-soft);">SELECT DATA TIME ANALYSIS HORIZON:</span>
-          <select class="vault-filter-select" onchange="alert('Simulating pipeline query execution engine logic parameters for selected range.')">
-            <option>Last 7 Days Metrics</option>
-            <option>Last 14 Days Metrics</option>
-            <option>Last 28 Days Metrics</option>
-            <option>Last 2 Months History</option>
-            <option>Last 3 Months History</option>
-            <option>Custom Engine Registry Range</option>
-          </select>
-        </div>
-
-        <div class="vault-table-card">
-          <h4 style="font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 12px;">Detailed Post Metrics Archive Summary Logs</h4>
-          <div class="table-wrapper" style="margin-top:0;">
-            <table class="compliance-table">
-              <thead>
-                <tr>
-                  <th>Post Identifier Reference Name</th>
-                  <th>Target Redirection URL</th>
-                  <th style="text-align: center;">Likes</th>
-                  <th style="text-align: center;">Comments</th>
-                  <th style="text-align: right;">Avg Eng% Tier</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="font-weight:600;">Wipro Stock Buyback Deepdive Analysis</td>
-                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
-                  <td style="text-align: center; font-weight: 600;">240</td>
-                  <td style="text-align: center; font-weight: 600;">42</td>
-                  <td style="text-align: right; color:#2f855a; font-weight:600;">8.42% High</td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600;">Chegg vs Generative Artificial Intelligence Disruptions</td>
-                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
-                  <td style="text-align: center; font-weight: 600;">195</td>
-                  <td style="text-align: center; font-weight: 600;">31</td>
-                  <td style="text-align: right; color:#2f855a; font-weight:600;">6.10% Med</td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600;">IPL & Sports Franchise Business Monetization Architecture</td>
-                  <td><a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" style="color:var(--gold);">Open Link ↗</a></td>
-                  <td style="text-align: center; font-weight: 600;">310</td>
-                  <td style="text-align: center; font-weight: 600;">56</td>
-                  <td style="text-align: right; color:#2f855a; font-weight:600;">11.20% High</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div style="font-family: var(--body); font-size: 11px; color: rgba(15,31,61,0.4); margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15,31,61,0.15); font-weight:500;">
-        Pipeline Source: Google Sheets App Script API Automation Engine Tier
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="section section-white fade">
-  <div class="container">
-    <p class="eyebrow">Projects, Observations & Learnings</p>
-    <h2 class="section-heading">Insights from the Field</h2>
-    <p class="section-sub">A layout of tracking documentation built around physical real-world checks, systems audits, and transactional data logs.</p>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <span class="proj-icon">🔍</span>
-        <h3 class="proj-title">Audit Observations</h3>
-        <p class="proj-desc">Investigating complex ledger systems to find accounting discrepancies and structural process bypass errors.</p>
-      </div>
-      <div class="proj-card">
-        <span class="proj-icon">📋</span>
-        <h3 class="proj-title">Process Reviews</h3>
-        <p class="proj-desc">Mapping inventory walk-throughs across factory locations to optimize actual resource utilization cycles.</p>
-      </div>
-      <div class="proj-card">
-        <span class="proj-icon">⚖️</span>
-        <h3 class="proj-title">Compliance Learnings</h3>
-        <p class="proj-desc">Dissecting cross-border tax regulations, state laws, and corporate filing schedules across multi-tiered parameters.</p>
-      </div>
-      <div class="proj-card">
-        <span class="proj-icon">⚙️</span>
-        <h3 class="proj-title">Internal Controls</h3>
-        <p class="proj-desc">Evaluating custom user permissions inside complex enterprise legacy databases to patch data loop exceptions.</p>
-      </div>
-      <div class="proj-card">
-        <span class="proj-icon">📊</span>
-        <h3 class="proj-title">Business Insights</h3>
-        <p class="proj-desc">Reviewing structural working capital data lines to evaluate underlying financial health of supply networks.</p>
-      </div>
-      <div class="proj-card">
-        <span class="proj-icon">📦</span>
-        <h3 class="proj-title">Operational Learnings</h3>
-        <p class="proj-desc">Spending operational shifts monitoring raw yard log entries and dispatch balances straight from loading platforms.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="thoughts" class="section section-off fade">
-  <div class="container">
-    <p class="eyebrow">From Files to Thoughts</p>
-    <h2 class="section-heading">The Digital Notebook</h2>
-    <p class="section-sub">Because not everything worth noting fits in a working paper.</p>
-    <div class="files-grid">
-      <div class="file-card">
-        <span class="file-emoji">📂</span>
-        <h3 class="file-title">What I'm Learning</h3>
-        <p class="file-desc">Things currently being explored, understood, or questioned. Notes on fresh corporate frameworks, global tax mechanics, and system design lines.</p>
-        <p class="file-coming">Log Active</p>
-      </div>
-      <div class="file-card">
-        <span class="file-emoji">📝</span>
-        <h3 class="file-title">Thoughts & Write-Ups</h3>
-        <p class="file-desc">Analytical business deep-dives, strategy break-downs, career reflections, and personal perspectives concerning financial operations.</p>
-        <p class="file-coming">Log Active</p>
-      </div>
-      <div class="file-card">
-        <span class="file-emoji">🔍</span>
-        <h3 class="file-title">Notes from the Audit Trail</h3>
-        <p class="file-desc">Lessons gathered from active assignments, factory floor systems, internal validation checks, and ledger reconciliation pipelines.</p>
-        <p class="file-coming">Log Active</p>
-      </div>
-      <div class="file-card">
-        <span class="file-emoji">🔥</span>
-        <h3 class="file-title">What's Happening Around Us</h3>
-        <p class="file-desc">Dissecting macro-economic announcements, current affairs updates, major domestic startup restructurings, and policy modifications.</p>
-        <p class="file-coming">Log Active</p>
-      </div>
-      <div class="file-card">
-        <span class="file-emoji">🏏</span>
-        <h3 class="file-title">Beyond the Working Papers</h3>
-        <p class="file-desc">Discussions regarding cricket tactical systems, data mechanics in sports administration, and life lessons that can't be mapped to balance sheets.</p>
-        <p class="file-coming">Log Active</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="section section-white fade">
-  <div class="container">
-    <p class="eyebrow">Places I've Learned From</p>
-    <h2 class="section-heading">Industrial Exposure Overview</h2>
-    <div class="ind-grid" style="margin-top:24px;">
-      <div class="ind-card">
-        <span class="ind-emoji">🏭</span>
-        <h3 class="ind-name">Textile</h3>
-        <p class="ind-lesson">How small process gaps can quietly become expensive business problems. Understanding the alignment loop of quality parameters and material handling.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">⚡</span>
-        <h3 class="ind-name">Hydropower</h3>
-        <p class="ind-lesson">Why compliance matters most when nobody is looking. Seeing internal structural governance frameworks preserve high-capital long-term asset models.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">🥛</span>
-        <h3 class="ind-name">Dairy</h3>
-        <p class="ind-lesson">How operations, inventory, and quality controls depend on one another. Navigating time-sensitive supply chains where small disruptions multiply instantly.</p>
-      </div>
-      <div class="ind-card">
-        <span class="ind-emoji">🛞</span>
-        <h3 class="ind-name">Tyre</h3>
-        <p class="ind-lesson">How working capital often hides in places nobody thinks to look. Dissecting stock aging parameters and raw procurement store loops.</p>
-      </div>
-    </div>
-
-    <div class="formal-inner" style="margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--rule);">
-      <div>
-        <h3 style="font-family: var(--serif); font-size: 1.6rem; color: var(--navy); margin-bottom: 8px;">Formal Portfolio Version</h3>
-        <p style="font-family: var(--lora); font-style: italic; color: rgba(15,31,61,0.5); font-size: 14px;">The PDF document options exist for formal corporate requirements and administrative tracking routines.</p>
-      </div>
-      <div class="formal-cards">
-        <a href="resume.pdf" target="_blank" class="formal-card">
-          <div>
-            <h3 class="formal-card-name">Curriculum Vitae</h3>
-            <p class="formal-card-desc">Download Resume (PDF Version)</p>
-          </div>
-          <span class="formal-card-icon">↓</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="section section-off fade">
-  <div class="container">
-    <div class="contact-inner">
-      <div>
-        <h2 class="contact-heading">Let's continue the <em>conversation.</em></h2>
-        <p class="contact-sub">Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, a specific cricket tracking observation, or sharing notes on spreadsheet models—reach out.</p>
-      </div>
-      <div class="contact-links">
-        <a href="https://www.linkedin.com/in/md-zaid-kamran" target="_blank" class="c-link">
-          <div class="c-left">
-            <span class="c-icon">↗</span>
-            <div>
-              <p class="c-platform">LinkedIn Profile</p>
-              <p class="c-handle">Connect professionally @md-zaid-kamran</p>
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-bold tracking-wider text-teal-400">MZK</span>
             </div>
-          </div>
-          <span class="c-arrow">→</span>
-        </a>
-        <a href="https://www.instagram.com/zaid_kamran05?igsh=eGhubzd6M2tsM2Np" target="_blank" class="c-link">
-          <div class="c-left">
-            <span class="c-icon">↗</span>
-            <div>
-              <p class="c-platform">Instagram</p>
-              <p class="c-handle">Personal corner logs @zaid_kamran05</p>
+            
+            <nav class="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#tools" class="hover:text-teal-400 transition-colors">Control Center</a>
+                <a href="#vault" class="hover:text-teal-400 transition-colors">Insights Vault</a>
+                <a href="#exposure" class="hover:text-teal-400 transition-colors">Industrial Exposure</a>
+                <a href="#about" class="hover:text-teal-400 transition-colors">About</a>
+                <a href="#contact" class="hover:text-teal-400 transition-colors">Contact</a>
+            </nav>
+
+            <div class="relative inline-block text-left group">
+                <button class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-graduation-cap"></i> ICAI Portals <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-72 bg-slate-800 rounded-xl shadow-2xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+                    <a href="https://eservices.icai.org/per/g21/pub/1666/SelfServices/templates/Login%20Folder21052019122446/Login%20Folder/ICAI%20Phase%20II%20Login%20Page521052019122546.html" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-user-check mr-2"></i> SSP Portal Registry</a>
+                    <a href="https://www.icai.org/" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-globe mr-2"></i> Main ICAI Corporate Portal</a>
+                    <a href="https://bosknowledgeportal.icai.org/" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-book-open mr-2"></i> BOS Knowledge Portal</a>
+                    <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-layer-group mr-2"></i> Training Batch Checker</a>
+                    <a href="https://spmt.icai.org/ICAI/LoginAction_showSlotDetails.action" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-clipboard-list mr-2"></i> ICAI SPMT Portal</a>
+                    <a href="https://lms.icai.org/login" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-laptop-code mr-2"></i> Digital Learning LMS</a>
+                </div>
             </div>
-          </div>
-          <span class="c-arrow">→</span>
-        </a>
-        <a href="mailto:mdzaidkamran05@gmail.com" class="c-link">
-          <div class="c-left">
-            <span class="c-icon">✉</span>
-            <div>
-              <p class="c-platform">Email Directly</p>
-              <p class="c-handle">mdzaidkamran05@gmail.com</p>
+        </div>
+    </header>
+
+    <main id="tools" class="max-w-7xl mx-auto px-4 py-10 w-full space-y-12">
+        
+        <section class="dark-card rounded-2xl p-6 shadow-xl">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                        <i class="fa-solid fa-building-shield text-teal-400"></i> Statutory Compliance Control Grid
+                    </h2>
+                    <p class="text-sm text-slate-400">Central processing channels and parameters for corporate registries and notice updates.</p>
+                </div>
+                
+                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                        <i class="fa-solid fa-calendar-days text-teal-400"></i> Date Transport:
+                    </span>
+                    <input type="date" id="registryDatePicker" class="bg-slate-900 border border-slate-600 rounded px-2 py-1 text-sm text-slate-200 focus:outline-none focus:border-teal-400">
+                    <button onclick="launchAllRegistries()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold px-3 py-1.5 rounded transition-all">
+                        Open All Filtered Tabs
+                    </button>
+                </div>
             </div>
-          </div>
-          <span class="c-arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<footer>
-  <div>
-    <p class="footer-name">Md Zaid Kamran</p>
-    <p class="footer-note">Built during articleship, updated whenever curiosity wins.</p>
-  </div>
-  <p class="footer-note">Still learning, still asking questions, and still occasionally <span class="footer-gold">fighting with spreadsheets.</span></p>
-</footer>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-receipt text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">GST Portal (GSTN)</h3>
+                        <p class="text-xs text-slate-400 mt-1">Returns filing matrix and operational logs.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('gst')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-<script>
-// Typewriter Engine Execution
-const nameEl = document.getElementById("typed-name");
-const cursor = document.getElementById("cursor");
-const heroBody = document.getElementById("hero-body");
-const heroScroll = document.getElementById("hero-scroll");
-const name = "ZAiD";
-let i = 0;
-function type() {
-  if (i <= name.length) {
-    nameEl.textContent = name.substring(0, i++);
-    setTimeout(type, i === 1 ? 900 : 130);
-  } else {
-    setTimeout(() => {
-      cursor.style.display = "none";
-      heroBody.style.opacity = "1";
-      heroScroll.style.opacity = "1";
-    }, 500);
-  }
-}
-setTimeout(type, 600);
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-calculator text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">Income Tax (ITD)</h3>
+                        <p class="text-xs text-slate-400 mt-1">Statutory returns and processing assessments.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('it')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-// Scroll view observer fade configurations
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
-}, { threshold: 0.05 });
-document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-briefcase text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">MCA21 Portal</h3>
+                        <p class="text-xs text-slate-400 mt-1">Company filings, director master records, and ROC.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.mca.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('mca')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-// Equity Router Engine Multiplexer Execution
-function launchStockAnalysis() {
-  var tickerSymbol = document.getElementById('global-stock-ticker').value.trim().toUpperCase();
-  var enginePlatform = document.getElementById('stock-target-engine').value;
-  
-  if(!tickerSymbol) {
-    alert('Please enter a valid stock symbol (e.g., RELIANCE).');
-    return;
-  }
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-chart-line text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">NSE India</h3>
+                        <p class="text-xs text-slate-400 mt-1">Corporate disclosures and listed equity parameters.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.nseindia.com/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('nse')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-  var routingEngineUrlMap = {
-    'screener': 'https://www.screener.in/company/' + tickerSymbol + '/',
-    'tradingview': 'https://www.tradingview.com/symbols/NSE-' + tickerSymbol + '/',
-    'tickertape': 'https://www.tickertape.in/stocks/' + tickerSymbol.toLowerCase() + '-RELI',
-    'moneycontrol': 'https://www.moneycontrol.com/india/stockpricequote/'
-  };
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-chart-bar text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">BSE India</h3>
+                        <p class="text-xs text-slate-400 mt-1">Regulatory notices, corporate actions, filings data.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.bseindia.com/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('bse')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-  var destinationLink = routingEngineUrlMap[enginePlatform];
-  window.open(destinationLink, '_blank');
-}
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-landmark text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">RBI (Reserve Bank)</h3>
+                        <p class="text-xs text-slate-400 mt-1">Master circulars, notifications, banking rules.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.rbi.org.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('rbi')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
 
-// Scraper Target Simulation Alert
-function processLinkedInProfile() {
-  var userUrlInput = document.getElementById('linkedin-profile-input').value.trim();
-  if(!userUrlInput.includes('linkedin.com/')) {
-    alert('Validation Error: Please insert a secure, qualified LinkedIn address URL.');
-    return;
-  }
-  alert('Target Added to Pipeline Queue: Triggering cloud data metrics sync. Engagement intervals will be compiled under your private sheet records.');
-}
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <i class="fa-solid fa-shield-halved text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">SEBI Portal</h3>
+                        <p class="text-xs text-slate-400 mt-1">Legal regulations, board circulars, compliance mandates.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
+                        <a href="https://www.sebi.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
+                        <button onclick="transportToPortal('sebi')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-// Vault Security Code Verification logic matching '0505'
-function togglePrivateVaultData() {
-  var metricVault = document.getElementById('private-metrics-vault-container');
-  var actionButtonText = document.getElementById('vault-toggle-button');
-  
-  if (metricVault.style.filter === 'blur(0px)') {
-    metricVault.style.filter = 'blur(10px)';
-    metricVault.style.pointerEvents = 'none';
-    actionButtonText.innerText = 'Unlock Secure Vault';
-  } else {
-    var structuralSecurePinPrompt = prompt('System Authentication Guard: Enter security pin code passkey to unblur private tracking data logs:');
-    
-    if(structuralSecurePinPrompt === '0505') { 
-      metricVault.style.filter = 'blur(0px)';
-      metricVault.style.pointerEvents = 'auto';
-      actionButtonText.innerText = 'Lock Private Displays';
-    } else {
-      alert('Access Denied: Authentication parameters mismatch. Vault remains safely locked.');
-    }
-  }
-}
-</script>
+        <section class="dark-card rounded-2xl p-6 shadow-xl">
+            <div class="mb-6 border-b border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                        <i class="fa-solid fa-earth-americas text-teal-400"></i> Universal Global Stock Tracker
+                    </h2>
+                    <p class="text-sm text-slate-400">Monitor live metrics or cross-reference tracking platforms for all international markets.</p>
+                </div>
+                
+                <div class="flex gap-2 w-full md:w-auto">
+                    <input type="text" id="globalTickerInput" placeholder="Enter symbol (e.g. RELIANCE, AAPL, 7203)" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 w-full md:w-64 focus:outline-none focus:border-teal-400">
+                    <select id="marketExchangeSelector" class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-2 text-sm text-slate-300 focus:outline-none">
+                        <option value="IN">India</option>
+                        <option value="US">USA</option>
+                        <option value="JP">Japan</option>
+                        <option value="CN">China</option>
+                    </select>
+                    <button onclick="routeUniversalSearch()" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all">
+                        Search
+                    </button>
+                </div>
+            </div>
 
+            <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Primary Analytics Nodes:</span>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="https://www.tickertape.in/" target="_blank" class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
+                        <span class="text-sm font-semibold text-slate-200 block">Tickertape India</span>
+                    </a>
+                    <a href="https://www.screener.in/" target="_blank" class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
+                        <span class="text-sm font-semibold text-slate-200 block">Screener Analytics</span>
+                    </a>
+                    <a href="https://in.tradingview.com/" target="_blank" class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
+                        <span class="text-sm font-semibold text-slate-200 block">TradingView Engine</span>
+                    </a>
+                    <a href="https://www.moneycontrol.com/" target="_blank" class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
+                        <span class="text-sm font-semibold text-slate-200 block">Moneycontrol Logs</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/60 pt-4">
+                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block">US MARKETS</span>
+                        <span class="text-sm font-medium text-slate-200">S&P 500 / NASDAQ</span>
+                    </div>
+                    <a href="https://www.bloomberg.com/markets/stocks" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
+                </div>
+                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block">JAPAN INDICES</span>
+                        <span class="text-sm font-medium text-slate-200">Nikkei 225 (^N225)</span>
+                    </div>
+                    <a href="https://www.reuters.com/markets/indexes/" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
+                </div>
+                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block">CHINA HUBS</span>
+                        <span class="text-sm font-medium text-slate-200">Shanghai Composite</span>
+                    </div>
+                    <a href="https://www.cnbc.com/world-markets/" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="vault" class="dark-card rounded-2xl p-6 shadow-xl">
+            <div class="mb-6 border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-user-lock text-rose-400"></i> Locked Portfolio Growth Vault
+                </h2>
+                <p class="text-sm text-slate-400">Input security code verification parameters to view hidden tracking modules.</p>
+            </div>
+
+            <div id="vaultLockScreen" class="py-8 flex flex-col items-center justify-center text-center">
+                <div class="w-16 h-16 bg-rose-500/10 text-rose-400 rounded-full flex items-center justify-center text-2xl mb-4 border border-rose-500/20">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-200 mb-2">Access Token Required</h3>
+                <div class="flex gap-2 max-w-sm w-full">
+                    <input type="password" id="vaultPasswordInput" placeholder="Enter 4-Digit Key Code" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-center tracking-widest w-full text-slate-100 focus:outline-none focus:border-rose-400">
+                    <button onclick="unlockVaultChannel()" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                        Verify
+                    </button>
+                </div>
+                <p id="vaultErrorMessage" class="text-xs text-rose-400 mt-2 hidden">Incorrect token code matrix parameter.</p>
+            </div>
+
+            <div id="vaultContentArea" class="hidden space-y-6">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700 flex flex-col md:flex-row justify-between gap-4">
+                    <div class="relative w-full md:w-72">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="vaultPostSearch" disabled placeholder="Search posts... (On Hold)" class="bg-slate-900 border border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-400 w-full cursor-not-allowed">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Time Horizon Matrix:</span>
+                        <select id="vaultTimeHorizon" disabled class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-slate-400 cursor-not-allowed">
+                            <option>Today</option>
+                            <option selected>7 Days</option>
+                            <option>14 Days</option>
+                            <option>28 Days</option>
+                            <option>2 Months</option>
+                            <option>3 Months</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
+                        <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Total Profile Posts</span>
+                        <span class="text-2xl font-black text-teal-400 mt-1 block">48</span>
+                    </div>
+                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
+                        <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Net Impressions Log</span>
+                        <span class="text-2xl font-black text-blue-400 mt-1 block">124,500+</span>
+                    </div>
+                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
+                        <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Engagement Upvotes</span>
+                        <span class="text-2xl font-black text-amber-400 mt-1 block">3,840</span>
+                    </div>
+                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
+                        <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Aggregated Feedback Comments</span>
+                        <span class="text-2xl font-black text-purple-400 mt-1 block">920</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Post Reference Master Records Log</span>
+                        <span class="text-xs text-slate-500 italic">Interface status: locked on hold</span>
+                    </div>
+                    <div class="text-sm text-slate-400 bg-slate-950 p-3 rounded border border-slate-800 text-center">
+                        LinkedIn metrics arrays and analytics components are structurally maintained exactly as they are currently written.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="max-w-7xl mx-auto px-4 pb-12 w-full space-y-12">
+        
+        <section id="exposure" class="dark-card rounded-2xl p-6 shadow-xl">
+            <div class="mb-6 border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-industry text-teal-400"></i> Corporate Operations & Industrial Exposure Matrix
+                </h2>
+                <p class="text-sm text-slate-400">Logistical audit verification parameters, technical processing benchmarks, and state regulatory guidelines.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
+                    <div class="text-teal-400 mb-2"><i class="fa-solid fa-cow text-xl"></i></div>
+                    <h3 class="font-bold text-slate-200 text-sm">Dairy & Milk Processing Plants</h3>
+                    <p class="text-xs text-slate-400 mt-1">Audit logs mapping quality assurance indices, SNF/Fat analytics parameters, and logistics monitoring systems.</p>
+                </div>
+                <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
+                    <div class="text-teal-400 mb-2"><i class="fa-solid fa-shirt text-xl"></i></div>
+                    <h3 class="font-bold text-slate-200 text-sm">Textiles & Finished Job-Work</h3>
+                    <p class="text-xs text-slate-400 mt-1">Audit paths checking finished fabric outputs, configuration codes, and environment system rules across industrial hubs.</p>
+                </div>
+                <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
+                    <div class="text-teal-400 mb-2"><i class="fa-solid fa-ring text-xl"></i></div>
+                    <h3 class="font-bold text-slate-200 text-sm">Tyre & High-Volume Assembly</h3>
+                    <p class="text-xs text-slate-400 mt-1">Market evaluation tracking industrial shares, raw inventory workflows, and compliance audits for state pollution boards.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-gradient-to-r from-slate-800 to-slate-800/40 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg border border-teal-500/20">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-200 text-sm">Verified Professional Credentials Vault</h4>
+                        <p class="text-xs text-slate-400">Clicking this button will route to the placeholder file link path.</p>
+                    </div>
+                </div>
+                <a href="resume.pdf" class="bg-slate-700 hover:bg-slate-600 text-slate-100 text-xs font-bold px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-download"></i> Download CV File Option
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="dark-card rounded-2xl p-6 shadow-xl relative overflow-hidden">
+            <div class="absolute top-4 right-6 text-slate-800 text-3xl font-black select-none tracking-widest opacity-40">
+                Alhamdulillah
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-24 h-24 rounded-full border-2 border-teal-400 overflow-hidden bg-slate-800 flex-shrink-0">
+                    <img src="profile.jpg" alt="Md Zaid Kamran" class="w-full h-full object-cover onerror-fallback">
+                </div>
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <h2 class="text-2xl font-bold text-slate-100">Aagaye aap! Welcome.</h2>
+                        <span class="text-xs bg-teal-500/10 text-teal-400 font-bold px-2 py-0.5 rounded border border-teal-500/20">Alhamdulillah</span>
+                    </div>
+                    <p class="text-sm font-semibold tracking-wide text-slate-300">Md Zaid Kamran | Chartered Accountancy Final Student & Professional Intern</p>
+                    <p class="text-xs text-slate-400 max-w-3xl leading-relaxed">
+                        Balancing demanding articleship milestones and comprehensive audit reporting portfolios while exploring structural efficiency automation. 
+                        Developing long-term investment strategies, startup operational frameworks, financial metrics modeling logic, and expanding personal presence on professional platforms.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="dark-card rounded-2xl p-8 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-100 leading-none">
+                        Let's continue the <br>
+                        <span class="text-amber-400 italic font-serif">conversation.</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-4 max-w-md leading-relaxed">
+                        Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, a specific cricket tracking observation, or sharing notes on spreadsheet models—reach out.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <a href="https://linkedin.com" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-linkedin text-xl text-slate-400 group-hover:text-teal-400"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-200">LinkedIn Profile</h4>
+                                <p class="text-xs text-slate-400">Connect professionally @md-zaid-kamran</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-instagram text-xl text-slate-400 group-hover:text-teal-400"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-200">Instagram</h4>
+                                <p class="text-xs text-slate-400">Personal corner logs @zaid_kamran05</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="mailto:mdzaidkamran05@gmail.com" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-xl text-slate-400 group-hover:text-teal-400"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-200">Email Directly</h4>
+                                <p class="text-xs text-slate-400">mdzaidkamran05@gmail.com</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-6 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h4 class="text-sm font-bold text-slate-200">Md Zaid Kamran</h4>
+                <p class="text-xs text-slate-500 mt-1">Built during articleship, updated whenever curiosity wins.</p>
+            </div>
+            <div class="text-left md:text-right">
+                <p class="text-xs text-slate-400 italic">
+                    Still learning, still asking questions, and still occasionally <span class="text-amber-400 font-serif font-medium">fighting with spreadsheets.</span>
+                </p>
+                <p class="text-[10px] text-slate-600 mt-2">&copy; 2026 Md Zaid Kamran. All rights reserved across all system modules.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Profile image fallback check tool
+        document.addEventListener("DOMContentLoaded", function() {
+            const img = document.querySelector('.onerror-fallback');
+            if(img) {
+                img.onerror = function() {
+                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%231e293b'><circle cx='50' cy='35' r='20' fill='%2394a3b8'/><path d='M10,85 C10,65 30,60 50,60 C70,60 90,65 90,85 Z' fill='%2394a3b8'/></svg>";
+                };
+            }
+        });
+
+        // 1. Multi-Date Registry Tab Launcher Logic Engine
+        function getTargetUrlString(portalKey, dateStr) {
+            const registryEndpoints = {
+                gst: "https://www.gst.gov.in/newsandupdates",
+                it: "https://www.incometax.gov.in/iec/foportal/latest-news",
+                mca: "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
+                nse: "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+                bse: "https://www.bseindia.com/corporates/ann.html",
+                rbi: "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+                sebi: "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes"
+            };
+            return registryEndpoints[portalKey] || "https://google.com";
+        }
+
+        function transportToPortal(portalKey) {
+            const dateBox = document.getElementById('registryDatePicker');
+            const chosenDate = dateBox.value;
+            const finalDestinationUrl = getTargetUrlString(portalKey, chosenDate);
+            
+            if (chosenDate) {
+                alert("Redirecting to " + portalKey.toUpperCase() + " archive logs filtered around configuration metrics for date: " + chosenDate);
+            }
+            window.open(finalDestinationUrl, '_blank');
+        }
+
+        // Loops through all 7 portals and opens them concurrently
+        function launchAllRegistries() {
+            const dateBox = document.getElementById('registryDatePicker');
+            const chosenDate = dateBox.value;
+            const portalsList = ['gst', 'it', 'mca', 'nse', 'bse', 'rbi', 'sebi'];
+            
+            if (chosenDate) {
+                alert("Launching all 7 statutory portals concurrently into your taskbar rows for selected timeline parameter: " + chosenDate);
+            }
+            
+            portalsList.forEach(function(key) {
+                window.open(getTargetUrlString(key, chosenDate), '_blank');
+            });
+        }
+
+        // 2. Universal Global Stock Tracker Navigation Engine
+        function routeUniversalSearch() {
+            const symbol = document.getElementById('globalTickerInput').value.trim();
+            const country = document.getElementById('marketExchangeSelector').value;
+            
+            if(!symbol) {
+                alert("Please input a valid listing corporate ticker index symbol.");
+                return;
+            }
+
+            let destinationUrl = "";
+            if (country === "IN") {
+                destinationUrl = "https://www.tickertape.in/stocks/" + symbol.toLowerCase();
+            } else if (country === "US") {
+                destinationUrl = "https://www.cnbc.com/quotes/" + symbol.toUpperCase();
+            } else if (country === "JP") {
+                destinationUrl = "https://www.reuters.com/markets/quotes/" + symbol.toUpperCase();
+            } else if (country === "CN") {
+                destinationUrl = "https://www.bloomberg.com/quote/" + symbol.toUpperCase() + ":CH";
+            }
+
+            window.open(destinationUrl, '_blank');
+        }
+
+        // 3. Private Vault Room Security Gate Engine
+        function unlockVaultChannel() {
+            const passwordField = document.getElementById('vaultPasswordInput');
+            const errorLine = document.getElementById('vaultErrorMessage');
+            const lockScreen = document.getElementById('vaultLockScreen');
+            const contentsView = document.getElementById('vaultContentArea');
+            
+            if (passwordField.value === "0505") {
+                errorLine.classList.add('hidden');
+                lockScreen.classList.add('hidden');
+                contentsView.classList.remove('hidden');
+            } else {
+                errorLine.classList.remove('hidden');
+                passwordField.value = "";
+            }
+        }
+    </script>
 </body>
 </html>
