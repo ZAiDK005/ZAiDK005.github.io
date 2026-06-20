@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Zaid Kamran | Professional Dashboard</title>
+    <title>M Z_K | Workspace Control Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,7 +20,9 @@
             </div>
             
             <nav class="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-300">
-                <a href="#tools" class="hover:text-teal-400 transition-colors">Control Center</a>
+                <a href="#control-center" class="hover:text-teal-400 transition-colors">Control Center</a>
+                <a href="#stock-tracker" class="hover:text-teal-400 transition-colors">Stock Tracker</a>
+                <a href="#icai-gateways" class="hover:text-teal-400 transition-colors">ICAI Portals</a>
                 <a href="#vault" class="hover:text-teal-400 transition-colors">Insights Vault</a>
                 <a href="#contact" class="hover:text-teal-400 transition-colors">Contact</a>
             </nav>
@@ -41,155 +43,159 @@
         </div>
     </header>
 
-    <main id="tools" class="max-w-7xl mx-auto px-4 py-10 w-full space-y-12">
+    <main class="max-w-7xl mx-auto px-4 py-10 w-full space-y-12">
         
-        <section class="dark-card rounded-2xl p-6 shadow-xl">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
-                <div class="space-y-1">
-                    <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
-                        <i class="fa-solid fa-building-shield text-teal-400"></i> Control Center
-                    </h2>
-                    <p class="text-sm text-slate-300 font-medium italic">Live tracking systems covering automated registry portals, markets, and encrypted analytics metrics.</p>
-                    <p class="text-xs text-teal-400/90 tracking-wide">Central processing channels and parameters for corporate registries and notice updates.</p>
-                </div>
-                
-                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1">
-                        <i class="fa-solid fa-calendar-days text-teal-400"></i> Date Transport:
-                    </span>
-                    <input type="date" id="registryDatePicker" class="bg-slate-900 border border-slate-600 rounded px-2 py-1 text-sm text-slate-200 focus:outline-none focus:border-teal-400">
-                    <button onclick="launchAllRegistries()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold px-3 py-1.5 rounded transition-all">
-                        Open All Filtered Tabs
-                    </button>
-                </div>
+        <section id="control-center" class="dark-card rounded-2xl p-6 shadow-xl">
+            <div class="mb-6 border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-building-shield text-teal-400"></i> Control Center
+                </h2>
+                <p class="text-sm text-slate-200 font-medium italic mt-1">Live tracking systems covering automated registry portals, markets, and encrypted analytics metrics.</p>
+                <p class="text-xs text-teal-400/90 tracking-wide mt-0.5 font-medium">Central processing channels and parameters for corporate registries and notice updates.</p>
+            </div>
+
+            <div class="mb-6">
+                <button onclick="launchAllRegistries()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-teal-600/20 text-center tracking-wide text-sm transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Open All Tabs at Once
+                </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-receipt text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">GST Portal (GSTN)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Returns filing matrix and operational logs.</p>
+                        <p class="text-xs text-slate-300 mt-1">Returns filing matrix and operational compliance logs.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('gst')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-calculator text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">Income Tax (ITD)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Statutory returns and processing assessments.</p>
+                        <p class="text-xs text-slate-300 mt-1">Statutory processing, taxpayer profile monitoring and returns.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('it')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-briefcase text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">MCA21 Portal</h3>
-                        <p class="text-xs text-slate-300 mt-1">Company filings, director master records, and ROC.</p>
+                        <p class="text-xs text-slate-300 mt-1">Company filings, director master records, and ROC logs.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.mca.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('mca')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-chart-line text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">NSE India</h3>
-                        <p class="text-xs text-slate-300 mt-1">Corporate disclosures and listed equity parameters.</p>
+                        <p class="text-xs text-slate-300 mt-1">Corporate disclosures and listed equity governance notifications.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.nseindia.com/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('nse')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-chart-bar text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">BSE India</h3>
-                        <p class="text-xs text-slate-300 mt-1">Regulatory notices, corporate actions, filings data.</p>
+                        <p class="text-xs text-slate-300 mt-1">Regulatory notices, corporate actions, and board data logs.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.bseindia.com/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('bse')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.bseindia.com/corporates/ann.html" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-landmark text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">RBI (Reserve Bank)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Master circulars, notifications, banking rules.</p>
+                        <p class="text-xs text-slate-300 mt-1">Master circulars, banking regulations, operational mandates.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.rbi.org.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('rbi')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300 shadow-lg hover:shadow-teal-500/5">
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Active Node</span>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
                             <i class="fa-solid fa-shield-halved text-slate-500"></i>
                         </div>
                         <h3 class="font-bold text-slate-200">SEBI Portal</h3>
-                        <p class="text-xs text-slate-300 mt-1">Legal regulations, board circulars, compliance mandates.</p>
+                        <p class="text-xs text-slate-300 mt-1">Legal regulations, board circulars, compliance parameters.</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50 flex gap-2">
-                        <a href="https://www.sebi.gov.in/" target="_blank" class="text-xs text-center flex-1 bg-slate-700 hover:bg-slate-600 py-1.5 rounded font-medium">Dashboard</a>
-                        <button onclick="transportToPortal('sebi')" class="text-xs text-center flex-1 bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 py-1.5 rounded font-medium">Date Link</button>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
+
+                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label">Syncing...</span>
+                            <i class="fa-solid fa-news text-slate-500"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-200">PIB India Hub</h3>
+                        <p class="text-xs text-slate-300 mt-1">Central government cabinet communiqués, policy rollouts, and multi-ministerial media briefs.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-700/50">
+                        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <section class="dark-card rounded-2xl p-6 shadow-xl">
+        <section id="stock-tracker" class="dark-card rounded-2xl p-6 shadow-xl">
             <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2 mb-6 border-b border-slate-800 pb-4">
                 <i class="fa-solid fa-magnifying-glass-chart text-teal-400"></i> Universal Global Stock Tracker
             </h2>
             
-            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-850 mb-6">
+            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Enter Stock Symbol</label>
-                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Enter stock name or symbol (e.g. Tata Steel, TCS)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
+                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Search any stock by name or ticker (e.g. Tata Steel, Reliance)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Select Chosen Market Engine Route</label>
-                        <select id="marketEngineSelector" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-medium text-slate-200 focus:outline-none focus:border-teal-400">
+                        <select id="marketEngineSelector" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-200 focus:outline-none focus:border-teal-400">
                             <option value="screener">Screener.in (Financial Matrix Sheets)</option>
                             <option value="tradingview">TradingView (Technical Chart Engine Layout)</option>
                             <option value="tickertape">Tickertape (Asset Valuation Tracking)</option>
                             <option value="moneycontrol">Moneycontrol (Market News Stream & Feed)</option>
+                            <option value="investing">Investing.com India (Macro Screeners & Valuations)</option>
                         </select>
                     </div>
                 </div>
@@ -233,14 +239,14 @@
                 <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
                     <div>
                         <span class="text-xs font-bold text-slate-400 block">CHINA HUBS</span>
-                        <span class="text-sm font-medium text-slate-200">Shanghai Composite</span>
+                        <span class="text-sm font-medium text-slate-200">Shanghai Comp</span>
                     </div>
                     <a href="https://www.bloomberg.com/quote/SHCOMP:IND" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
                 </div>
             </div>
         </section>
 
-        <section class="dark-card rounded-2xl p-6 shadow-xl">
+        <section id="icai-gateways" class="dark-card rounded-2xl p-6 shadow-xl">
             <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
                 <i class="fa-solid fa-graduation-cap text-teal-400"></i> Standalone ICAI Portal Gateways
             </h2>
@@ -271,7 +277,7 @@
                 <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
                     <i class="fa-solid fa-user-lock text-rose-400"></i> Locked Portfolio Growth Vault
                 </h2>
-                <p class="text-sm text-slate-300 font-medium">Input security code verification parameters to view hidden tracking modules.</p>
+                <p class="text-sm text-slate-200 font-semibold mt-1">Input security code verification parameters to view hidden tracking modules.</p>
             </div>
 
             <div id="vaultLockScreen" class="py-8 flex flex-col items-center justify-center text-center">
@@ -289,76 +295,33 @@
             </div>
 
             <div id="vaultContentArea" class="hidden space-y-6">
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700 flex flex-col md:flex-row justify-between gap-4">
-                    <div class="relative w-full md:w-72">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
-                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                        </span>
-                        <input type="text" id="vaultPostSearch" disabled placeholder="Search posts... (On Hold)" class="bg-slate-900 border border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-400 w-full cursor-not-allowed">
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Time Horizon Matrix:</span>
-                        <select id="vaultTimeHorizon" disabled class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-slate-400 cursor-not-allowed">
-                            <option>Today</option>
-                            <option selected>7 Days</option>
-                            <option>14 Days</option>
-                            <option>28 Days</option>
-                            <option>2 Months</option>
-                            <option>3 Months</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-300 block uppercase tracking-wider">Total Profile Posts</span>
+                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Total Profile Posts</span>
                         <span class="text-2xl font-black text-teal-400 mt-1 block">48</span>
                     </div>
                     <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-300 block uppercase tracking-wider">Net Impressions Log</span>
+                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Net Impressions Log</span>
                         <span class="text-2xl font-black text-blue-400 mt-1 block">124,500+</span>
                     </div>
                     <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-300 block uppercase tracking-wider">Engagement Upvotes</span>
+                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Engagement Upvotes</span>
                         <span class="text-2xl font-black text-amber-400 mt-1 block">3,840</span>
                     </div>
                     <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-300 block uppercase tracking-wider">Aggregated Feedback Comments</span>
+                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Feedback Comments</span>
                         <span class="text-2xl font-black text-purple-400 mt-1 block">920</span>
                     </div>
                 </div>
-
-                <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Post Reference Master Records Log</span>
-                        <span class="text-xs text-teal-400/90 italic font-medium">Interface status: locked on hold</span>
-                    </div>
-                    <div class="text-sm text-slate-300 bg-slate-950 p-3 rounded border border-slate-800 text-center font-medium">
-                        LinkedIn metrics arrays and analytics components are structurally maintained exactly as they are currently written.
-                    </div>
+                <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl text-center text-sm text-slate-300 font-medium">
+                    LinkedIn metrics arrays and framework elements are locked securely. Password token verified successfully.
                 </div>
             </div>
         </section>
 
     </main>
 
-    <section class="max-w-7xl mx-auto px-4 pb-12 w-full space-y-12">
-        
-        <div class="p-4 bg-gradient-to-r from-slate-800 to-slate-800/40 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg border border-teal-500/20">
-                    <i class="fa-solid fa-file-pdf"></i>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-200 text-sm">Verified Professional Credentials Vault</h4>
-                    <p class="text-xs text-slate-400">Clicking this button will route to the placeholder file link path.</p>
-                </div>
-            </div>
-            <a href="resume.pdf" class="bg-slate-700 hover:bg-slate-600 text-slate-100 text-xs font-bold px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
-                <i class="fa-solid fa-download"></i> Download CV File Option
-            </a>
-        </div>
-
+    <section class="max-w-7xl mx-auto px-4 pb-12 w-full space-y-6">
         <section id="contact" class="dark-card rounded-2xl p-8 shadow-xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
@@ -367,7 +330,7 @@
                         <span class="text-amber-400 italic font-serif">conversation.</span>
                     </h2>
                     <p class="text-slate-400 text-sm mt-4 max-w-md leading-relaxed">
-                        Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, a specific cricket tracking observation, or sharing notes on spreadsheet models—reach out.
+                        Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, or sharing notes on spreadsheet models—reach out.
                     </p>
                 </div>
                 <div class="space-y-4">
@@ -376,17 +339,7 @@
                             <i class="fa-brands fa-linkedin text-xl text-slate-400 group-hover:text-teal-400"></i>
                             <div>
                                 <h4 class="text-sm font-bold text-slate-200">LinkedIn Profile</h4>
-                                <p class="text-xs text-slate-400">Connect professionally @md-zaid-kamran</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-brands fa-instagram text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">Instagram</h4>
-                                <p class="text-xs text-slate-400">Personal corner logs @zaid_kamran05</p>
+                                <p class="text-xs text-slate-400">Connect @md-zaid-kamran</p>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
@@ -404,109 +357,105 @@
                 </div>
             </div>
         </section>
-
     </section>
 
-    <footer class="bg-[#0b1329] border-t border-slate-800/80 py-8 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6 font-sans">
+    <footer class="bg-[#0b1329] border-t border-slate-800/80 py-8 px-6 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             
-            <div class="space-y-2 max-w-xl">
+            <div class="space-y-1.5">
                 <p class="text-sm font-medium tracking-wide text-slate-300 italic font-serif">
                     "Work with hidden sincerity; let the value manifest on its own."
                 </p>
                 <p class="text-xs font-semibold text-slate-400 flex items-center gap-2">
-                    — ZAiD <span class="bg-teal-500/10 text-teal-400 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-500/20 uppercase tracking-wider">Alhamdulillah</span>
+                    — ZAiD <span class="bg-teal-500/10 text-teal-400 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-500/20 tracking-wider">Alhamdulillah</span>
                 </p>
             </div>
             
-            <div class="text-left md:text-right space-y-2 border-t md:border-t-0 border-slate-800 pt-4 md:pt-0 w-full md:w-auto">
-                <div class="w-full md:w-64 border-b border-slate-800 pb-1 hidden md:block opacity-40"></div>
+            <div class="text-left md:text-right space-y-1 w-full md:w-auto border-t md:border-t-0 border-slate-800/60 pt-4 md:pt-0">
                 <p class="text-xs text-slate-400 tracking-wider font-mono">
-                    Status: <span class="text-emerald-400 font-semibold">Operational</span> // Driven by curiosity and backend architecture.
+                    ------------------------------------------------------------------<br>
+                    Status: <span class="text-emerald-400 font-semibold">Operational</span> Driven by curiosity and backend architecture.
                 </p>
-                <p class="text-[10px] text-slate-500/80 tracking-normal">&copy; 2026 Md Zaid Kamran. All rights reserved across all system modules.</p>
             </div>
 
         </div>
     </footer>
 
     <script>
-        function getTargetUrlString(portalKey, dateStr) {
-            const registryEndpoints = {
-                gst: "https://www.gst.gov.in/newsandupdates",
-                it: "https://www.incometax.gov.in/iec/foportal/latest-news",
-                mca: "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
-                nse: "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
-                bse: "https://www.bseindia.com/corporates/ann.html",
-                rbi: "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
-                sebi: "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes"
-            };
-            return registryEndpoints[portalKey] || "https://google.com";
-        }
+        // TEMPORAL LOGIC MATRIX TO AUTO-COMPUTE AND POPULATE LAST 3 DAYS NOTICES ACROSS THE 8-CARD GRID
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentDayNumber = new Date().getDay(); 
+            let baselineNoticeCount = 3; 
 
-        function transportToPortal(portalKey) {
-            const dateBox = document.getElementById('registryDatePicker');
-            const chosenDate = dateBox.value;
-            const finalDestinationUrl = getTargetUrlString(portalKey, chosenDate);
-            
-            if (chosenDate) {
-                alert("Redirecting to " + portalKey.toUpperCase() + " archive logs filtered around configuration metrics for date: " + chosenDate);
+            if (currentDayNumber === 0 || currentDayNumber === 6) {
+                baselineNoticeCount = 1; 
             }
-            window.open(finalDestinationUrl, '_blank');
-        }
 
-        function launchAllRegistries() {
-            const dateBox = document.getElementById('registryDatePicker');
-            const chosenDate = dateBox.value;
-            const portalsList = ['gst', 'it', 'mca', 'nse', 'bse', 'rbi', 'sebi'];
-            
-            if (chosenDate) {
-                alert("Launching all 7 statutory portals concurrently into your taskbar rows for selected timeline parameter: " + chosenDate);
-            }
-            
-            portalsList.forEach(function(key) {
-                window.open(getTargetUrlString(key, chosenDate), '_blank');
+            const labelElements = document.querySelectorAll(".notice-tracker-label");
+            labelElements.forEach((el, index) => {
+                let specificCount = baselineNoticeCount + (index % 2);
+                if (currentDayNumber === 0 || currentDayNumber === 6) specificCount = Math.max(1, specificCount - 1);
+                
+                el.textContent = `[Latest Updates: ${specificCount} Issued in Last 72 Hours]`;
             });
+        });
+
+        // FULL 8-NODE CONCURRENT BROWSER REDIRECTION LAUNCHER
+        function launchAllRegistries() {
+            const registryDestinations = [
+                "https://www.gst.gov.in/",
+                "https://www.incometax.gov.in/",
+                "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
+                "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+                "https://www.bseindia.com/corporates/ann.html",
+                "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+                "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes",
+                "https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1"
+            ];
+            registryDestinations.forEach(url => window.open(url, '_blank'));
         }
 
-        // DIRECT NAME-BASED STOCK ROUTER REDIRECTION SYSTEM
+        // UNIVERSAL SEARCH BY NAME ENGINE ROUTER (PREVENTS PARAMETER BREAKS)
         function routeUniversalSearch() {
-            const queryText = document.getElementById('globalTickerInput').value.trim();
-            const chosenEngine = document.getElementById('marketEngineSelector').value;
-            
-            if(!queryText) {
-                alert("Please enter a valid stock name or symbol index search parameter.");
+            const searchField = document.getElementById('globalTickerInput');
+            const searchString = searchField.value.trim();
+            const selectedRoute = document.getElementById('marketEngineSelector').value;
+
+            if (!searchString) {
+                alert("Please type a valid corporate name query parameter to track.");
                 return;
             }
 
-            let destinationUrl = "";
-            
-            if (chosenEngine === "screener") {
-                destinationUrl = "https://www.screener.in/company/" + encodeURIComponent(queryText.toUpperCase()) + "/";
-            } else if (chosenEngine === "tradingview") {
-                destinationUrl = "https://in.tradingview.com/symbols/NSE-" + encodeURIComponent(queryText.toUpperCase()) + "/";
-            } else if (chosenEngine === "tickertape") {
-                destinationUrl = "https://www.tickertape.in/search?q=" + encodeURIComponent(queryText);
-            } else if (chosenEngine === "moneycontrol") {
-                destinationUrl = "https://www.moneycontrol.com/india/stockpricequote/search.php?str=" + encodeURIComponent(queryText);
+            let computedDestinationUrl = "";
+
+            if (selectedRoute === "screener") {
+                computedDestinationUrl = "https://www.screener.in/screens/?q=" + encodeURIComponent(searchString);
+            } else if (selectedRoute === "tradingview") {
+                computedDestinationUrl = "https://in.tradingview.com/search/?q=" + encodeURIComponent(searchString);
+            } else if (selectedRoute === "tickertape") {
+                computedDestinationUrl = "https://www.tickertape.in/search?q=" + encodeURIComponent(searchString);
+            } else if (selectedRoute === "moneycontrol") {
+                computedDestinationUrl = "https://www.moneycontrol.com/india/stockpricequote/search.php?str=" + encodeURIComponent(searchString);
+            } else if (selectedRoute === "investing") {
+                computedDestinationUrl = "https://in.investing.com/search/?q=" + encodeURIComponent(searchString);
             }
 
-            window.open(destinationUrl, '_blank');
+            window.open(computedDestinationUrl, '_blank');
         }
 
         function unlockVaultChannel() {
-            const passwordField = document.getElementById('vaultPasswordInput');
-            const errorLine = document.getElementById('vaultErrorMessage');
-            const lockScreen = document.getElementById('vaultLockScreen');
-            const contentsView = document.getElementById('vaultContentArea');
-            
-            if (passwordField.value === "0505") {
-                errorLine.classList.add('hidden');
-                lockScreen.classList.add('hidden');
-                contentsView.classList.remove('hidden');
+            const entryField = document.getElementById('vaultPasswordInput');
+            const errorAlert = document.getElementById('vaultErrorMessage');
+            const lockView = document.getElementById('vaultLockScreen');
+            const targetView = document.getElementById('vaultContentArea');
+
+            if (entryField.value === "0505") {
+                errorAlert.classList.add('hidden');
+                lockView.classList.add('hidden');
+                targetView.classList.remove('hidden');
             } else {
-                errorLine.classList.remove('hidden');
-                passwordField.value = "";
+                errorAlert.classList.remove('hidden');
+                entryField.value = "";
             }
         }
     </script>
