@@ -186,7 +186,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Enter Stock Name or Ticker</label>
-                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Search any stock (e.g. Wipro, Reliance, Maral Overseas)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
+                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Search any stock (e.g. TCS, Reliance, Wipro)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Select Chosen Market Engine Route</label>
@@ -427,7 +427,7 @@
             registryDestinations.forEach(url => window.open(url, '_blank'));
         }
 
-        // RE-OPTIMIZED MIXED INPUT SEARCH QUERY CONTROLLER
+        // INTELLIGENT ROUTER CONTROLLER (RESOLVES BOTH RAW TICKERS AND FULL NAMES)
         function routeUniversalSearch() {
             const searchField = document.getElementById('globalTickerInput');
             const searchString = searchField.value.trim();
@@ -439,14 +439,26 @@
             }
 
             let computedDestinationUrl = "";
+            const isPlainTicker = /^[A-Za-z0-9]+$/.test(searchString) && searchString.length <= 12;
 
             if (selectedRoute === "screener") {
-                // Uses universal lookup wrapper to handle mixed character text safely
-                computedDestinationUrl = "https://www.screener.in/html-search/?q=" + encodeURIComponent(searchString);
+                if (isPlainTicker) {
+                    computedDestinationUrl = "https://www.screener.in/company/" + encodeURIComponent(searchString.toUpperCase()) + "/";
+                } else {
+                    computedDestinationUrl = "https://www.screener.in/html-search/?q=" + encodeURIComponent(searchString);
+                }
             } else if (selectedRoute === "tradingview") {
-                computedDestinationUrl = "https://in.tradingview.com/search/?q=" + encodeURIComponent(searchString);
+                if (isPlainTicker) {
+                    computedDestinationUrl = "https://in.tradingview.com/symbols/" + encodeURIComponent(searchString.toUpperCase()) + "/";
+                } else {
+                    computedDestinationUrl = "https://in.tradingview.com/search/?q=" + encodeURIComponent(searchString);
+                }
             } else if (selectedRoute === "tickertape") {
-                computedDestinationUrl = "https://www.tickertape.in/search?q=" + encodeURIComponent(searchString);
+                if (isPlainTicker) {
+                    computedDestinationUrl = "https://www.tickertape.in/stocks/" + encodeURIComponent(searchString.toLowerCase());
+                } else {
+                    computedDestinationUrl = "https://www.tickertape.in/search?q=" + encodeURIComponent(searchString);
+                }
             } else if (selectedRoute === "moneycontrol") {
                 computedDestinationUrl = "https://www.moneycontrol.com/india/stockpricequote/search.php?str=" + encodeURIComponent(searchString);
             } else if (selectedRoute === "investing") {
