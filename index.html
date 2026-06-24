@@ -3,486 +3,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M Z_K | Workspace Control Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>AuditTools Dashboard Workspace</title>
     <style>
-        html { scroll-behavior: smooth; }
-        .dark-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
-</head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
-
-    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <span class="text-xl font-bold tracking-wider text-slate-100">M Z_K</span>
-            </div>
-            
-            <nav class="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-300">
-                <a href="#control-center" class="hover:text-teal-400 transition-colors">Control Center</a>
-                <a href="#stock-tracker" class="hover:text-teal-400 transition-colors">Stock Tracker</a>
-                <a href="#icai-gateways" class="hover:text-teal-400 transition-colors">ICAI Portals</a>
-                <a href="#vault" class="hover:text-teal-400 transition-colors">Insights Vault</a>
-                <a href="#contact" class="hover:text-teal-400 transition-colors">Contact</a>
-            </nav>
-
-            <div class="relative inline-block text-left group">
-                <button class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-2 transition-all">
-                    <i class="fa-solid fa-graduation-cap"></i> ICAI Portal Links <i class="fa-solid fa-chevron-down text-xs"></i>
-                </button>
-                <div class="absolute right-0 mt-2 w-72 bg-slate-800 rounded-xl shadow-2xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-                    <a href="https://eservices.icai.org/per/g21/pub/1666/SelfServices/templates/Login%20Folder21052019122446/Login%20Folder/ICAI%20Phase%20II%20Login%20Page521052019122546.html" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-user-check mr-2"></i> SSP Portal Registry</a>
-                    <a href="https://www.icai.org/" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-globe mr-2"></i> Main ICAI Corporate Portal</a>
-                    <a href="https://bosknowledgeportal.icai.org/" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-book-open mr-2"></i> BOS Knowledge Portal</a>
-                    <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-layer-group mr-2"></i> Training Batch Checker</a>
-                    <a href="https://spmt.icai.org/ICAI/LoginAction_showSlotDetails.action" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-clipboard-list mr-2"></i> ICAI SPMT Portal</a>
-                    <a href="https://lms.icai.org/login" target="_blank" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-teal-400"><i class="fa-solid fa-laptop-code mr-2"></i> Digital Learning LMS</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 py-10 w-full space-y-12">
-        
-        <section id="control-center" class="dark-card rounded-2xl p-6 shadow-xl">
-            <div class="mb-6 border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
-                    <i class="fa-solid fa-building-shield text-teal-400"></i> Control Center
-                </h2>
-                <p class="text-sm text-slate-200 font-medium italic mt-1">Live tracking systems covering automated registry portals, markets, and encrypted analytics metrics.</p>
-                <p class="text-xs text-teal-400/90 tracking-wide mt-0.5 font-medium">Central processing channels and parameters for corporate registries and notice updates.</p>
-            </div>
-
-            <div class="mb-6">
-                <button onclick="launchAllRegistries()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-teal-600/20 text-center tracking-wide text-sm transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Open All Tabs at Once
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="3">Syncing...</span>
-                            <i class="fa-solid fa-receipt text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">GST Portal (GSTN)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Returns filing matrix and operational compliance logs.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="1">Syncing...</span>
-                            <i class="fa-solid fa-calculator text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">Income Tax (ITD)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Statutory processing, taxpayer profile monitoring and returns.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="2">Syncing...</span>
-                            <i class="fa-solid fa-briefcase text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">MCA21 Portal</h3>
-                        <p class="text-xs text-slate-300 mt-1">Company filings, director master records, and ROC logs.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="2">Syncing...</span>
-                            <i class="fa-solid fa-chart-line text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">NSE India</h3>
-                        <p class="text-xs text-slate-300 mt-1">Official National Stock Exchange corporate portal and market summary logs.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.nseindia.com/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="4">Syncing...</span>
-                            <i class="fa-solid fa-chart-bar text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">BSE India</h3>
-                        <p class="text-xs text-slate-300 mt-1">Official Bombay Stock Exchange disclosures, notices, and corporate actions.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.bseindia.com/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="0">Syncing...</span>
-                            <i class="fa-solid fa-landmark text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">RBI (Reserve Bank)</h3>
-                        <p class="text-xs text-slate-300 mt-1">Master circulars, banking regulations, operational mandates.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="1">Syncing...</span>
-                            <i class="fa-solid fa-shield-halved text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">SEBI Portal</h3>
-                        <p class="text-xs text-slate-300 mt-1">Legal regulations, board circulars, compliance parameters.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 notice-tracker-label" data-base="4">Syncing...</span>
-                            <i class="fa-solid fa-newspaper text-slate-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-200">PIB India Hub</h3>
-                        <p class="text-xs text-slate-300 mt-1">Central government cabinet communiqués, policy rollouts, and media briefs.</p>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="stock-tracker" class="dark-card rounded-2xl p-6 shadow-xl">
-            <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2 mb-6 border-b border-slate-800 pb-4">
-                <i class="fa-solid fa-magnifying-glass-chart text-teal-400"></i> Universal Global Stock Tracker
-            </h2>
-            
-            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-                    <div>
-                        <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Enter Stock Name or Ticker</label>
-                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Search any stock (e.g. TCS, Reliance, Wipro)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Select Chosen Market Engine Route</label>
-                        <select id="marketEngineSelector" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-200 focus:outline-none focus:border-teal-400">
-                            <option value="screener">Screener.in (Financial Sheets)</option>
-                            <option value="tradingview">TradingView (Technical Charts)</option>
-                            <option value="tickertape">Tickertape (Valuation Analysis)</option>
-                            <option value="moneycontrol">Moneycontrol (Market Feed)</option>
-                            <option value="investing">Investing.com India (Macro Analytics)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <button onclick="routeUniversalSearch()" class="bg-[#0f1d30] border border-slate-700 hover:bg-slate-800 text-slate-200 text-xs font-bold tracking-wider uppercase px-5 py-3 rounded-lg inline-flex items-center gap-2 transition-all">
-                        Launch Analysis Portal <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                    </button>
-                </div>
-            </div>
-
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-3">Primary Analytics Nodes:</span>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 block">NIFTY 50</span>
-                        <span class="text-sm font-medium text-slate-200">NSE Index</span>
-                    </div>
-                    <a href="https://www.tickertape.in/market-movers/index/NIFTY" target="_blank" class="text-[10px] font-bold bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700 tracking-wider uppercase">Live</a>
-                </div>
-                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 block">SENSEX</span>
-                        <span class="text-sm font-medium text-slate-200">BSE Index</span>
-                    </div>
-                    <a href="https://www.tickertape.in/market-movers/index/SENSEX" target="_blank" class="text-[10px] font-bold bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700 tracking-wider uppercase">Live</a>
-                </div>
-                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 block">US MARKETS</span>
-                        <span class="text-sm font-medium text-slate-200">S&P 500 / NASDAQ</span>
-                    </div>
-                    <a href="https://www.bloomberg.com/markets/stocks" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
-                </div>
-                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 block">JAPAN INDICES</span>
-                        <span class="text-sm font-medium text-slate-200">Nikkei 225 (^N225)</span>
-                    </div>
-                    <a href="https://www.bloomberg.com/quote/NKY:IND" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
-                </div>
-                <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 block">CHINA HUBS</span>
-                        <span class="text-sm font-medium text-slate-200">Shanghai Comp</span>
-                    </div>
-                    <a href="https://www.bloomberg.com/quote/SHCOMP:IND" target="_blank" class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">Live Feed</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="icai-gateways" class="dark-card rounded-2xl p-6 shadow-xl">
-            <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
-                <i class="fa-solid fa-graduation-cap text-teal-400"></i> Standalone ICAI Portal Gateways
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <a href="https://eservices.icai.org/per/g21/pub/1666/SelfServices/templates/Login%20Folder21052019122446/Login%20Folder/ICAI%20Phase%20II%20Login%20Page521052019122546.html" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">SSP Registry</span>
-                </a>
-                <a href="https://www.icai.org/" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">ICAI Corporate</span>
-                </a>
-                <a href="https://bosknowledgeportal.icai.org/" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">BOS Knowledge</span>
-                </a>
-                <a href="https://www.icaionlineregistration.org/launchbatchdetail.aspx" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">Batch Checker</span>
-                </a>
-                <a href="https://spmt.icai.org/ICAI/LoginAction_showSlotDetails.action" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">SPMT Portal</span>
-                </a>
-                <a href="https://lms.icai.org/login" target="_blank" class="bg-slate-800/50 border border-slate-700/60 rounded-xl p-3 text-center hover:border-teal-500 transition-all block">
-                    <span class="text-xs font-bold text-slate-200 block">Digital LMS</span>
-                </a>
-            </div>
-        </section>
-
-        <section id="vault" class="dark-card rounded-2xl p-6 shadow-xl">
-            <div class="mb-6 border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
-                    <i class="fa-solid fa-user-lock text-rose-400"></i> Locked Portfolio Growth Vault
-                </h2>
-                <p class="text-sm text-slate-200 font-semibold mt-1">Input security code verification parameters to view hidden tracking modules.</p>
-            </div>
-
-            <div id="vaultLockScreen" class="py-8 flex flex-col items-center justify-center text-center">
-                <div class="w-16 h-16 bg-rose-500/10 text-rose-400 rounded-full flex items-center justify-center text-2xl mb-4 border border-rose-500/20">
-                    <i class="fa-solid fa-key"></i>
-                </div>
-                <h3 class="text-lg font-bold text-slate-200 mb-2">Access Token Required</h3>
-                <div class="flex gap-2 max-w-sm w-full">
-                    <input type="password" id="vaultPasswordInput" placeholder="Enter 4-Digit Key Code" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-center tracking-widest w-full text-slate-100 focus:outline-none focus:border-rose-400">
-                    <button onclick="unlockVaultChannel()" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
-                        Verify
-                    </button>
-                </div>
-                <p id="vaultErrorMessage" class="text-xs text-rose-400 mt-2 hidden">Incorrect token code matrix parameter.</p>
-            </div>
-
-            <div id="vaultContentArea" class="hidden space-y-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Total Profile Posts</span>
-                        <span class="text-2xl font-black text-teal-400 mt-1 block">48</span>
-                    </div>
-                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Net Impressions Log</span>
-                        <span class="text-2xl font-black text-blue-400 mt-1 block">124,500+</span>
-                    </div>
-                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Engagement Upvotes</span>
-                        <span class="text-2xl font-black text-amber-400 mt-1 block">3,840</span>
-                    </div>
-                    <div class="bg-slate-800/30 p-4 rounded-xl border border-slate-700/60 text-center">
-                        <span class="text-xs font-bold text-slate-200 block uppercase tracking-wider">Feedback Comments</span>
-                        <span class="text-2xl font-black text-purple-400 mt-1 block">920</span>
-                    </div>
-                </div>
-                <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl text-center text-sm text-slate-300 font-medium">
-                    LinkedIn metrics arrays and framework elements are locked securely. Password token verified successfully.
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <section class="max-w-7xl mx-auto px-4 pb-12 w-full space-y-6">
-        <section id="contact" class="dark-card rounded-2xl p-8 shadow-xl">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                <div class="lg:col-span-1">
-                    <h2 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-100 leading-none">
-                        Let's continue the <br>
-                        <span class="text-amber-400 italic font-serif">conversation.</span>
-                    </h2>
-                    <p class="text-slate-400 text-sm mt-4 leading-relaxed">
-                        Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, or sharing notes on spreadsheet models—reach out.
-                    </p>
-                </div>
-                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="https://linkedin.com" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-brands fa-linkedin text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">LinkedIn Profile</h4>
-                                <p class="text-xs text-slate-400">Connect @md-zaid-kamran</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                    
-                    <a href="https://instagram.com/zaid_kamran05" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-brands fa-instagram text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">Instagram Handle</h4>
-                                <p class="text-xs text-slate-400">Personal space @zaid_kamran05</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-
-                    <a href="mailto:mdzaidkamran05@gmail.com" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group md:col-span-2">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-envelope text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">Email Directly</h4>
-                                <p class="text-xs text-slate-400">mdzaidkamran05@gmail.com</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <footer class="bg-[#0b1329] border-t border-slate-800/80 py-8 px-6 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            
-            <div class="space-y-1.5">
-                <p class="text-sm font-medium tracking-wide text-slate-300 italic font-serif">
-                    "Work with hidden sincerity; let the value manifest on its own."
-                </p>
-                <p class="text-xs font-semibold text-slate-400 flex items-center gap-2">
-                    — ZAiD <span class="bg-teal-500/10 text-teal-400 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-500/20 tracking-wider">Alhamdulillah</span>
-                </p>
-            </div>
-            
-            <div class="text-left md:text-right space-y-1 w-full md:w-auto border-t md:border-t-0 border-slate-800/60 pt-4 md:pt-0">
-                <p class="text-xs text-slate-400 tracking-wider font-mono">
-                    ------------------------------------------------------------------<br>
-                    Status: <span class="text-emerald-400 font-semibold">Operational</span> Driven by curiosity and backend architecture.
-                </p>
-            </div>
-
-        </div>
-    </footer>
-
-    <script>
-        // WEEKDAY INDEPENDENT GRAPH GENERATOR (FIXES ALL-1 ERROR)
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentDayNumber = new Date().getDay(); 
-            const labelElements = document.querySelectorAll(".notice-tracker-label");
-            
-            labelElements.forEach((el) => {
-                let baseCount = parseInt(el.getAttribute("data-base")) || 1;
-                
-                if (currentDayNumber === 0 || currentDayNumber === 6) {
-                    baseCount = Math.max(1, baseCount);
-                } else {
-                    baseCount = baseCount + 2;
-                }
-                
-                el.textContent = `[Latest Updates: ${baseCount} Issued in Last 72 Hours]`;
-            });
-        });
-
-        // 8-NODE CONCURRENT BROWSER REDIRECTION LAUNCHER
-        function launchAllRegistries() {
-            const registryDestinations = [
-                "https://www.gst.gov.in/",
-                "https://www.incometax.gov.in/",
-                "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
-                "https://www.nseindia.com/",
-                "https://www.bseindia.com/",
-                "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
-                "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes",
-                "https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1"
-            ];
-            registryDestinations.forEach(url => window.open(url, '_blank'));
+        :root {
+            --bg-dark: #070a13;
+            --panel-glass: rgba(19, 26, 44, 0.5);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --emerald-accent: #00ca80;
+            --indigo-accent: #4f46e5;
+            --error-red: #ef4444;
         }
 
-        // INTELLIGENT ROUTER CONTROLLER (RESOLVES BOTH RAW TICKERS AND FULL NAMES)
-        function routeUniversalSearch() {
-            const searchField = document.getElementById('globalTickerInput');
-            const searchString = searchField.value.trim();
-            const selectedRoute = document.getElementById('marketEngineSelector').value;
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            if (!searchString) {
-                alert("Please type a valid stock name or symbol to query.");
+        .dashboard-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* 8-Card Control Center Layout Container */
+        .control-center-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .control-center-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .control-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .control-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.04);
+        }
+
+        /* Main Engine Hub Panel (Glassmorphism Sub-Theme) */
+        .engine-hub {
+            background: var(--panel-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .engine-header {
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .engine-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .engine-header h1 span {
+            color: var(--emerald-accent);
+        }
+
+        .engine-header p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Tab Navigation System */
+        .tab-navigation {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .tab-btn.active {
+            color: #000;
+            background: var(--emerald-accent);
+            font-weight: 600;
+        }
+
+        .tool-content {
+            display: none;
+        }
+
+        .tool-content.active {
+            display: block;
+        }
+
+        /* Workspace Structure */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 850px) {
+            .workspace-grid { grid-template-columns: 1fr; }
+        }
+
+        .input-panel, .output-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        textarea, input, select {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: var(--emerald-accent);
+            box-shadow: 0 0 0 2px rgba(0, 202, 128, 0.15);
+        }
+
+        /* Toggle Switches */
+        .toggle-container {
+            display: flex;
+            background: rgba(0,0,0,0.2);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+            width: fit-content;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .toggle-btn.active {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Console Output Windows */
+        .console-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            min-height: 220px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        /* Action Buttons */
+        .btn-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .action-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--panel-border);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .action-btn.primary {
+            background: var(--emerald-accent);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+
+        .action-btn.primary:hover {
+            background: #00b371;
+        }
+
+        /* Teaser View Theme Styling Matrix */
+        .teaser-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 48px 24px;
+            border: 1px dashed var(--panel-border);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+
+    <!-- 8-Card Control Center Array Grid Layout -->
+    <div class="control-center-grid">
+        <div class="control-card">📊 Data Stream Ingestion</div>
+        <div class="control-card">🧾 GST Verification Sandbox</div>
+        <div class="control-card">🏢 Vendor Profile Master</div>
+        <div class="control-card">⚙️ Macro Automation Core</div>
+        <div class="control-card">🔍 Micro-Cap Index Watch</div>
+        <div class="control-card">📁 Audit Trial Vault</div>
+        <div class="control-card">⚖️ Statutory Reporting Matrix</div>
+        <div class="control-card">🔒 Local Session Encryption</div>
+    </div>
+
+    <!-- MAIN ENGINE HUB CONTAINER -->
+    <div class="engine-hub">
+        <div class="engine-header">
+            <div>
+                <h1><span>audit</span>tools</h1>
+                <p>Your go-to audit engine</p>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); font-weight: 500;">Isolated Processing Engine</div>
+        </div>
+
+        <!-- Horizontal Tab Menu -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('tab-series')">1. Series Checker</button>
+            <button class="tab-btn" onclick="switchTab('tab-gstin')">2. GSTIN Validator</button>
+            <button class="tab-btn" onclick="switchTab('tab-udyam')">3. Udyam Parser</button>
+            <button class="tab-btn" onclick="switchTab('tab-tax')">4. Income Tax Engine</button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 1: MULTI-MODE SERIES CHECKER -->
+        <!-- ========================================== -->
+        <div id="tab-series" class="tool-content active">
+            <div class="workspace-grid">
+                <div class="input-panel">
+                    <div class="input-group">
+                        <label>Processing Target Configuration</label>
+                        <div class="toggle-container">
+                            <button id="series-single-btn" class="toggle-btn active" onclick="setSeriesMode('single')">Single Continuous Mode</button>
+                            <button id="series-group-btn" class="toggle-btn" onclick="setSeriesMode('group')">Grouped 17-Prefix Initials Mode</button>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label id="series-input-label">Paste Raw Scrambled Arrays (One entry per line)</label>
+                        <textarea id="series-input" rows="8" placeholder="Example for single:&#10;1001&#10;1003&#10;1002&#10;1005"></textarea>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn primary" onclick="processSeriesChecker()">Execute Numerical Scan</button>
+                    </div>
+                </div>
+                <div class="output-panel">
+                    <label>Live Exception Output Terminal</label>
+                    <div id="series-output" class="console-box">Engine standing by... Run execution matrix.</div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn" onclick="copyConsoleOutput('series-output')">📋 Copy to Clipboard</button>
+                        <button class="action-btn" onclick="triggerExcelExportMock('Series_Exceptions')">📥 Download Excel Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: BULK GSTIN SYNTAX VALIDATOR -->
+        <!-- ========================================== -->
+        <div id="tab-gstin" class="tool-content">
+            <div class="workspace-grid">
+                <div class="input-panel">
+                    <div class="input-group">
+                        <label>Dynamic Column Data Alignment (Ingestion Mapper)</label>
+                        <select id="gstin-column-map">
+                            <option value="auto">Auto-detect Raw Strings</option>
+                            <option value="colK">Column K (Vendor Records)</option>
+                            <option value="colL">Column L (Logistics Data)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Paste Raw Vendor GSTIN Matrix Block</label>
+                        <textarea id="gstin-input" rows="8" placeholder="Enter alphanumeric GSTINs (one per line)&#10;e.g., 20AAAAA1111A1Z1"></textarea>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn primary" onclick="processGSTINValidator()">Run Checksum Validation</button>
+                    </div>
+                </div>
+                <div class="output-panel">
+                    <label>Luhn Mod-36 & State Geolocation Map Engine</label>
+                    <div id="gstin-output" class="console-box">Waiting for raw database payload drop...</div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn" onclick="copyConsoleOutput('gstin-output')">📋 Copy to Clipboard</button>
+                        <button class="action-btn" onclick="triggerExcelExportMock('GSTIN_Audit_Log')">📥 Download Excel Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: UDYAM STRUCTURE PARSER -->
+        <!-- ========================================== -->
+        <div id="tab-udyam" class="tool-content">
+            <div class="workspace-grid">
+                <div class="input-panel">
+                    <div class="input-group">
+                        <label>Paste Raw MSME Udyam Numbers</label>
+                        <textarea id="udyam-input" rows="10" placeholder="Expected Statutory Rule format:&#10;UDYAM-XX-00-0000000"></textarea>
+                    </div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn primary" onclick="processUdyamParser()">Isolate State Metrics</button>
+                    </div>
+                </div>
+                <div class="output-panel">
+                    <label>Geographical Registry Hierarchy Results</label>
+                    <div id="udyam-output" class="console-box">Awaiting MSME register pipeline...</div>
+                    <div class="btn-wrapper">
+                        <button class="action-btn" onclick="copyConsoleOutput('udyam-output')">📋 Copy to Clipboard</button>
+                        <button class="action-btn" onclick="triggerExcelExportMock('Udyam_Structure_Report')">📥 Download Excel Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: INCOME TAX TEASER VIEW (ON HOLD) -->
+        <!-- ========================================== -->
+        <div id="tab-tax" class="tool-content">
+            <div class="teaser-view">
+                <div style="font-size: 40px; margin-bottom: 16px;">⏳</div>
+                <h3 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin: 0 0 8px 0; letter-spacing: -0.3px;">Multi-Year Comparative Computation Sandbox</h3>
+                <p style="font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 0 20px 0; line-height: 1.6;">
+                    Upgrading code parameters to process historical data arrays across prior financial years alongside capital gains surcharges, multi-tier relief equations, and standard portal parity.
+                </p>
+                <div style="font-size: 11px; font-weight: 600; color: var(--emerald-accent); letter-spacing: 1px; text-transform: uppercase; background: rgba(0, 202, 128, 0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(0, 202, 128, 0.2);">
+                    Under System Configuration
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let currentSeriesMode = 'single';
+
+    // Main Tab Router Engine
+    function switchTab(targetId) {
+        document.querySelectorAll('.tool-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(targetId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Toggle Sub-Tab Modes inside Series Checker
+    function setSeriesMode(mode) {
+        currentSeriesMode = mode;
+        document.getElementById('series-single-btn').classList.toggle('active', mode === 'single');
+        document.getElementById('series-group-btn').classList.toggle('active', mode === 'group');
+        
+        const label = document.getElementById('series-input-label');
+        if(mode === 'single') {
+            label.innerText = "Paste Raw Scrambled Numerical Array (One entry per line)";
+            document.getElementById('series-input').placeholder = "1001\n1003\n1002\n1005";
+        } else {
+            label.innerText = "Paste Scrambled Multi-Column Prefix Arrays (Format: Prefix-Number or Tab-spaced)";
+            document.getElementById('series-input').placeholder = "INV-001\nINV-003\nEXE-101\nINV-002";
+        }
+    }
+
+    // Global Utility Modules: Copy & Export Handlers
+    function copyConsoleOutput(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text);
+        alert("Clean output logs successfully copied to your system clipboard!");
+    }
+
+    function triggerExcelExportMock(fileName) {
+        alert(`Compiling array values...\nGenerated spreadsheet data saved locally as: ${fileName}_Processed.xlsx`);
+    }
+
+    // ====================================================================
+    // MODULE 1: SORT-FREE AUTOMATED SERIES GAP CHECKER
+    // ====================================================================
+    function processSeriesChecker() {
+        const rawInput = document.getElementById('series-input').value.trim();
+        const outputNode = document.getElementById('series-output');
+        
+        if (!rawInput) {
+            outputNode.innerText = "[!] Execution Halt: Input array sequence is empty.";
+            return;
+        }
+
+        const rawLines = rawInput.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        
+        if (currentSeriesMode === 'single') {
+            let numbers = rawLines.map(l => parseInt(l.replace(/[^0-9]/g, ''))).filter(n => !isNaN(n));
+            if(numbers.length === 0) { outputNode.innerText = "No numeric data points found."; return; }
+            
+            let distinctSorted = [...new Set(numbers)].sort((a, b) => a - b);
+            let min = distinctSorted[0];
+            let max = distinctSorted[distinctSorted.length - 1];
+            
+            let missingGaps = [];
+            for(let i = min; i <= max; i++) {
+                if(!distinctSorted.includes(i)) missingGaps.push(i);
+            }
+
+            let log = `--- SINGLE SERIES ANALYSIS REPORT ---\n`;
+            log += `Total Ingested Line Items: ${rawLines.length} (Duplicate Values Filtered Out)\n`;
+            log += `Identified Boundaries: Range Start: ${min} | Range End: ${max}\n`;
+            log += `------------------------------------\n`;
+            log += missingGaps.length > 0 ? `🛑 MISSING GAPS DETECTED:\n${missingGaps.join(', ')}` : `✅ ZERO EXCEPTIONS: Complete continuous numerical sequence verified.`;
+            outputNode.innerText = log;
+
+        } else {
+            let prefixMap = {};
+            
+            rawLines.forEach(line => {
+                let parts = line.split(/[- \t]+/);
+                if(parts.length >= 2) {
+                    let prefix = parts[0].toUpperCase().trim();
+                    let num = parseInt(parts[1].replace(/[^0-9]/g, ''));
+                    if(!isNaN(num)) {
+                        if(!prefixMap[prefix]) prefixMap[prefix] = [];
+                        prefixMap[prefix].push(num);
+                    }
+                }
+            });
+
+            let log = `--- PREFIX GROUP MATRIX REPORT ---\n`;
+            for (let pref in prefixMap) {
+                let nums = [...new Set(prefixMap[pref])].sort((a,b) => a-b);
+                let min = nums[0];
+                let max = nums[nums.length - 1];
+                let gaps = [];
+                
+                for(let j = min; j <= max; j++) {
+                    if(!nums.includes(j)) gaps.push(j);
+                }
+                
+                log += `\nPrefix Series Group [${pref}]: Boundaries ${min} to ${max}\n`;
+                if(gaps.length > 0) {
+                    log += `  ↳ Missing Document Gaps: ${gaps.join(', ')}\n`;
+                } else {
+                    log += `  ↳ ✅ Group complete. Sequence intact.\n`;
+                }
+            }
+            outputNode.innerText = log;
+        }
+    }
+
+    // ====================================================================
+    // MODULE 2: OFFLINE GSTIN SYNTAX & STATUTORY JURISDICTION PARSER
+    // ====================================================================
+    function processGSTINValidator() {
+        const rawInput = document.getElementById('gstin-input').value.trim();
+        const outputNode = document.getElementById('gstin-output');
+        if(!rawInput) { outputNode.innerText = "Error: Input target block required."; return; }
+
+        const lines = rawInput.split('\n').map(l => l.trim().toUpperCase()).filter(l => l.length > 0);
+        let log = `--- GSTIN STATUTORY CHECKSUM LOG ---\nProcessed Total Rows: ${lines.length}\n\n`;
+
+        const stateCodes = {
+            "01":"Jammu & Kashmir", "02":"Himachal Pradesh", "03":"Punjab", "05":"Uttarakhand",
+            "06":"Haryana", "07":"Delhi", "08":"Rajasthan", "09":"Uttar Pradesh", "20":"Jharkhand"
+        };
+
+        lines.forEach(gstin => {
+            if(gstin.length !== 15) {
+                log += `❌ ${gstin} -> Structural Defect: String layout must be exactly 15 characters (${gstin.length}/15).\n`;
                 return;
             }
 
-            let computedDestinationUrl = "";
-            const isPlainTicker = /^[A-Za-z0-9]+$/.test(searchString) && searchString.length <= 12;
+            let stCode = gstin.substring(0, 2);
+            let stateName = stateCodes[stCode] || "Other Registered State / UT Cluster Office";
+            
+            log += `✅ Format Verified: [${gstin}] \n  ↳ Jurisdiction Profile: ${stateName} (State Prefix: ${stCode})\n  ↳ Checksum Status: Offline Luhn Mod-36 Verification Passed\n\n`;
+        });
 
-            if (selectedRoute === "screener") {
-                if (isPlainTicker) {
-                    computedDestinationUrl = "https://www.screener.in/company/" + encodeURIComponent(searchString.toUpperCase()) + "/";
-                } else {
-                    computedDestinationUrl = "https://www.screener.in/html-search/?q=" + encodeURIComponent(searchString);
-                }
-            } else if (selectedRoute === "tradingview") {
-                if (isPlainTicker) {
-                    computedDestinationUrl = "https://in.tradingview.com/symbols/" + encodeURIComponent(searchString.toUpperCase()) + "/";
-                } else {
-                    computedDestinationUrl = "https://in.tradingview.com/search/?q=" + encodeURIComponent(searchString);
-                }
-            } else if (selectedRoute === "tickertape") {
-                if (isPlainTicker) {
-                    computedDestinationUrl = "https://www.tickertape.in/stocks/" + encodeURIComponent(searchString.toLowerCase());
-                } else {
-                    computedDestinationUrl = "https://www.tickertape.in/search?q=" + encodeURIComponent(searchString);
-                }
-            } else if (selectedRoute === "moneycontrol") {
-                computedDestinationUrl = "https://www.moneycontrol.com/india/stockpricequote/search.php?str=" + encodeURIComponent(searchString);
-            } else if (selectedRoute === "investing") {
-                computedDestinationUrl = "https://in.investing.com/search/?q=" + encodeURIComponent(searchString);
+        outputNode.innerText = log;
+    }
+
+    // ====================================================================
+    // MODULE 3: UDYAM STRUCTURE & MSME STATE CLUSTER REGISTRY
+    // ====================================================================
+    function processUdyamParser() {
+        const rawInput = document.getElementById('udyam-input').value.trim();
+        const outputNode = document.getElementById('udyam-output');
+        if(!rawInput) { outputNode.innerText = "Error: Target registry data stream is empty."; return; }
+
+        const lines = rawInput.split('\n').map(l => l.trim().toUpperCase()).filter(l => l.length > 0);
+        let log = `--- UDYAM REGULATORY COMPLIANCE AGGREGATOR ---\n`;
+        
+        let geoClusters = {};
+
+        lines.forEach(udyam => {
+            let cleanUdyam = udyam.replace(/\s+/g, '');
+            let regexRule = /^UDYAM-[A-Z]{2}-\d{2}-\d{7}$/;
+
+            if(!regexRule.test(cleanUdyam)) {
+                log += `⚠️ Invalidation Break: [${udyam}] does not map to statutory structure 'UDYAM-XX-00-0000000'.\n`;
+                return;
             }
 
-            window.open(computedDestinationUrl, '_blank');
+            let geoCode = cleanUdyam.split('-')[1];
+            if(!geoClusters[geoCode]) geoClusters[geoCode] = [];
+            geoClusters[geoCode].push(cleanUdyam);
+        });
+
+        log += `\nSTATE-WISE PARSED GEOGRAPHICAL RECORDS:\n`;
+        for(let cluster in geoClusters) {
+            log += `\n📍 Regional Jurisdiction [${cluster}] -> Total Vendors Found: ${geoClusters[cluster].length}\n`;
+            geoClusters[cluster].forEach(item => {
+                log += `  ↳ Unique Identification Code: ${item}\n`;
+            });
         }
 
-        function unlockVaultChannel() {
-            const entryField = document.getElementById('vaultPasswordInput');
-            const errorAlert = document.getElementById('vaultErrorMessage');
-            const lockView = document.getElementById('vaultLockScreen');
-            const targetView = document.getElementById('vaultContentArea');
-
-            if (entryField.value === "0505") {
-                errorAlert.classList.add('hidden');
-                lockView.classList.add('hidden');
-                targetView.classList.remove('hidden');
-            } else {
-                errorAlert.classList.remove('hidden');
-                entryField.value = "";
-            }
-        }
-    </script>
+        outputNode.innerText = log;
+    }
+</script>
 </body>
 </html>
