@@ -573,8 +573,24 @@
         });
 
         function launchAllRegistries() {
-            const registryDestinations = ["https://www.gst.gov.in/","https://www.incometax.gov.in/","https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html","https://www.nseindia.com/"];
-            registryDestinations.forEach(url => window.open(url, '_blank'));
+            const registryDestinations = [
+                "https://www.gst.gov.in/",
+                "https://www.incometax.gov.in/",
+                "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
+                "https://www.nseindia.com/",
+                "https://www.bseindia.com/",
+                "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+                "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes",
+                "https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1"
+            ];
+            const confirmed = confirm(
+                `This will open ${registryDestinations.length} portal tabs at once (GST, ITD, MCA21, NSE, BSE, RBI, SEBI, PIB).\n\nYour browser may block some as pop-ups on the first try — if so, click the pop-up blocked icon in your address bar and choose "Always allow" for this site, then click this button again.\n\nContinue?`
+            );
+            if (!confirmed) return;
+
+            registryDestinations.forEach((url, i) => {
+                setTimeout(() => window.open(url, '_blank'), i * 150);
+            });
         }
 
         function routeUniversalSearch() {
