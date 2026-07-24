@@ -17,6 +17,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r .github/scripts/requirements.txt
+          playwright install chromium --with-deps
 
       - name: Fetch live notice counts
         run: python .github/scripts/update_notices.py
@@ -25,6 +31,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add notices.json
-          git diff --staged --quiet || git commit -m "chore: auto-update notice counts"
+          git add public/notices.json
+          git diff --staged --quiet || git commit -m "chore: auto-update notice counts via Playwright"
           git push
