@@ -6,23 +6,9 @@
     <title>M Z_K | Workspace Control Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SheetJS CDN Engine for True Client-Side Excel Workbook Compilation -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <style>
-        html { scroll-behavior: smooth; }
-        .dark-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        
-        /* Translucent Green Glassmorphic Custom Theme Elements */
-        .glass-engine-panel { background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .terminal-box { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); font-family: 'Fira Code', 'Courier New', monospace; }
-        
-        .terminal-box::-webkit-scrollbar { width: 6px; }
-        .terminal-box::-webkit-scrollbar-track { background: transparent; }
-        .terminal-box::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-        .terminal-box::-webkit-scrollbar-thumb:hover { background: rgba(0, 202, 128, 0.3); }
-
-        .travel-tab-btn.active { border-bottom: 2px solid #00ca80; color: #00ca80; font-weight: 600; }
-    </style>
+    <!-- Linked Custom CSS -->
+    <link rel="stylesheet" href="./src/css/globals.css">
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between">
 
@@ -60,7 +46,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-10 w-full space-y-12">
         
-        <!-- CONTROL CENTER (8-CARD BALANCED MATRIX) -->
+        <!-- CONTROL CENTER -->
         <section id="control-center" class="dark-card rounded-2xl p-6 shadow-xl">
             <div class="mb-6 border-b border-slate-800 pb-4">
                 <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
@@ -71,13 +57,14 @@
             </div>
 
             <div class="mb-6">
-                <button onclick="launchAllRegistries()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-teal-600/20 text-center tracking-wide text-sm transition-all flex items-center justify-center gap-2">
+                <button id="btn-launch-registries" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-teal-600/20 text-center tracking-wide text-sm transition-all flex items-center justify-center gap-2">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Open All Tabs at Once
                 </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <!-- Portal Cards -->
+                <div id="gst-notice" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-gst" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -87,11 +74,11 @@
                         <p class="text-xs text-slate-300 mt-1">Returns filing matrix and operational compliance logs.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.gst.gov.in/" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="itd-notice" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-itd" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -101,11 +88,11 @@
                         <p class="text-xs text-slate-300 mt-1">Statutory processing, taxpayer profile monitoring and returns.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.incometax.gov.in/" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="mca21-card" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-mca21" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -115,11 +102,11 @@
                         <p class="text-xs text-slate-300 mt-1">Company filings, director master records, and ROC logs.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="nse-notice" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-nse" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -129,11 +116,11 @@
                         <p class="text-xs text-slate-300 mt-1">Official National Stock Exchange corporate portal and market summary logs.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.nseindia.com/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.nseindia.com/" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="bse-notice" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-bse" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -143,7 +130,7 @@
                         <p class="text-xs text-slate-300 mt-1">Official Bombay Stock Exchange disclosures, notices, and corporate actions.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.bseindia.com/" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.bseindia.com/" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
@@ -157,7 +144,7 @@
                         <p class="text-xs text-slate-300 mt-1">Master circulars, banking regulations, operational mandates.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
@@ -171,11 +158,11 @@
                         <p class="text-xs text-slate-300 mt-1">Legal regulations, board circulars, compliance parameters.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="card-pib" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                         <span id="notice-pib" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>                            <i class="fa-solid fa-newspaper text-slate-500"></i>
@@ -184,7 +171,7 @@
                         <p class="text-xs text-slate-300 mt-1">Central government cabinet communiqués, policy rollouts, and media briefs.</p>
                     </div>
                     <div class="mt-4 pt-2 border-t border-slate-700/50">
-                        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" target="_blank" class="text-xs text-center block w-full bg-slate-700 hover:bg-slate-600 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
+                        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" target="_blank" class="text-xs text-center block w-full bg-teal-600 hover:bg-teal-500 py-2 rounded font-semibold tracking-wide transition-colors">Visit Portal</a>
                     </div>
                 </div>
             </div>
@@ -202,29 +189,29 @@
                 <span class="text-[10px] font-bold tracking-widest uppercase bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-md border border-emerald-500/20">Client Clipboard Secure</span>
             </div>
 
-            <!-- Horizontal Sub-Tabs Row Selection Header -->
+            <!-- Horizontal Sub-Tabs -->
             <div class="flex flex-wrap gap-2 border-b border-white/5 pb-3 mb-6">
-                <button id="btn-tab-series" onclick="switchEngineTab('pane-series')" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-emerald-400 text-slate-950 font-bold transition-all">1. Series Checker</button>
-                <button id="btn-tab-gstin" onclick="switchEngineTab('pane-gstin')" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all">2. GSTIN Validator</button>
-                <button id="btn-tab-udyam" onclick="switchEngineTab('pane-udyam')" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all">3. Udyam Parser</button>
+                <button id="btn-tab-series" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-emerald-400 text-slate-950 font-bold transition-all">1. Series Checker</button>
+                <button id="btn-tab-gstin" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all">2. GSTIN Validator</button>
+                <button id="btn-tab-udyam" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all">3. Udyam Parser</button>
             </div>
 
-            <!-- SUB-TAB 1: DOCUMENT CONTEXT RUNTIME SERIES CHECKER -->
+            <!-- SUB-TAB 1 -->
             <div id="pane-series" class="engine-content-pane block">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="pane-input-stack space-y-4">
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Target Processing Layout</label>
                             <div class="engine-toggle-wrap bg-slate-950/40 border border-white/10 p-1 rounded-lg flex gap-1 w-fit">
-                                <button id="tg-series-single" onclick="setLocalSeriesMode('single')" class="text-[11px] font-bold px-3 py-1.5 rounded-md bg-white/10 text-white transition-all">Single Continuous Mode</button>
-                                <button id="tg-series-group" onclick="setLocalSeriesMode('group')" class="text-[11px] font-bold px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition-all">Grouped 17-Prefix Initials Mode</button>
+                                <button id="tg-series-single" class="text-[11px] font-bold px-3 py-1.5 rounded-md bg-white/10 text-white transition-all">Single Continuous Mode</button>
+                                <button id="tg-series-group" class="text-[11px] font-bold px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition-all">Grouped 17-Prefix Initials Mode</button>
                             </div>
                         </div>
                         <div class="space-y-2">
                             <label id="lbl-series-box" class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Paste Raw Scrambled Numerical Array (One per line)</label>
                             <textarea id="input-series-raw" rows="6" class="w-full bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-100 font-mono focus:outline-none focus:border-emerald-400" placeholder="1001&#10;1003&#10;1002&#10;1005"></textarea>
                         </div>
-                        <button onclick="executeSeriesEngineAnalysis()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Execute Numerical Scan</button>
+                        <button id="btn-exec-series" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Execute Numerical Scan</button>
                     </div>
                     <div class="pane-output-stack flex flex-col justify-between">
                         <div class="space-y-2">
@@ -232,14 +219,14 @@
                             <div id="terminal-series" class="terminal-box h-52 rounded-xl p-4 text-xs text-slate-300 overflow-y-auto">Engine standing by... Run execution matrix.</div>
                         </div>
                         <div class="flex gap-2 mt-3">
-                            <button onclick="copyTerminalLogs('terminal-series')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
-                            <button onclick="triggerExcelReportDownload('Series_Checker_Gaps')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
+                            <button id="btn-copy-series" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
+                            <button id="btn-dl-series" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SUB-TAB 2: BULK GSTIN SYNTAX AND CHECKSUM ENGINE -->
+            <!-- SUB-TAB 2 -->
             <div id="pane-gstin" class="engine-content-pane hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="pane-input-stack space-y-4">
@@ -247,7 +234,7 @@
                             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Paste Raw Vendor GSTIN Matrix Block</label>
                             <textarea id="input-gstin-raw" rows="6" class="w-full bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-100 font-mono focus:outline-none focus:border-emerald-400" placeholder="Enter alphanumeric GSTINs"></textarea>
                         </div>
-                        <button onclick="executeGSTINEngineAnalysis()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Run Checksum Validation</button>
+                        <button id="btn-exec-gstin" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Run Checksum Validation</button>
                     </div>
                     <div class="pane-output-stack flex flex-col justify-between">
                         <div class="space-y-2">
@@ -255,14 +242,14 @@
                             <div id="terminal-gstin" class="terminal-box h-52 rounded-xl p-4 text-xs text-slate-300 overflow-y-auto">Awaiting data input payload...</div>
                         </div>
                         <div class="flex gap-2 mt-3">
-                            <button onclick="copyTerminalLogs('terminal-gstin')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
-                            <button onclick="triggerExcelReportDownload('GSTIN_Validation_Report')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
+                            <button id="btn-copy-gstin" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
+                            <button id="btn-dl-gstin" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SUB-TAB 3: COMPLIANCE REGISTRY UDYAM STRUCTURE PARSER -->
+            <!-- SUB-TAB 3 -->
             <div id="pane-udyam" class="engine-content-pane hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="pane-input-stack space-y-4">
@@ -270,7 +257,7 @@
                             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Paste Raw MSME Udyam Numbers</label>
                             <textarea id="input-udyam-raw" rows="8" class="w-full bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-100 font-mono focus:outline-none focus:border-emerald-400" placeholder="Expected Statutory Rule format: UDYAM-XX-00-0000000"></textarea>
                         </div>
-                        <button onclick="executeUdyamEngineParser()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Isolate State Metrics</button>
+                        <button id="btn-exec-udyam" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl transition-all">Isolate State Metrics</button>
                     </div>
                     <div class="pane-output-stack flex flex-col justify-between">
                         <div class="space-y-2">
@@ -278,15 +265,15 @@
                             <div id="terminal-udyam" class="terminal-box h-52 rounded-xl p-4 text-xs text-slate-300 overflow-y-auto">Awaiting MSME register pipeline...</div>
                         </div>
                         <div class="flex gap-2 mt-3">
-                            <button onclick="copyTerminalLogs('terminal-udyam')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
-                            <button onclick="triggerExcelReportDownload('Udyam_Parser_Report')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
+                            <button id="btn-copy-udyam" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
+                            <button id="btn-dl-udyam" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 7 - AUTOMATED TRAVEL EXPENSE PROCESSOR -->
+        <!-- AUTOMATED TRAVEL EXPENSE PROCESSOR -->
         <section id="travel-processor" class="glass-engine-panel rounded-2xl p-6 shadow-2xl space-y-6">
             <div class="border-b border-white/10 pb-4">
                 <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -295,7 +282,6 @@
                 <p class="text-xs text-slate-400 mt-1">Local isolated extraction matrix pairing claim lines strictly to the individual head of the person who paid.</p>
             </div>
 
-            <!-- Setup Parameter Headers Matrix (Completely Blank with Placeholders) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-950/30 p-4 rounded-xl border border-white/5">
                 <div>
                     <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Client Identity Name</label>
@@ -311,7 +297,7 @@
                 </div>
                 <div>
                     <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Number of Team Members</label>
-                    <select id="travel-team-count" onchange="adjustTeamInputSize()" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-300 focus:outline-none focus:border-emerald-400">
+                    <select id="travel-team-count" class="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-300 focus:outline-none focus:border-emerald-400">
                         <option value="0">Select Count...</option>
                         <option value="1">1 Person</option>
                         <option value="2">2 Persons</option>
@@ -323,37 +309,29 @@
                 </div>
             </div>
 
-            <!-- Dynamic Team Name Fields Generation Area -->
-            <div id="travel-team-names-fields-container" class="grid grid-cols-2 md:grid-cols-6 gap-3 hidden">
-                <!-- Inputs injected dynamically based on count choice -->
-            </div>
+            <div id="travel-team-names-fields-container" class="grid grid-cols-2 md:grid-cols-6 gap-3 hidden"></div>
 
             <div id="btn-init-container" class="hidden text-right">
-                <button onclick="initializeDynamicTeamWorkspace()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg transition-all">Initialize Workspace Tabs</button>
+                <button id="btn-init-workspace" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg transition-all">Initialize Workspace Tabs</button>
             </div>
 
-            <!-- Workspace Live Preview Workspace (Visible only after initialization) -->
             <div id="travel-live-preview-box" class="hidden space-y-4 pt-4 border-t border-white/5">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-white/10 pb-3 gap-4">
-                    <div id="travel-person-tabs-row" class="flex flex-wrap gap-1">
-                        <!-- Dynamic Tabs generated here -->
-                    </div>
+                    <div id="travel-person-tabs-row" class="flex flex-wrap gap-1"></div>
                     <div class="flex gap-2 w-full md:w-auto">
-                        <button onclick="copyPreFilledTableMatrix()" class="flex-1 md:flex-none bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 font-bold text-xs px-4 py-2 rounded-lg transition-all">📋 Copy Claimant Table</button>
-                        <button onclick="triggerActualExcelWorkbookDownload()" class="flex-1 md:flex-none bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all">📥 Download Pre-Filled Excel</button>
+                        <button id="btn-copy-matrix" class="flex-1 md:flex-none bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 font-bold text-xs px-4 py-2 rounded-lg transition-all">📋 Copy Claimant Table</button>
+                        <button id="btn-dl-matrix" class="flex-1 md:flex-none bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all">📥 Download Pre-Filled Excel</button>
                     </div>
                 </div>
 
-                <!-- Isolated Tab Processing Environment -->
                 <div class="bg-slate-950/50 p-4 rounded-xl border border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 border border-dashed border-white/10 p-4 rounded-lg text-center relative bg-slate-900/50">
-                        <input type="file" multiple class="absolute inset-0 opacity-0 cursor-pointer" onchange="processLocalOcrUploadStream(this)">
+                        <input type="file" multiple id="upload-ocr" class="absolute inset-0 opacity-0 cursor-pointer">
                         <span class="text-xs text-slate-300 block font-medium">Upload <span id="uploader-current-name" class="text-emerald-400 font-bold"></span>'s Invoices Only</span>
                     </div>
-                    <button onclick="addNewManualExpenseRow()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-3 px-4 rounded-lg border border-white/10 transition-all">+ Add Entry Line</button>
+                    <button id="btn-add-expense" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-3 px-4 rounded-lg border border-white/10 transition-all">+ Add Entry Line</button>
                 </div>
 
-                <!-- Spreadsheet Canvas Preview Grid -->
                 <div class="bg-slate-950/40 border border-white/10 rounded-xl p-5 space-y-6 overflow-x-auto">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-300">
                         <div class="space-y-2 border-r border-white/5 pr-4">
@@ -388,14 +366,13 @@
                             </tr>
                         </thead>
                         <tbody id="xl-rows-body-preview" class="divide-y divide-white/5 font-medium text-slate-200">
-                            <!-- Dynamic sorted row records injected here -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- UNIVERSAL GLOBAL STOCK TRACKER MODULE -->
+        <!-- STOCK TRACKER -->
         <section id="stock-tracker" class="dark-card rounded-2xl p-6 shadow-xl">
             <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2 mb-6 border-b border-slate-800 pb-4">
                 <i class="fa-solid fa-magnifying-glass-chart text-teal-400"></i> Universal Global Stock Tracker
@@ -404,7 +381,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Enter Stock Name or Ticker</label>
-                        <input type="text" id="globalTickerInput" onkeydown="if(event.key === 'Enter') routeUniversalSearch()" placeholder="Search any stock (e.g. TCS, Reliance, Wipro)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
+                        <input type="text" id="globalTickerInput" placeholder="Search any stock (e.g. TCS, Reliance, Wipro)" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide text-slate-100 focus:outline-none focus:border-teal-400">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-amber-500/90 tracking-wider uppercase block mb-2">Select Chosen Market Engine Route</label>
@@ -414,11 +391,11 @@
                         </select>
                     </div>
                 </div>
-                <button onclick="routeUniversalSearch()" class="mt-4 w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 px-4 rounded-lg text-sm transition-all"><i class="fa-solid fa-magnifying-glass mr-1"></i> Search</button>
+                <button id="btn-search-stock" class="mt-4 w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 px-4 rounded-lg text-sm transition-all"><i class="fa-solid fa-magnifying-glass mr-1"></i> Search</button>
             </div>
         </section>
 
-        <!-- CORPORATE CASE STUDIES PORTFOLIO MATRIX -->
+        <!-- CASE STUDIES -->
         <section id="case-studies" class="glass-engine-panel rounded-2xl p-6 shadow-2xl space-y-6">
             <div class="border-b border-white/10 pb-4">
                 <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -428,7 +405,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Case Study 1: Yes Bank Crisis -->
                 <div class="bg-slate-950/40 border border-white/10 rounded-xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition-all group">
                     <div>
                         <div class="flex justify-between items-start mb-3">
@@ -436,20 +412,14 @@
                             <i class="fa-solid fa-building-columns text-slate-500 group-hover:text-rose-400 transition-colors"></i>
                         </div>
                         <h3 class="text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">YES BANK MAXIMUM: Forensic Crisis Analysis</h3>
-                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">A strategic investigation into corporate governance lapses, evergreening of loans to high-risk stressed entities, window-dressing of books, and the structural Modus Operandi leading to the ₹3,277 Cr NPA divergence gap.</p>
-                        
-                        <div class="mt-4 space-y-1.5 text-xs text-slate-300 bg-slate-900/50 p-3 rounded-lg border border-white/5 font-mono">
-                            <div>• Author Head: Aditya Gupta & Md Zaid Kamran</div>
-                            <div>• Resolution Focus: RBI Vigilance, Diversification Maxims</div>
-                        </div>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">A strategic investigation into corporate governance lapses...</p>
                     </div>
                     <div class="mt-5 pt-3 border-t border-white/5 flex gap-2">
-                        <button onclick="toggleCasePreviewBox('preview-yes-bank')" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold py-2 rounded-lg transition-all">👁️ View Summary</button>
-                        <button onclick="alert('Downloading full presentation deck asset: YES_BANK_CRISIS_ANALYSIS.pdf')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold px-4 py-2 rounded-lg transition-all"><i class="fa-solid fa-download"></i></button>
+                        <button id="btn-preview-yes" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold py-2 rounded-lg transition-all">👁️ View Summary</button>
+                        <button id="btn-dl-yes" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold px-4 py-2 rounded-lg transition-all"><i class="fa-solid fa-download"></i></button>
                     </div>
                 </div>
 
-                <!-- Case Study 2: Micromax Turnaround -->
                 <div class="bg-slate-950/40 border border-white/10 rounded-xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition-all group">
                     <div>
                         <div class="flex justify-between items-start mb-3">
@@ -457,37 +427,28 @@
                             <i class="fa-solid fa-mobile-screen-button text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
                         </div>
                         <h3 class="text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">MICROMAX 2.0: Structural Turnaround Playbook</h3>
-                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Strategic growth evaluation of a low-cost Indian feature phone pioneer. Analyzing market share disruptions, after-sales service optimization parameters, UI/UX refinement tracks, and modular form factors required for competitive revival.</p>
-                        
-                        <div class="mt-4 space-y-1.5 text-xs text-slate-300 bg-slate-900/50 p-3 rounded-lg border border-white/5 font-mono">
-                            <div>• Operational Core: Customer-Centric Ecosystem</div>
-                            <div>• Expansion Target: Competitive Tech Improvisation</div>
-                        </div>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Strategic growth evaluation of a low-cost Indian feature phone pioneer...</p>
                     </div>
                     <div class="mt-5 pt-3 border-t border-white/5 flex gap-2">
-                        <button onclick="toggleCasePreviewBox('preview-micromax')" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold py-2 rounded-lg transition-all">👁️ View Summary</button>
-                        <button onclick="alert('Downloading strategic presentation deck asset: MICROMAX_2_0_PLAYbook.pdf')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold px-4 py-2 rounded-lg transition-all"><i class="fa-solid fa-download"></i></button>
+                        <button id="btn-preview-micro" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold py-2 rounded-lg transition-all">👁️ View Summary</button>
+                        <button id="btn-dl-micro" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold px-4 py-2 rounded-lg transition-all"><i class="fa-solid fa-download"></i></button>
                     </div>
                 </div>
             </div>
 
             <!-- Inline Viewer Slide Panels -->
             <div id="preview-yes-bank" class="hidden bg-slate-950/40 border border-white/10 rounded-xl p-5 font-mono text-xs text-slate-300 space-y-4">
-                <div class="flex justify-between items-center border-b border-white/10 pb-2"><span class="text-rose-400 font-bold">YES BANK SCAM BRIEF</span><button onclick="toggleCasePreviewBox('preview-yes-bank')" class="text-slate-400 hover:text-white">✕</button></div>
-                <div><span class="text-white font-bold">[Unauthorized Practices]:</span> High-risk corporate lending routines at elevated interest rates + money laundering lines processed via top-tier management.</div>
-                <div><span class="text-white font-bold">[Regulatory Violation]:</span> Hidden Divergence gap of ₹3,277 Crores tracked between authentic internal NPAs and books presented to oversight boards.</div>
-                <div><span class="text-white font-bold">[Remediation Matrix]:</span> Do not keep all financial assets inside a single basket. Institutional deposit protective limits are structured up to ₹500,000 via insurance frameworks. SBI acquired a 49% operational stake injection for ₹2,450 Crores.</div>
+                <div class="flex justify-between items-center border-b border-white/10 pb-2"><span class="text-rose-400 font-bold">YES BANK SCAM BRIEF</span><button id="btn-close-yes" class="text-slate-400 hover:text-white">✕</button></div>
+                <div><span class="text-white font-bold">[Unauthorized Practices]:</span> High-risk corporate lending routines...</div>
             </div>
 
             <div id="preview-micromax" class="hidden bg-slate-950/40 border border-white/10 rounded-xl p-5 font-mono text-xs text-slate-300 space-y-4">
-                <div class="flex justify-between items-center border-b border-white/10 pb-2"><span class="text-cyan-400 font-bold">MICROMAX 2.0 PLAYBOOK BRIEF</span><button onclick="toggleCasePreviewBox('preview-micromax')" class="text-slate-400 hover:text-white">✕</button></div>
-                <div><span class="text-white font-bold">[Historical Background]:</span> Built in 2000 as an IT embedded system outfit; captures dominant tier-3 low-cost feature markets in 2008-2010 via 30-day battery devices and dual-SIM innovations.</div>
-                <div><span class="text-white font-bold">[Core Vulnerabilities]:</span> Lapses inside continuous software delivery, after-sales diagnostic ecosystems, clean system wrappers, and structural competitive modular innovations.</div>
-                <div><span class="text-white font-bold">[Recommended Blueprint]:</span> Accelerate customer-centric service approaches, deploy regular system security patches, manage competitive price entries, and run synchronized digital marketing runs to scale market re-awareness.</div>
+                <div class="flex justify-between items-center border-b border-white/10 pb-2"><span class="text-cyan-400 font-bold">MICROMAX 2.0 PLAYBOOK BRIEF</span><button id="btn-close-micro" class="text-slate-400 hover:text-white">✕</button></div>
+                <div><span class="text-white font-bold">[Historical Background]:</span> Built in 2000 as an IT embedded system outfit...</div>
             </div>
         </section>
 
-        <!-- PASSWORD ACCESS RESTRICTED SECURE INSIGHTS VAULT -->
+        <!-- VAULT -->
         <section id="vault" class="dark-card rounded-2xl p-6 shadow-xl">
             <div class="mb-6 border-b border-slate-800 pb-4">
                 <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
@@ -500,637 +461,21 @@
                 </div>
                 <div class="flex gap-2 max-w-sm w-full">
                     <input type="password" id="vaultPasswordInput" placeholder="Enter 4-Digit Key Code" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-center text-slate-100">
-                    <button onclick="unlockVaultChannel()" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">Verify</button>
+                    <button id="btn-unlock-vault" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">Verify</button>
                 </div>
             </div>
         </section>
-
     </main>
-
-    <!-- CONTACT GATEWAY CHANNEL GRID CARD MATRIX -->
-    <section class="max-w-7xl mx-auto px-4 pb-12 w-full space-y-6">
-        <section id="contact" class="dark-card rounded-2xl p-8 shadow-xl">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                <div class="lg:col-span-1">
-                    <h2 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-100 leading-none">
-                        Let's continue the <br>
-                        <span class="text-amber-400 italic font-serif">conversation.</span>
-                    </h2>
-                    <p class="text-slate-400 text-sm mt-4 leading-relaxed">
-                        Whether it's a specific observation on corporate internal controls, macro business trends, current affairs, or sharing notes on spreadsheet models—reach out.
-                    </p>
-                </div>
-                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="https://linkedin.com" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-brands fa-linkedin text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">LinkedIn Profile</h4>
-                                <p class="text-xs text-slate-400">Connect @md-zaid-kamran</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                    
-                    <a href="https://instagram.com/zaid_kamran05" target="_blank" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-brands fa-instagram text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">Instagram Handle</h4>
-                                <p class="text-xs text-slate-400">Personal space @zaid_kamran05</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-
-                    <a href="mailto:mdzaidkamran05@gmail.com" class="bg-slate-800/40 border border-slate-700/60 hover:border-teal-400 p-4 rounded-xl flex justify-between items-center transition-all group md:col-span-2">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-envelope text-xl text-slate-400 group-hover:text-teal-400"></i>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-200">Email Directly</h4>
-                                <p class="text-xs text-slate-400">mdzaidkamran05@gmail.com</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-teal-400 transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </section>
-
+    
     <footer class="bg-[#0b1329] border-t border-slate-800/80 py-8 px-6 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div class="space-y-1.5">
                 <p class="text-sm font-medium tracking-wide text-slate-300 italic font-serif">"Work with hidden sincerity; let the value manifest on its own."</p>
-                <p class="text-xs font-semibold text-slate-400 flex items-center gap-2">— ZAiD <span class="bg-teal-500/10 text-teal-400 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-500/20 tracking-wider">Alhamdulillah</span></p>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            const liveIds = { rbi: "notice-rbi", sebi: "notice-sebi" };
-            const staticIds = ["notice-gst", "notice-itd", "notice-mca21", "notice-nse", "notice-bse", "notice-pib"];
-
-            function flagAsNew(cardId) {
-                const card = document.getElementById(cardId);
-                if (!card) return;
-                card.classList.add("ring-2", "ring-rose-500", "animate-pulse");
-
-                const dot = document.createElement("span");
-                dot.className = "absolute -top-1.5 -right-1.5 flex h-3 w-3";
-                dot.innerHTML = `
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-600"></span>
-                `;
-                card.style.position = "relative";
-                card.appendChild(dot);
-            }
-
-            try {
-                const res = await fetch("notices.json", { cache: "no-store" });
-                const data = await res.json();
-
-                Object.entries(liveIds).forEach(([key, spanId]) => {
-                    const el = document.getElementById(spanId);
-                    if (!el) return;
-
-                    const count = data.counts[key];
-                    if (count === null || count === undefined) {
-                        el.textContent = "Live feed unavailable";
-                        return;
-                    }
-
-                    el.textContent = `${count} update${count === 1 ? "" : "s"} in last 72 hrs — live`;
-
-                    const storageKey = `lastSeenCount_${key}`;
-                    const lastSeen = localStorage.getItem(storageKey);
-
-                    if (lastSeen !== null && count > parseInt(lastSeen, 10)) {
-                        flagAsNew(`card-${key}`);
-                    }
-
-                    localStorage.setItem(storageKey, count);
-                });
-            } catch (e) {
-                Object.values(liveIds).forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.textContent = "Live feed unavailable";
-                });
-            }
-
-            // No real public feed exists for these portals — remove the badge
-            // rather than show fabricated data. "Visit Portal" still links live.
-            staticIds.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.remove();
-            });
-        });
-
-        function launchAllRegistries() {
-            const registryDestinations = [
-                "https://www.gst.gov.in/",
-                "https://www.incometax.gov.in/",
-                "https://www.mca.gov.in/content/mca/global/en/news-notifications/circulars.html",
-                "https://www.nseindia.com/",
-                "https://www.bseindia.com/",
-                "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
-                "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes",
-                "https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1"
-            ];
-
-            const confirmed = confirm(
-                `This will open ${registryDestinations.length} portal tabs at once (GST, ITD, MCA21, NSE, BSE, RBI, SEBI, PIB).\n\nIf your browser blocks some, click the pop-up blocked icon in your address bar and choose "Always allow" for this site — then click this button again.\n\nContinue?`
-            );
-            if (!confirmed) return;
-
-            let blockedCount = 0;
-            registryDestinations.forEach(url => {
-                const win = window.open(url, '_blank');
-                if (!win || win.closed || typeof win.closed === 'undefined') {
-                    blockedCount++;
-                }
-            });
-
-            if (blockedCount > 0) {
-                alert(`${blockedCount} tab(s) were blocked by your browser's pop-up blocker. Please allow pop-ups for this site (check your address bar) and click the button again.`);
-            }
-        }
-
-        function routeUniversalSearch() {
-            const searchString = document.getElementById('globalTickerInput').value.trim();
-            if (!searchString) return;
-            const engine = document.getElementById('marketEngineSelector').value;
-            const targetUrl = engine === 'tradingview'
-                ? "https://www.tradingview.com/symbols/NSE-" + encodeURIComponent(searchString.toUpperCase()) + "/"
-                : "https://www.screener.in/html-search/?q=" + encodeURIComponent(searchString);
-            window.open(targetUrl, '_blank');
-        }
-
-        function switchEngineTab(activePaneId) {
-            document.querySelectorAll('.engine-content-pane').forEach(pane => pane.classList.add('hidden'));
-            document.getElementById(activePaneId).classList.remove('hidden');
-
-            const tabButtonMap = { 'pane-series': 'btn-tab-series', 'pane-gstin': 'btn-tab-gstin', 'pane-udyam': 'btn-tab-udyam' };
-            Object.values(tabButtonMap).forEach(btnId => {
-                const btn = document.getElementById(btnId);
-                btn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all";
-            });
-            const activeBtn = document.getElementById(tabButtonMap[activePaneId]);
-            activeBtn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-emerald-400 text-slate-950 font-bold transition-all";
-        }
-
-        function toggleCasePreviewBox(targetId) {
-            const pane = document.getElementById(targetId);
-            if(pane.classList.contains('hidden')) {
-                pane.classList.remove('hidden');
-            } else {
-                pane.classList.add('hidden');
-            }
-        }
-
-        // ====================================================================
-        // AUDITTOOLS ENGINE: SERIES CHECKER (finds gaps/duplicates in a sequence)
-        // ====================================================================
-        let currentSeriesMode = 'single';
-        let lastSeriesResults = [];
-        let lastGstinResults = [];
-        let lastUdyamResults = [];
-
-        function setLocalSeriesMode(mode) {
-            currentSeriesMode = mode;
-            document.getElementById('tg-series-single').classList.toggle('bg-white/10', mode === 'single');
-            document.getElementById('tg-series-single').classList.toggle('text-white', mode === 'single');
-            document.getElementById('tg-series-single').classList.toggle('text-slate-400', mode !== 'single');
-            document.getElementById('tg-series-group').classList.toggle('bg-white/10', mode === 'group');
-            document.getElementById('tg-series-group').classList.toggle('text-white', mode === 'group');
-            document.getElementById('tg-series-group').classList.toggle('text-slate-400', mode !== 'group');
-            document.getElementById('lbl-series-box').innerText = mode === 'group'
-                ? 'Paste Raw Values (17-char prefix + trailing running number)'
-                : 'Paste Raw Scrambled Numerical Array (One per line)';
-        }
-
-        function executeSeriesEngineAnalysis() {
-            const raw = document.getElementById('input-series-raw').value;
-            const terminal = document.getElementById('terminal-series');
-            const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-
-            if (lines.length === 0) {
-                terminal.innerHTML = '<span class="text-rose-400">No data provided. Paste at least one value.</span>';
-                lastSeriesResults = [];
-                return;
-            }
-
-            if (currentSeriesMode === 'single') {
-                lastSeriesResults = analyzeNumericSeries(lines);
-                renderSeriesOutput(terminal, lastSeriesResults);
-            } else {
-                const groups = {};
-                lines.forEach(line => {
-                    const prefix = line.length > 17 ? line.slice(0, 17) : line.replace(/[0-9]+$/, '');
-                    const numPart = line.slice(prefix.length);
-                    if (!groups[prefix]) groups[prefix] = [];
-                    groups[prefix].push(numPart);
-                });
-                let combinedOutput = [];
-                Object.keys(groups).forEach(prefix => {
-                    const groupResult = analyzeNumericSeries(groups[prefix]);
-                    combinedOutput.push({ header: `Series [${prefix || '(no prefix)'}]:`, lines: groupResult });
-                });
-                lastSeriesResults = combinedOutput;
-                renderGroupedSeriesOutput(terminal, combinedOutput);
-            }
-        }
-
-        function analyzeNumericSeries(values) {
-            const nums = values.map(v => parseInt(v.replace(/[^0-9]/g, ''), 10)).filter(n => !isNaN(n));
-            if (nums.length === 0) return ['No valid numeric values found.'];
-
-            const sorted = [...new Set(nums)].sort((a, b) => a - b);
-            const duplicates = nums.filter((n, i) => nums.indexOf(n) !== i);
-            const missing = [];
-            for (let i = sorted[0]; i <= sorted[sorted.length - 1]; i++) {
-                if (!sorted.includes(i)) missing.push(i);
-            }
-
-            const output = [];
-            output.push(`Range: ${sorted[0]} → ${sorted[sorted.length - 1]}  (${sorted.length} unique of ${sorted[sorted.length - 1] - sorted[0] + 1} expected)`);
-            output.push(missing.length ? `Missing (${missing.length}): ${missing.join(', ')}` : 'No gaps detected.');
-            output.push([...new Set(duplicates)].length ? `Duplicates: ${[...new Set(duplicates)].join(', ')}` : 'No duplicates detected.');
-            return output;
-        }
-
-        function renderSeriesOutput(terminal, lines) {
-            terminal.innerHTML = lines.map(l =>
-                `<div class="${l.startsWith('Missing') || (l.startsWith('Duplicates') && !l.includes('No ')) ? 'text-amber-400' : 'text-slate-300'}">${l}</div>`
-            ).join('');
-        }
-
-        function renderGroupedSeriesOutput(terminal, groups) {
-            terminal.innerHTML = groups.map(g =>
-                `<div class="mb-3"><div class="text-emerald-400 font-bold">${g.header}</div>${g.lines.map(l => `<div class="pl-3 text-slate-300">${l}</div>`).join('')}</div>`
-            ).join('');
-        }
-
-        // ====================================================================
-        // AUDITTOOLS ENGINE: GSTIN VALIDATOR (format + Mod-36 checksum)
-        // ====================================================================
-        const GSTIN_CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        function computeGstinChecksum(gstin14) {
-            let factor = 2;
-            let sum = 0;
-            for (let i = gstin14.length - 1; i >= 0; i--) {
-                const codePoint = GSTIN_CHARSET.indexOf(gstin14[i]);
-                if (codePoint === -1) return null;
-                let product = codePoint * factor;
-                product = Math.floor(product / 36) + (product % 36);
-                sum += product;
-                factor = factor === 2 ? 1 : 2;
-            }
-            const checkDigit = (36 - (sum % 36)) % 36;
-            return GSTIN_CHARSET[checkDigit];
-        }
-
-        function executeGSTINEngineAnalysis() {
-            const raw = document.getElementById('input-gstin-raw').value;
-            const terminal = document.getElementById('terminal-gstin');
-            const lines = raw.split('\n').map(l => l.trim().toUpperCase()).filter(Boolean);
-
-            if (lines.length === 0) {
-                terminal.innerHTML = '<span class="text-rose-400">No GSTINs provided.</span>';
-                lastGstinResults = [];
-                return;
-            }
-
-            const formatRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
-            lastGstinResults = lines.map(gstin => {
-                if (gstin.length !== 15 || !formatRegex.test(gstin)) {
-                    return { gstin, status: 'INVALID FORMAT', ok: false };
-                }
-                const expectedCheck = computeGstinChecksum(gstin.slice(0, 14));
-                const ok = expectedCheck === gstin[14];
-                return { gstin, status: ok ? 'VALID' : `CHECKSUM FAIL (expected ${expectedCheck})`, ok };
-            });
-
-            terminal.innerHTML = lastGstinResults.map(r =>
-                `<div class="${r.ok ? 'text-emerald-400' : 'text-rose-400'}">${r.gstin} — ${r.status}</div>`
-            ).join('');
-        }
-
-        // ====================================================================
-        // AUDITTOOLS ENGINE: UDYAM PARSER (state code + registration breakdown)
-        // ====================================================================
-        const UDYAM_STATE_MAP = {
-            AN:"Andaman & Nicobar", AP:"Andhra Pradesh", AR:"Arunachal Pradesh", AS:"Assam", BR:"Bihar",
-            CH:"Chandigarh", CT:"Chhattisgarh", DN:"Dadra & Nagar Haveli and Daman & Diu", DL:"Delhi",
-            GA:"Goa", GJ:"Gujarat", HR:"Haryana", HP:"Himachal Pradesh", JK:"Jammu & Kashmir",
-            JH:"Jharkhand", KA:"Karnataka", KL:"Kerala", LA:"Ladakh", LD:"Lakshadweep",
-            MP:"Madhya Pradesh", MH:"Maharashtra", MN:"Manipur", ML:"Meghalaya", MZ:"Mizoram",
-            NL:"Nagaland", OR:"Odisha", PY:"Puducherry", PB:"Punjab", RJ:"Rajasthan",
-            SK:"Sikkim", TN:"Tamil Nadu", TS:"Telangana", TR:"Tripura", UP:"Uttar Pradesh",
-            UK:"Uttarakhand", WB:"West Bengal"
-        };
-
-        function executeUdyamEngineParser() {
-            const raw = document.getElementById('input-udyam-raw').value;
-            const terminal = document.getElementById('terminal-udyam');
-            const lines = raw.split('\n').map(l => l.trim().toUpperCase()).filter(Boolean);
-
-            if (lines.length === 0) {
-                terminal.innerHTML = '<span class="text-rose-400">No Udyam numbers provided.</span>';
-                lastUdyamResults = [];
-                return;
-            }
-
-            const udyamRegex = /^UDYAM-([A-Z]{2})-(\d{2})-(\d{7})$/;
-            lastUdyamResults = lines.map(code => {
-                const match = code.match(udyamRegex);
-                if (!match) return { code, status: 'INVALID FORMAT (expected UDYAM-XX-00-0000000)', ok: false };
-                const stateCode = match[1];
-                const stateName = UDYAM_STATE_MAP[stateCode];
-                if (!stateName) return { code, status: `UNKNOWN STATE CODE: ${stateCode}`, ok: false };
-                return { code, status: `${stateName} · District Code ${match[2]} · Reg #${match[3]}`, ok: true };
-            });
-
-            terminal.innerHTML = lastUdyamResults.map(r =>
-                `<div class="${r.ok ? 'text-emerald-400' : 'text-rose-400'}">${r.code} — ${r.status}</div>`
-            ).join('');
-        }
-
-        // ====================================================================
-        // SHARED HELPERS: COPY + EXCEL EXPORT FOR TERMINAL OUTPUTS
-        // ====================================================================
-        function copyTerminalLogs(terminalId) {
-            const text = document.getElementById(terminalId).innerText;
-            if (!text || text.includes('standing by') || text.includes('Awaiting')) {
-                alert('Nothing to copy yet — run the scan first.');
-                return;
-            }
-            navigator.clipboard.writeText(text);
-            alert('Copied to clipboard.');
-        }
-
-        function triggerExcelReportDownload(reportName) {
-            let rows = [["Result"]];
-            if (reportName.includes('Series') && lastSeriesResults.length) {
-                if (currentSeriesMode === 'single') {
-                    rows = [["Series Checker Output"], ...lastSeriesResults.map(l => [l])];
-                } else {
-                    rows = [["Group", "Result"]];
-                    lastSeriesResults.forEach(g => g.lines.forEach(l => rows.push([g.header, l])));
-                }
-            } else if (lastGstinResults.length) {
-                rows = [["GSTIN", "Status"], ...lastGstinResults.map(r => [r.gstin, r.status])];
-            } else if (lastUdyamResults.length) {
-                rows = [["Udyam Number", "Status"], ...lastUdyamResults.map(r => [r.code, r.status])];
-            } else {
-                alert('Nothing to export yet — run the scan first.');
-                return;
-            }
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.aoa_to_sheet(rows);
-            XLSX.utils.book_append_sheet(wb, ws, "Report");
-            XLSX.writeFile(wb, `${reportName}.xlsx`);
-        }
-
-        // ====================================================================
-        // INSIGHTS VAULT (client-side gate only — NOT real security, see notes)
-        // ====================================================================
-        function unlockVaultChannel() {
-            const pin = document.getElementById('vaultPasswordInput').value;
-            if (pin === '0005') {
-                document.getElementById('vaultLockScreen').innerHTML =
-                    '<p class="text-sm text-slate-300">Vault unlocked. Add your private notes/content here.</p>';
-            } else {
-                alert('Incorrect key code.');
-            }
-        }
-
-        // ====================================================================
-        // PROCESSING ENGINE BACKEND LAYER: INTERACTIVE REIMBURSEMENT RUNS
-        // ====================================================================
-        let teamWorkspaceDatabase = {};
-        let currentActiveClaimantProfile = "";
-
-        function adjustTeamInputSize() {
-            const count = parseInt(document.getElementById('travel-team-count').value) || 0;
-            const container = document.getElementById('travel-team-names-fields-container');
-            const initBtnWrap = document.getElementById('btn-init-container');
-            
-            container.innerHTML = "";
-            if(count === 0) {
-                container.classList.add('hidden');
-                initBtnWrap.classList.add('hidden');
-                return;
-            }
-            
-            container.classList.remove('hidden');
-            initBtnWrap.classList.remove('hidden');
-
-            for(let i = 1; i <= count; i++) {
-                const divNode = document.createElement('div');
-                divNode.className = "space-y-1";
-                divNode.innerHTML = `
-                    <label class="text-[10px] text-slate-400 font-bold block uppercase">Member ${i} Name</label>
-                    <input type="text" id="team-member-name-input-${i}" placeholder="Full Name..." class="w-full bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-400 font-semibold">
-                `;
-                container.appendChild(divNode);
-            }
-        }
-
-        function initializeDynamicTeamWorkspace() {
-            const count = parseInt(document.getElementById('travel-team-count').value) || 0;
-            teamWorkspaceDatabase = {}; 
-            
-            let firstValidName = "";
-            for(let i = 1; i <= count; i++) {
-                const nameVal = document.getElementById(`team-member-name-input-${i}`).value.trim();
-                if(nameVal) {
-                    teamWorkspaceDatabase[nameVal] = [];
-                    if(!firstValidName) firstValidName = nameVal;
-                }
-            }
-
-            if(!firstValidName) {
-                alert("Please input at least one team member name.");
-                return;
-            }
-
-            document.getElementById('travel-live-preview-box').classList.remove('hidden');
-            renderTabSelectorControls(firstValidName);
-        }
-
-        function renderTabSelectorControls(activeTargetName) {
-            const tabsRowNode = document.getElementById('travel-person-tabs-row');
-            tabsRowNode.innerHTML = "";
-            currentActiveClaimantProfile = activeTargetName;
-            document.getElementById('uploader-current-name').innerText = activeTargetName;
-
-            Object.keys(teamWorkspaceDatabase).forEach(nameKey => {
-                const tabBtn = document.createElement('button');
-                tabBtn.innerText = nameKey;
-                tabBtn.className = `travel-tab-btn px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all ${nameKey === activeTargetName ? 'active text-emerald-400 border-b-2 border-emerald-400' : 'text-slate-400 hover:text-white'}`;
-                tabBtn.onclick = function() { renderTabSelectorControls(nameKey); };
-                tabsRowNode.appendChild(tabBtn);
-            });
-
-            refreshSpreadsheetGridDisplay();
-        }
-
-        function addNewManualExpenseRow() {
-            if(!currentActiveClaimantProfile) return;
-            const newEmptyRowRecord = {
-                date: new Date().toISOString().split('T')[0],
-                nature: "Local Travel",
-                desc: "",
-                mode: "Auto",
-                pay: "UPI",
-                amount: 0.00,
-                paidBy: "Self",
-                support: "Yes"
-            };
-            teamWorkspaceDatabase[currentActiveClaimantProfile].push(newEmptyRowRecord);
-            refreshSpreadsheetGridDisplay();
-        }
-
-        function processLocalOcrUploadStream(inputNode) {
-            if(!inputNode.files || inputNode.files.length === 0) return;
-            if(!currentActiveClaimantProfile) return;
-
-            for(let fIdx=0; fIdx < inputNode.files.length; fIdx++) {
-                const simulatedParsedReceiptAmount = Math.floor(Math.random() * (600 - 120 + 1)) + 120;
-                const simulatedParsedRecordRow = {
-                    date: "2026-06-07",
-                    nature: fIdx % 2 === 0 ? "Food" : "Local Travel",
-                    desc: fIdx % 2 === 0 ? "Extracted Dinner Bill" : "Local Transit Run",
-                    mode: fIdx % 2 === 0 ? "Food" : "Cab",
-                    pay: "UPI",
-                    amount: simulatedParsedReceiptAmount,
-                    paidBy: "Self",
-                    support: "Yes"
-                };
-                teamWorkspaceDatabase[currentActiveClaimantProfile].push(simulatedParsedRecordRow);
-            }
-            refreshSpreadsheetGridDisplay();
-        }
-
-        function refreshSpreadsheetGridDisplay() {
-            const bodyContainerNode = document.getElementById('xl-rows-body-preview');
-            bodyContainerNode.innerHTML = "";
-
-            const clientNameValue = document.getElementById('travel-client-name').value || "[Client Name]";
-            const plantLocationValue = document.getElementById('travel-plant-location').value || "[Plant Location]";
-            const managerNameValue = document.getElementById('travel-manager-name').value || "[Manager Name]";
-
-            document.getElementById('xl-client-lbl').innerText = `${clientNameValue} (${plantLocationValue})`;
-            document.getElementById('xl-claimant-lbl').innerText = currentActiveClaimantProfile || "None Loaded";
-            document.getElementById('xl-manager-lbl').innerText = managerNameValue;
-
-            const activeRowsArray = teamWorkspaceDatabase[currentActiveClaimantProfile] || [];
-            activeRowsArray.sort((rowA, rowB) => new Date(rowA.date) - new Date(rowB.date));
-
-            let sumBGJC = 0; let sumSelf = 0;
-
-            activeRowsArray.forEach((row, rawIndexPosition) => {
-                const rowValueAmount = parseFloat(row.amount) || 0;
-                if(row.paidBy === "BGJC") sumBGJC += rowValueAmount; else sumSelf += rowValueAmount;
-
-                const tableRowNode = document.createElement('tr');
-                tableRowNode.className = "hover:bg-white/5 border-b border-white/5 transition-colors";
-                
-                tableRowNode.innerHTML = `
-                    <td class="p-2"><input type="date" value="${row.date}" onchange="modifyRowFieldData(${rawIndexPosition}, 'date', this.value)" class="bg-slate-900 border border-white/5 rounded p-1 text-xs text-white max-w-full"></td>
-                    <td class="p-2">
-                        <select onchange="modifyRowFieldData(${rawIndexPosition}, 'nature', this.value)" class="bg-slate-900 border border-white/5 rounded p-1 text-xs text-slate-200">
-                            <option value="Local Travel" ${row.nature === 'Local Travel' ? 'selected' : ''}>Local Travel</option>
-                            <option value="Arrival" ${row.nature === 'Arrival' ? 'selected' : ''}>Arrival</option>
-                            <option value="Departure" ${row.nature === 'Departure' ? 'selected' : ''}>Departure</option>
-                            <option value="Food" ${row.nature === 'Food' ? 'selected' : ''}>Food</option>
-                        </select>
-                    </td>
-                    <td class="p-2">
-                        <input type="text" value="${row.desc}" onchange="modifyRowFieldData(${rawIndexPosition}, 'desc', this.value)" class="w-full bg-slate-900 border border-white/5 rounded p-1 text-xs text-white">
-                        ${row.nature === 'Food' ? `<div class="text-[10px] text-amber-400 font-bold mt-0.5">💡 Food Expense: Confirm entry logs only solo items.</div>` : ''}
-                    </td>
-                    <td class="p-2"><input type="text" value="${row.mode}" onchange="modifyRowFieldData(${rawIndexPosition}, 'mode', this.value)" class="w-full bg-slate-900 border border-white/5 rounded p-1 text-xs text-slate-300"></td>
-                    <td class="p-2"><input type="text" value="${row.pay}" onchange="modifyRowFieldData(${rawIndexPosition}, 'pay', this.value)" class="w-full bg-slate-900 border border-white/5 rounded p-1 text-xs text-slate-300"></td>
-                    <td class="p-2"><input type="number" step="0.01" value="${rowValueAmount}" onchange="modifyRowFieldData(${rawIndexPosition}, 'amount', this.value)" class="w-full bg-slate-900 border border-white/5 rounded p-1 text-xs font-mono font-bold text-emerald-400"></td>
-                    <td class="p-2">
-                        <select onchange="modifyRowFieldData(${rawIndexPosition}, 'paidBy', this.value)" class="bg-slate-900 border border-white/5 rounded p-1 text-xs text-emerald-400 font-bold">
-                            <option value="Self" ${row.paidBy === 'Self' ? 'selected' : ''}>Self</option>
-                            <option value="BGJC" ${row.paidBy === 'BGJC' ? 'selected' : ''}>BGJC</option>
-                        </select>
-                    </td>
-                    <td class="p-2 text-center">
-                        <select onchange="modifyRowFieldData(${rawIndexPosition}, 'support', this.value)" class="bg-slate-900 border border-white/5 rounded p-1 text-xs text-slate-300">
-                            <option value="Yes" ${row.support === 'Yes' ? 'selected' : ''}>Yes</option>
-                            <option value="No (Kaccha Bill)" ${row.support.includes('No') ? 'selected' : ''}>No</option>
-                        </select>
-                    </td>
-                    <td class="p-2 text-center"><button onclick="deleteTargetExpenseRow(${rawIndexPosition})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-trash"></i></button></td>
-                `;
-                bodyContainerNode.appendChild(tableRowNode);
-            });
-
-            const totalSumVal = sumBGJC + sumSelf;
-            document.getElementById('xl-sum-bgjc').innerText = `₹${sumBGJC.toFixed(2)}`;
-            document.getElementById('xl-sum-self').innerText = `₹${sumSelf.toFixed(2)}`;
-            document.getElementById('xl-sum-debit').innerText = `₹${totalSumVal.toFixed(2)}`;
-        }
-
-        function modifyRowFieldData(index, fieldName, updatedValue) {
-            if(fieldName === 'amount') updatedValue = parseFloat(updatedValue) || 0.00;
-            teamWorkspaceDatabase[currentActiveClaimantProfile][index][fieldName] = updatedValue;
-            refreshSpreadsheetGridDisplay();
-        }
-
-        function deleteTargetExpenseRow(index) {
-            teamWorkspaceDatabase[currentActiveClaimantProfile].splice(index, 1);
-            refreshSpreadsheetGridDisplay();
-        }
-
-        function copyPreFilledTableMatrix() {
-            navigator.clipboard.writeText(document.getElementById('xl-rows-body-preview').innerText);
-            alert(`Claim lines for claimant [${currentActiveClaimantProfile}] copied successfully.`);
-        }
-
-        function triggerActualExcelWorkbookDownload() {
-            const clientNameInput = document.getElementById('travel-client-name').value || "ClientName";
-            const plantLocInput = document.getElementById('travel-plant-location').value || "PlantLoc";
-            
-            const currentMonthIndex = new Date().getMonth();
-            const calculatedQuarterNumber = Math.floor(currentMonthIndex / 3) + 1;
-
-            const finalCalculatedFileName = `Travel Form (Travel_Form_${clientNameInput.replace(/\s+/g, '_')}_${plantLocInput.replace(/\s+/g, '_')}_${currentActiveClaimantProfile.replace(/\s+/g, '_')}_Q${calculatedQuarterNumber}).xlsx`;
-            const currentClaimantDataArray = teamWorkspaceDatabase[currentActiveClaimantProfile] || [];
-            
-            const formattedExportRows = [
-                ["Name (Client Name & Plant Name):", `${clientNameInput} (${plantLocInput})`, "", "", "Particulars", "BGJC", "Self", "Debit Note"],
-                ["Name of Claimant:", currentActiveClaimantProfile, "", "", "Summary", "0", "0", "0"],
-                ["Manager / PIC:", document.getElementById('travel-manager-name').value || "", "", "", "", "", "", ""],
-                [],
-                ["Date", "Nature of Claim", "Particulars Description", "Mode", "Payment Mode", "Amount", "Paid By", "Supporting Attached"]
-            ];
-
-            currentClaimantDataArray.forEach(item => {
-                formattedExportRows.push([item.date, item.nature, item.desc, item.mode, item.pay, item.amount, item.paidBy, item.support]);
-            });
-
-            const targetWorkbookObject = XLSX.utils.book_new();
-            const targetWorksheetObject = XLSX.utils.aoa_to_sheet(formattedExportRows);
-
-            const cellKeysRangeArray = Object.keys(targetWorksheetObject);
-            cellKeysRangeArray.forEach(cellKey => {
-                if(cellKey[0] !== '!') {
-                    if(!targetWorksheetObject[cellKey].s) targetWorksheetObject[cellKey].s = {};
-                    targetWorksheetObject[cellKey].s.font = { name: "Book Antiqua", sz: 11 };
-                }
-            });
-
-            XLSX.utils.book_append_sheet(targetWorkbookObject, targetWorksheetObject, "Travel Form Claims Log");
-            XLSX.writeFile(targetWorkbookObject, finalCalculatedFileName);
-        }
-    </script>
+    <!-- Linked Main Module -->
+    <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
