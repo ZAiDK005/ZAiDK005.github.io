@@ -147,7 +147,7 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="card-rbi" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-rbi" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
+                <div id="card-sebi" class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between hover:-translate-y-1 hover:border-teal-500/50 transition-all duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span id="notice-sebi" class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Checking...</span>
@@ -254,6 +254,10 @@
                             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Luhn Mod-36 Output Records</label>
                             <div id="terminal-gstin" class="terminal-box h-52 rounded-xl p-4 text-xs text-slate-300 overflow-y-auto">Awaiting data input payload...</div>
                         </div>
+                        <div class="flex gap-2 mt-3">
+                            <button onclick="copyTerminalLogs('terminal-gstin')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
+                            <button onclick="triggerExcelReportDownload('GSTIN_Validation_Report')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -272,6 +276,10 @@
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Geographical Registry Hierarchy Results</label>
                             <div id="terminal-udyam" class="terminal-box h-52 rounded-xl p-4 text-xs text-slate-300 overflow-y-auto">Awaiting MSME register pipeline...</div>
+                        </div>
+                        <div class="flex gap-2 mt-3">
+                            <button onclick="copyTerminalLogs('terminal-udyam')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-clipboard"></i> Copy to Clipboard</button>
+                            <button onclick="triggerExcelReportDownload('Udyam_Parser_Report')" class="flex-1 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-xs font-bold py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all"><i class="fa-regular fa-file-excel"></i> Download Excel Report</button>
                         </div>
                     </div>
                 </div>
@@ -564,16 +572,45 @@
             const liveIds = { rbi: "notice-rbi", sebi: "notice-sebi" };
             const staticIds = ["notice-gst", "notice-itd", "notice-mca21", "notice-nse", "notice-bse", "notice-pib"];
 
+            function flagAsNew(cardId) {
+                const card = document.getElementById(cardId);
+                if (!card) return;
+                card.classList.add("ring-2", "ring-rose-500", "animate-pulse");
+
+                const dot = document.createElement("span");
+                dot.className = "absolute -top-1.5 -right-1.5 flex h-3 w-3";
+                dot.innerHTML = `
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-600"></span>
+                `;
+                card.style.position = "relative";
+                card.appendChild(dot);
+            }
+
             try {
                 const res = await fetch("notices.json", { cache: "no-store" });
                 const data = await res.json();
-                Object.entries(liveIds).forEach(([key, id]) => {
-                    const el = document.getElementById(id);
+
+                Object.entries(liveIds).forEach(([key, spanId]) => {
+                    const el = document.getElementById(spanId);
                     if (!el) return;
+
                     const count = data.counts[key];
-                    el.textContent = (count === null || count === undefined)
-                        ? "Live feed unavailable"
-                        : `${count} update${count === 1 ? "" : "s"} in last 72 hrs — live`;
+                    if (count === null || count === undefined) {
+                        el.textContent = "Live feed unavailable";
+                        return;
+                    }
+
+                    el.textContent = `${count} update${count === 1 ? "" : "s"} in last 72 hrs — live`;
+
+                    const storageKey = `lastSeenCount_${key}`;
+                    const lastSeen = localStorage.getItem(storageKey);
+
+                    if (lastSeen !== null && count > parseInt(lastSeen, 10)) {
+                        flagAsNew(`card-${key}`);
+                    }
+
+                    localStorage.setItem(storageKey, count);
                 });
             } catch (e) {
                 Object.values(liveIds).forEach(id => {
@@ -589,6 +626,7 @@
                 if (el) el.remove();
             });
         });
+
         function launchAllRegistries() {
             const registryDestinations = [
                 "https://www.gst.gov.in/",
@@ -600,14 +638,23 @@
                 "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes",
                 "https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1"
             ];
+
             const confirmed = confirm(
-                `This will open ${registryDestinations.length} portal tabs at once (GST, ITD, MCA21, NSE, BSE, RBI, SEBI, PIB).\n\nYour browser may block some as pop-ups on the first try — if so, click the pop-up blocked icon in your address bar and choose "Always allow" for this site, then click this button again.\n\nContinue?`
+                `This will open ${registryDestinations.length} portal tabs at once (GST, ITD, MCA21, NSE, BSE, RBI, SEBI, PIB).\n\nIf your browser blocks some, click the pop-up blocked icon in your address bar and choose "Always allow" for this site — then click this button again.\n\nContinue?`
             );
             if (!confirmed) return;
 
-            registryDestinations.forEach((url, i) => {
-                setTimeout(() => window.open(url, '_blank'), i * 150);
+            let blockedCount = 0;
+            registryDestinations.forEach(url => {
+                const win = window.open(url, '_blank');
+                if (!win || win.closed || typeof win.closed === 'undefined') {
+                    blockedCount++;
+                }
             });
+
+            if (blockedCount > 0) {
+                alert(`${blockedCount} tab(s) were blocked by your browser's pop-up blocker. Please allow pop-ups for this site (check your address bar) and click the button again.`);
+            }
         }
 
         function routeUniversalSearch() {
@@ -618,6 +665,28 @@
                 ? "https://www.tradingview.com/symbols/NSE-" + encodeURIComponent(searchString.toUpperCase()) + "/"
                 : "https://www.screener.in/html-search/?q=" + encodeURIComponent(searchString);
             window.open(targetUrl, '_blank');
+        }
+
+        function switchEngineTab(activePaneId) {
+            document.querySelectorAll('.engine-content-pane').forEach(pane => pane.classList.add('hidden'));
+            document.getElementById(activePaneId).classList.remove('hidden');
+
+            const tabButtonMap = { 'pane-series': 'btn-tab-series', 'pane-gstin': 'btn-tab-gstin', 'pane-udyam': 'btn-tab-udyam' };
+            Object.values(tabButtonMap).forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                btn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all";
+            });
+            const activeBtn = document.getElementById(tabButtonMap[activePaneId]);
+            activeBtn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-emerald-400 text-slate-950 font-bold transition-all";
+        }
+
+        function toggleCasePreviewBox(targetId) {
+            const pane = document.getElementById(targetId);
+            if(pane.classList.contains('hidden')) {
+                pane.classList.remove('hidden');
+            } else {
+                pane.classList.add('hidden');
+            }
         }
 
         // ====================================================================
@@ -656,7 +725,6 @@
                 lastSeriesResults = analyzeNumericSeries(lines);
                 renderSeriesOutput(terminal, lastSeriesResults);
             } else {
-                // Group mode: first 17 chars = series prefix, remainder = running number
                 const groups = {};
                 lines.forEach(line => {
                     const prefix = line.length > 17 ? line.slice(0, 17) : line.replace(/[0-9]+$/, '');
@@ -694,7 +762,7 @@
 
         function renderSeriesOutput(terminal, lines) {
             terminal.innerHTML = lines.map(l =>
-                `<div class="${l.startsWith('Missing') || l.startsWith('Duplicates') && !l.includes('No ') ? 'text-amber-400' : 'text-slate-300'}">${l}</div>`
+                `<div class="${l.startsWith('Missing') || (l.startsWith('Duplicates') && !l.includes('No ')) ? 'text-amber-400' : 'text-slate-300'}">${l}</div>`
             ).join('');
         }
 
@@ -836,28 +904,6 @@
                     '<p class="text-sm text-slate-300">Vault unlocked. Add your private notes/content here.</p>';
             } else {
                 alert('Incorrect key code.');
-            }
-        }
-
-        function switchEngineTab(activePaneId) {
-            document.querySelectorAll('.engine-content-pane').forEach(pane => pane.classList.add('hidden'));
-            document.getElementById(activePaneId).classList.remove('hidden');
-
-            const tabButtonMap = { 'pane-series': 'btn-tab-series', 'pane-gstin': 'btn-tab-gstin', 'pane-udyam': 'btn-tab-udyam' };
-            Object.values(tabButtonMap).forEach(btnId => {
-                const btn = document.getElementById(btnId);
-                btn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700/60 transition-all";
-            });
-            const activeBtn = document.getElementById(tabButtonMap[activePaneId]);
-            activeBtn.className = "text-xs font-semibold px-4 py-2.5 rounded-lg bg-emerald-400 text-slate-950 font-bold transition-all";
-        }
-
-        function toggleCasePreviewBox(targetId) {
-            const pane = document.getElementById(targetId);
-            if(pane.classList.contains('hidden')) {
-                pane.classList.remove('hidden');
-            } else {
-                pane.classList.add('hidden');
             }
         }
 
