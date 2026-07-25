@@ -1,0 +1,17 @@
+{
+  "ticker": "ITC.NS",
+  "company_name": "ITC Limited",
+  "sector": "Consumer Defensive",
+  "industry": "Tobacco",
+  "market_cap": 3551477891072,
+  "current_price": 283.45,
+  "pe_ratio": 17.034256,
+  "pb_ratio": 4.8981323,
+  "dividend_yield": 5.69,
+  "roce": "N/A",
+  "roe": 0.2934,
+  "debt_to_equity": 3.293,
+  "book_value": 57.869,
+  "52_week_high": 427.0,
+  "52_week_low": 275.0
+}
