@@ -22,7 +22,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r .github/scripts/requirements.txt
-          playwright install chromium --with-deps
+          npx playwright install-deps chromium || true
+          python -m playwright install chromium
 
       - name: Fetch live notice counts
         run: python .github/scripts/update_notices.py
