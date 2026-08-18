@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-18T12:53:45.784984+00:00",
+  "generated_at": "2026-08-18T18:44:56.343883+00:00",
   "window_hours": 72,
   "counts": {
     "rbi": null,
     "sebi": null,
     "pib": null,
     "gst": 0,
-    "itd": 0,
+    "itd": 1,
     "mca21": 0,
     "nse": null,
     "bse": 0
