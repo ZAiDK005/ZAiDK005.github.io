@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T11:35:14.513683+00:00",
+  "generated_at": "2026-08-30T16:21:56.995835+00:00",
   "window_hours": 72,
   "counts": {
     "rbi": null,
@@ -7,7 +7,7 @@
     "pib": null,
     "gst": 0,
     "itd": 0,
-    "mca21": 0,
+    "mca21": null,
     "nse": null,
     "bse": 0
   }
